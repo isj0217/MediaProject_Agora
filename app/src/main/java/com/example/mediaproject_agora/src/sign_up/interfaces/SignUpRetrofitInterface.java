@@ -1,6 +1,6 @@
 package com.example.mediaproject_agora.src.sign_up.interfaces;
 
-import com.example.mediaproject_agora.src.main.models.DefaultResponse;
+import com.example.mediaproject_agora.src.sign_up.models.SignUpResponse;
 
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -13,14 +13,14 @@ import retrofit2.http.Query;
 public interface SignUpRetrofitInterface {
     //    @GET("/test")
     @GET("/jwt")
-    Call<DefaultResponse> getTest();
+    Call<SignUpResponse> getTest();
 
     @GET("/test/{number}")
-    Call<DefaultResponse> getTestPathAndQuery(
+    Call<SignUpResponse> getTestPathAndQuery(
             @Path("number") int number,
             @Query("content") final String content
     );
 
     @POST("/test")
-    Call<DefaultResponse> postTest(@Body RequestBody params);
+    Call<SignUpResponse> postTest(@Body RequestBody params);
 }

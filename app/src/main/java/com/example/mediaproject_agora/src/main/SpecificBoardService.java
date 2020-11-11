@@ -3,6 +3,7 @@ package com.example.mediaproject_agora.src.main;
 import com.example.mediaproject_agora.src.main.interfaces.MainActivityView;
 import com.example.mediaproject_agora.src.main.interfaces.MainRetrofitInterface;
 import com.example.mediaproject_agora.src.main.interfaces.SpecificBoardActivityView;
+import com.example.mediaproject_agora.src.main.interfaces.SpecificBoardRetrofitInterface;
 import com.example.mediaproject_agora.src.main.models.DefaultResponse;
 
 import retrofit2.Call;
@@ -19,8 +20,8 @@ class SpecificBoardService {
     }
 
     void getTest() {
-        final MainRetrofitInterface mainRetrofitInterface = getRetrofit().create(MainRetrofitInterface.class);
-        mainRetrofitInterface.getTest().enqueue(new Callback<DefaultResponse>() {
+        final SpecificBoardRetrofitInterface specificBoardRetrofitInterface = getRetrofit().create(SpecificBoardRetrofitInterface.class);
+        specificBoardRetrofitInterface.getTest().enqueue(new Callback<DefaultResponse>() {
             @Override
             public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
                 final DefaultResponse defaultResponse = response.body();

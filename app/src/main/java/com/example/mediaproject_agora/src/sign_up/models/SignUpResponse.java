@@ -1,8 +1,8 @@
-package com.example.mediaproject_agora.src.sign_in.models;
+package com.example.mediaproject_agora.src.sign_up.models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class DefaultResponse {
+public class SignUpResponse {
     @SerializedName("code")
     private int code;
 

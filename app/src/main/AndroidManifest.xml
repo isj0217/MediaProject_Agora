@@ -27,9 +27,9 @@
         </activity>
         <activity android:name=".src.main.MainActivity" />
         <activity android:name=".src.sign_up.SignUpActivity" />
-        <activity android:name=".main.SpecificBoardActivity" />
-        <activity android:name=".main.InPostActivity" />
-        <activity android:name=".main.WritingActivity" />
+        <activity android:name=".src.main.SpecificBoardActivity" />
+        <activity android:name=".src.main.InPostActivity" />
+        <activity android:name=".src.main.WritingActivity" />
     </application>
 
 </manifest>

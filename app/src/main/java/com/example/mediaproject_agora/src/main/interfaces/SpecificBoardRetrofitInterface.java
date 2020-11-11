@@ -1,6 +1,6 @@
-package com.example.mediaproject_agora.src.sign_in.interfaces;
+package com.example.mediaproject_agora.src.main.interfaces;
 
-import com.example.mediaproject_agora.src.sign_in.models.SignInResponse;
+import com.example.mediaproject_agora.src.main.models.DefaultResponse;
 
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -10,17 +10,17 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-public interface SignInRetrofitInterface {
+public interface SpecificBoardRetrofitInterface {
     //    @GET("/test")
     @GET("/jwt")
-    Call<SignInResponse> getTest();
+    Call<DefaultResponse> getTest();
 
     @GET("/test/{number}")
-    Call<SignInResponse> getTestPathAndQuery(
+    Call<DefaultResponse> getTestPathAndQuery(
             @Path("number") int number,
             @Query("content") final String content
     );
 
     @POST("/test")
-    Call<SignInResponse> postTest(@Body RequestBody params);
+    Call<DefaultResponse> postTest(@Body RequestBody params);
 }

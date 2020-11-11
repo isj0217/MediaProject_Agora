@@ -2,7 +2,7 @@ package com.example.mediaproject_agora.src.sign_in;
 
 import com.example.mediaproject_agora.src.sign_in.interfaces.SignInActivityView;
 import com.example.mediaproject_agora.src.sign_in.interfaces.SignInRetrofitInterface;
-import com.example.mediaproject_agora.src.main.models.DefaultResponse;
+import com.example.mediaproject_agora.src.sign_in.models.SignInResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,20 +19,20 @@ class SignInService {
 
     void getTest() {
         final SignInRetrofitInterface signInRetrofitInterface = getRetrofit().create(SignInRetrofitInterface.class);
-        signInRetrofitInterface.getTest().enqueue(new Callback<DefaultResponse>() {
+        signInRetrofitInterface.getTest().enqueue(new Callback<SignInResponse>() {
             @Override
-            public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
-                final DefaultResponse defaultResponse = response.body();
-                if (defaultResponse == null) {
+            public void onResponse(Call<SignInResponse> call, Response<SignInResponse> response) {
+                final SignInResponse signInResponse = response.body();
+                if (signInResponse == null) {
                     mSignInActivityView.validateFailure(null);
                     return;
                 }
 
-                mSignInActivityView.validateSuccess(defaultResponse.getMessage());
+                mSignInActivityView.validateSuccess(signInResponse.getMessage());
             }
 
             @Override
-            public void onFailure(Call<DefaultResponse> call, Throwable t) {
+            public void onFailure(Call<SignInResponse> call, Throwable t) {
                 mSignInActivityView.validateFailure(null);
             }
         });
