@@ -1,9 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+<!--    <color name="colorPrimary">#008577</color>-->
+<!--    <color name="colorPrimaryDark">#00574B</color>-->
+<!--    <color name="colorAccent">#D81B60</color>-->
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorRed">#FF0000</color>
     <color name="colorBlack">#000000</color>
+
+<!--    이 위로는 템플릿에 담겨있던 색상-->
+
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+
+    <color name="light_grey">#BBBBBB</color>
+    <!--    <color name="blue_app_name">#0055A4</color>-->
+    <color name="blue_app_name">#0033FF</color>
+    <color name="brown_ajou">#B38000</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="grey">#888888</color>
+    <color name="dark_grey">#333333</color>
+    <color name="lighter_grey">#DDDDDD</color>
+    <color name="more_lighter_grey">#F2F2F2</color>
+    <color name="green">#32CD32</color>
+
+
+
+
 </resources>

@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="15dp"
+    tools:context=".sign_up.SignUpActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--    상단바-->
+        <LinearLayout
+            android:id="@+id/linear_layout_sign_up_top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingTop="2dp"
+            android:paddingBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/sv_sign_up"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_weight="10">
+
+            <ImageView
+                android:id="@+id/iv_sign_up_go_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="customOnClick"
+                android:src="@drawable/ic_baseline_arrow_back_35" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="회원가입"
+                android:textColor="@color/black"
+                android:textSize="22sp" />
+
+        </LinearLayout>
+
+        <ScrollView
+            android:id="@+id/sv_sign_up"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linear_layout_sign_up_top_bar">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="10dp">
+
+                <!--    회원정보-->
+                <TextView
+                    android:id="@+id/tv_sign_up_user_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="15dp"
+                    android:text="회원 정보"
+                    android:textColor="@color/black"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+<!--                &lt;!&ndash;    이름 박스&ndash;&gt;-->
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/linear_layout_sign_up_name_box"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="15dp"-->
+<!--                    android:orientation="vertical"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/tv_sign_up_user_info">-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:gravity="center_vertical"-->
+<!--                        android:orientation="horizontal"-->
+<!--                        android:padding="10dp">-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="이름"-->
+<!--                            android:textColor="@color/grey"-->
+<!--                            android:textStyle="bold" />-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_weight="1" />-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="실명을 입력하세요"-->
+<!--                            android:textColor="@color/light_grey"-->
+<!--                            android:textStyle="bold" />-->
+<!--                    </LinearLayout>-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/et_background_light_grey_with_border"-->
+<!--                        android:gravity="center_vertical"-->
+<!--                        android:orientation="horizontal">-->
+
+<!--                        <EditText-->
+<!--                            android:id="@+id/et_sign_up_name"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:background="@android:color/transparent"-->
+<!--                            android:hint="이름"-->
+<!--                            android:inputType="text"-->
+<!--                            android:maxLength="20"-->
+<!--                            android:maxLines="1"-->
+<!--                            android:paddingStart="20dp"-->
+<!--                            android:textColorHint="@color/light_grey"-->
+<!--                            android:textCursorDrawable="@drawable/cursor_blue"-->
+<!--                            android:textSize="14sp" />-->
+
+<!--                    </LinearLayout>-->
+
+<!--                </LinearLayout>-->
+
+<!--                &lt;!&ndash;    아이디 박스&ndash;&gt;-->
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/linear_layout_sign_up_id_box"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="15dp"-->
+<!--                    android:orientation="vertical"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/linear_layout_sign_up_name_box">-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:gravity="center_vertical"-->
+<!--                        android:orientation="horizontal"-->
+<!--                        android:padding="10dp">-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="아이디"-->
+<!--                            android:textColor="@color/grey"-->
+<!--                            android:textStyle="bold" />-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_weight="1" />-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="로그인시 이용"-->
+<!--                            android:textColor="@color/light_grey"-->
+<!--                            android:textStyle="bold" />-->
+<!--                    </LinearLayout>-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/et_background_light_grey_with_border"-->
+<!--                        android:gravity="center_vertical"-->
+<!--                        android:orientation="horizontal">-->
+
+<!--                        <EditText-->
+<!--                            android:id="@+id/et_sign_up_id"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:background="@android:color/transparent"-->
+<!--                            android:hint="아이디"-->
+<!--                            android:inputType="text"-->
+<!--                            android:maxLength="20"-->
+<!--                            android:maxLines="1"-->
+<!--                            android:paddingStart="20dp"-->
+<!--                            android:textColorHint="@color/light_grey"-->
+<!--                            android:textCursorDrawable="@drawable/cursor_blue"-->
+<!--                            android:textSize="14sp" />-->
+
+<!--                        <ImageView-->
+<!--                            android:id="@+id/iv_sign_up_check_id"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginEnd="10dp"-->
+<!--                            android:src="@drawable/ic_baseline_check_circle_outline_24_red" />-->
+<!--                    </LinearLayout>-->
+
+<!--                </LinearLayout>-->
+
+<!--                &lt;!&ndash;    PW BOX&ndash;&gt;-->
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/linear_layout_sign_up_pw_box"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="15dp"-->
+<!--                    android:orientation="vertical"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/linear_layout_sign_up_id_box">-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:gravity="center_vertical"-->
+<!--                        android:orientation="horizontal"-->
+<!--                        android:padding="10dp">-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="비밀번호"-->
+<!--                            android:textColor="@color/grey"-->
+<!--                            android:textStyle="bold" />-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_weight="1" />-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="4~20자"-->
+<!--                            android:textColor="@color/light_grey"-->
+<!--                            android:textStyle="bold" />-->
+<!--                    </LinearLayout>-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/et_background_light_grey_with_border"-->
+<!--                        android:gravity="center_vertical"-->
+<!--                        android:orientation="horizontal">-->
+
+<!--                        <EditText-->
+<!--                            android:id="@+id/et_sign_up_pw"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:background="@android:color/transparent"-->
+<!--                            android:hint="비밀번호"-->
+<!--                            android:inputType="textPassword"-->
+<!--                            android:maxLength="20"-->
+<!--                            android:maxLines="1"-->
+<!--                            android:paddingStart="20dp"-->
+<!--                            android:textColorHint="@color/light_grey"-->
+<!--                            android:textCursorDrawable="@drawable/cursor_blue"-->
+<!--                            android:textSize="14sp" />-->
+
+<!--                        <ImageView-->
+<!--                            android:id="@+id/iv_sign_up_check_pw"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginEnd="10dp"-->
+<!--                            android:src="@drawable/ic_baseline_check_circle_outline_24_red" />-->
+<!--                    </LinearLayout>-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:layout_marginTop="5dp"-->
+<!--                        android:background="@drawable/et_background_light_grey_with_border"-->
+<!--                        android:gravity="center_vertical"-->
+<!--                        android:orientation="horizontal">-->
+
+<!--                        <EditText-->
+<!--                            android:id="@+id/et_sign_up_pw_again"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:background="@android:color/transparent"-->
+<!--                            android:hint="비밀번호 재입력"-->
+<!--                            android:inputType="textPassword"-->
+<!--                            android:maxLength="20"-->
+<!--                            android:maxLines="1"-->
+<!--                            android:paddingStart="20dp"-->
+<!--                            android:textColorHint="@color/light_grey"-->
+<!--                            android:textCursorDrawable="@drawable/cursor_blue"-->
+<!--                            android:textSize="14sp" />-->
+
+<!--                        <ImageView-->
+<!--                            android:id="@+id/iv_sign_up_check_pw_again"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginEnd="10dp"-->
+<!--                            android:src="@drawable/ic_baseline_check_circle_outline_24_red" />-->
+<!--                    </LinearLayout>-->
+<!--                </LinearLayout>-->
+
+                <!--    닉네임 박스-->
+                <LinearLayout
+                    android:id="@+id/linear_layout_sign_up_nickname_box"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linear_layout_sign_up_pw_box">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="닉네임"
+                            android:textColor="@color/grey"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="커뮤니티 활동시 이용"
+                            android:textColor="@color/light_grey"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/et_background_light_grey_with_border"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/et_sign_up_nickname"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@android:color/transparent"
+                            android:hint="닉네임"
+                            android:inputType="text"
+                            android:maxLength="20"
+                            android:maxLines="1"
+                            android:paddingStart="20dp"
+                            android:textColorHint="@color/light_grey"
+                            android:textCursorDrawable="@drawable/cursor_blue"
+                            android:textSize="14sp" />
+
+                        <ImageView
+                            android:id="@+id/iv_sign_up_check_nickname"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:src="@drawable/ic_baseline_check_circle_outline_24_red" />
+                    </LinearLayout>
+                </LinearLayout>
+
+<!--                &lt;!&ndash;    이메일 박스&ndash;&gt;-->
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/linear_layout_sign_up_email_box"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="15dp"-->
+<!--                    android:orientation="vertical"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/linear_layout_sign_up_nickname_box">-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:gravity="center_vertical"-->
+<!--                        android:orientation="horizontal"-->
+<!--                        android:padding="10dp">-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="이메일"-->
+<!--                            android:textColor="@color/grey"-->
+<!--                            android:textStyle="bold" />-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_weight="1" />-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="학교 이메일 주소를 입력하세요"-->
+<!--                            android:textColor="@color/light_grey"-->
+<!--                            android:textStyle="bold" />-->
+<!--                    </LinearLayout>-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/et_background_light_grey_with_border"-->
+<!--                        android:gravity="center_vertical"-->
+<!--                        android:orientation="horizontal">-->
+
+<!--                        <EditText-->
+<!--                            android:id="@+id/et_sign_up_email"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:background="@android:color/transparent"-->
+<!--                            android:hint="ex) jlp@ajou.ac.kr"-->
+<!--                            android:inputType="text"-->
+<!--                            android:maxLength="35"-->
+<!--                            android:maxLines="1"-->
+<!--                            android:paddingStart="20dp"-->
+<!--                            android:textColorHint="@color/light_grey"-->
+<!--                            android:textCursorDrawable="@drawable/cursor_blue"-->
+<!--                            android:textSize="14sp" />-->
+
+<!--                        <ImageView-->
+<!--                            android:id="@+id/iv_sign_up_check_email"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginEnd="10dp"-->
+<!--                            android:src="@drawable/ic_baseline_check_circle_outline_24_red" />-->
+<!--                    </LinearLayout>-->
+<!--                </LinearLayout>-->
+
+                <!--    학과 박스-->
+                <LinearLayout
+                    android:id="@+id/linear_layout_sign_up_department_box"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linear_layout_sign_up_email_box">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="학과"
+                            android:textColor="@color/grey"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="전공/학과를 입력하세요"
+                            android:textColor="@color/light_grey"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/et_background_light_grey_with_border"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/et_sign_up_department"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@android:color/transparent"
+                            android:hint="ex) 미디어학과"
+                            android:inputType="text"
+                            android:maxLength="20"
+                            android:maxLines="1"
+                            android:paddingStart="20dp"
+                            android:textColorHint="@color/light_grey"
+                            android:textCursorDrawable="@drawable/cursor_blue"
+                            android:textSize="14sp" />
+
+                        <ImageView
+                            android:id="@+id/iv_sign_up_check_department"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:src="@drawable/ic_baseline_check_circle_outline_24_red" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!--    학번 박스-->
+                <LinearLayout
+                    android:id="@+id/linear_layout_sign_up_student_id_box"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linear_layout_sign_up_department_box">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="학번"
+                            android:textColor="@color/grey"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="학번을 입력하세요"
+                            android:textColor="@color/light_grey"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/et_background_light_grey_with_border"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/et_sign_up_student_id"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@android:color/transparent"
+                            android:hint="ex) 201521116"
+                            android:inputType="numberDecimal"
+                            android:maxLength="9"
+                            android:maxLines="1"
+                            android:paddingStart="20dp"
+                            android:textColorHint="@color/light_grey"
+                            android:textCursorDrawable="@drawable/cursor_blue"
+                            android:textSize="14sp" />
+
+                        <ImageView
+                            android:id="@+id/iv_sign_up_check_student_id"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:src="@drawable/ic_baseline_check_circle_outline_24_red" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!--    회원가입 버튼-->
+                <Button
+                    android:id="@+id/btn_sign_up_sign_up"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/btn_sign_up_background_blue"
+                    android:onClick="customOnClick"
+                    android:text="가입"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linear_layout_sign_up_student_id_box" />
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,4 +3,35 @@
     <string name="loading">로딩중입니다.</string>
     <string name="network_error">네트워크 연결이 원활하지 않습니다.</string>
 
+<!--    이 위로는 템플릿에 담겨있던 것-->
+
+    <!--    홈화면의 네비게이션 드로어를 위한 것-->
+    <string name="profile">Profile</string>
+    <string name="notifications">Notifications</string>
+    <string name="collection">Collection</string>
+    <string name="inbox">InBox</string>
+    <string name="orders">Orders</string>
+    <string name="others">기타</string>
+    <string name="settings">설정</string>
+    <string name="support">학생 지원</string>
+    <string name="about_us">About Us</string>
+    <string name="user_nickname">망포동아붕이</string>
+    <string name="dept_year">미디어학과 15학번</string>
+    <string name="main">Main</string>
+    <string name="univ_news">아주대학교 소식</string>
+    <string name="dept_notification">학과 공지</string>
+    <string name="scrap">스크랩</string>
+    <string name="message">쪽지함</string>
+    <string name="app_info">앱 정보</string>
+
+    <string name="activity_writing_content_hint">여기를 눌러서 글을 작성할 수 있습니다.\n\n
+
+        [커뮤니티 이용규칙에 어긋나는 행위 금지]\n
+        1. 욕설, 비하, 음란물, 개인정보가 포함된 게시물 게시\n
+        2. 특정인이나 단체/지역을 비방하는 행위\n
+        3. 기타 현행법에 어긋나는 행위\n
+    </string>
+
+
+
 </resources>

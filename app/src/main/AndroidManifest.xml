@@ -14,10 +14,10 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.NoActionBar"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="n">
-        <activity android:name=".src.main.MainActivity"
+        <activity android:name=".src.main.SignInActivity"
             tools:ignore="Instantiatable">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,6 +25,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".src.main.MainActivity" />
+        <activity android:name=".sign_up.SignUpActivity" />
+<!--        <activity android:name=".main.MainActivity" />-->
+        <activity android:name=".main.SpecificBoardActivity" />
+        <activity android:name=".main.InPostActivity" />
+        <activity android:name=".main.WritingActivity" />
     </application>
 
 </manifest>
