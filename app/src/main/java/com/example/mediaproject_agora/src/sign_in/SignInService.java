@@ -1,9 +1,7 @@
-package com.example.mediaproject_agora.src.main;
+package com.example.mediaproject_agora.src.sign_in;
 
-import com.example.mediaproject_agora.src.main.interfaces.MainActivityView;
-import com.example.mediaproject_agora.src.main.interfaces.MainRetrofitInterface;
-import com.example.mediaproject_agora.src.main.interfaces.SignInActivityView;
-import com.example.mediaproject_agora.src.main.interfaces.SignInRetrofitInterface;
+import com.example.mediaproject_agora.src.sign_in.interfaces.SignInActivityView;
+import com.example.mediaproject_agora.src.sign_in.interfaces.SignInRetrofitInterface;
 import com.example.mediaproject_agora.src.main.models.DefaultResponse;
 
 import retrofit2.Call;

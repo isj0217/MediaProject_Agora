@@ -17,7 +17,7 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="n">
-        <activity android:name=".src.main.SignInActivity"
+        <activity android:name=".src.sign_in.SignInActivity"
             tools:ignore="Instantiatable">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,8 +26,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".src.main.MainActivity" />
-        <activity android:name=".sign_up.SignUpActivity" />
-<!--        <activity android:name=".main.MainActivity" />-->
+        <activity android:name=".src.sign_up.SignUpActivity" />
         <activity android:name=".main.SpecificBoardActivity" />
         <activity android:name=".main.InPostActivity" />
         <activity android:name=".main.WritingActivity" />

@@ -1,4 +1,4 @@
-package com.example.mediaproject_agora.src.main.interfaces;
+package com.example.mediaproject_agora.src.sign_in.interfaces;
 
 import com.example.mediaproject_agora.src.main.models.DefaultResponse;
 

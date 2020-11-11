@@ -1,23 +1,21 @@
-package com.example.mediaproject_agora.src.main;
+package com.example.mediaproject_agora.src.sign_in;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.mediaproject_agora.R;
 import com.example.mediaproject_agora.src.BaseActivity;
-import com.example.mediaproject_agora.src.main.interfaces.MainActivityView;
-import com.example.mediaproject_agora.src.main.interfaces.SignInActivityView;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.mediaproject_agora.src.main.MainActivity;
+import com.example.mediaproject_agora.src.sign_in.interfaces.SignInActivityView;
+import com.example.mediaproject_agora.src.sign_up.SignUpActivity;
 import com.nhn.android.naverlogin.OAuthLogin;
 import com.nhn.android.naverlogin.OAuthLoginHandler;
 import com.nhn.android.naverlogin.ui.view.OAuthLoginButton;
@@ -133,7 +131,11 @@ public class SignInActivity extends BaseActivity implements SignInActivityView {
     };
 
     public boolean checkAlreadyMember(){
-        //우리 DB에 가입되어있는지 여부 확인
+        // todo
+        // 우리 DB에 가입되어있는지 여부 확인
+        // 우리 DB에 가입되어 있다면 return true;
+        // 우리 DB에 가입되지 않은 신규회원이라면 return false;
+
         return true;
     }
 
@@ -154,9 +156,9 @@ public class SignInActivity extends BaseActivity implements SignInActivityView {
             startActivity(intent);
             finish();
         } else {
-//            final Intent intent = new Intent(this, SignUpActivity.class);
-//            startActivity(intent);
-//            finish();
+            final Intent intent = new Intent(this, SignUpActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 
