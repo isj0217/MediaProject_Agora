@@ -172,20 +172,6 @@ public class SignUpActivity extends BaseActivity implements SignUpActivityView {
                             et_sign_up_department.getText().toString(),
                             Integer.parseInt(et_sign_up_student_id.getText().toString()));
 
-                    new AlertDialog.Builder(SignUpActivity.this) // TestActivity 부분에는 현재 Activity의 이름 입력.
-                            .setTitle("회원가입 완료")
-                            .setMessage("아고라 가입을 축하합니다")
-                            .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    intent = new Intent(SignUpActivity.this, SignInActivity.class);
-                                    startActivity(intent);
-                                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                                    finish();
-                                }
-                            }).setCancelable(false)
-                            .show();
-
-
                 } else {
                     Toast.makeText(this, "모든 양식을 적절하게 작성해주세요", Toast.LENGTH_SHORT).show();
                 }
@@ -221,11 +207,18 @@ public class SignUpActivity extends BaseActivity implements SignUpActivityView {
         switch (signUpResponse.getCode()) {
 
             case 100:
-                showCustomToast("회원가입이 완료되었습니다");
-
-                intent = new Intent(SignUpActivity.this, SignInActivity.class);
-                startActivity(intent);
-                finish();
+                new AlertDialog.Builder(SignUpActivity.this) // TestActivity 부분에는 현재 Activity의 이름 입력.
+                        .setTitle("회원가입 완료")
+                        .setMessage("아고라 가입을 축하합니다")
+                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                intent = new Intent(SignUpActivity.this, SignInActivity.class);
+                                startActivity(intent);
+                                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                                finish();
+                            }
+                        }).setCancelable(false)
+                        .show();
                 break;
 
             default:
