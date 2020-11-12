@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/linear_layout_writing_top_bar"
@@ -92,41 +92,73 @@
     </ScrollView>
 
     <LinearLayout
+        android:id="@+id/ll_writing_attach_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="end|center_vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/iv_writing_attach_cancel"
+            android:layout_marginEnd="15dp"
+            android:src="@drawable/delete"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_writing_thumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:background="#BBBBBB"
+        android:gravity="center"
         android:orientation="horizontal"
+        android:visibility="gone">
+<!--        android:visibility=""-->
+
+        <ImageView
+            android:id="@+id/iv_writing_attached_thumbnail"
+            android:layout_width="wrap_content"
+            android:layout_height="90dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:paddingStart="20dp"
         android:paddingEnd="20dp">
 
         <ImageView
             android:id="@+id/btn_writing_attach_photo"
-            android:layout_marginStart="6dp"
             android:layout_width="22dp"
             android:layout_height="22dp"
+            android:layout_marginStart="6dp"
             android:src="@drawable/icon_camera" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
-<!--        <CheckBox-->
-<!--            android:id="@+id/chk_writing_anonymous"-->
-<!--            android:checked="true"-->
-<!--            android:buttonTint="@color/blue_app_name"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:scaleX="0.7"-->
-<!--            android:scaleY="0.7"/>-->
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="익명"-->
-<!--            android:textStyle="bold"-->
-<!--            android:textColor="@color/blue_app_name"-->
-<!--            android:textSize="12sp" />-->
+        <!--        <CheckBox-->
+        <!--            android:id="@+id/chk_writing_anonymous"-->
+        <!--            android:checked="true"-->
+        <!--            android:buttonTint="@color/blue_app_name"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:scaleX="0.7"-->
+        <!--            android:scaleY="0.7"/>-->
+        <!--        <TextView-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:text="익명"-->
+        <!--            android:textStyle="bold"-->
+        <!--            android:textColor="@color/blue_app_name"-->
+        <!--            android:textSize="12sp" />-->
 
     </LinearLayout>
-
 
 
 </LinearLayout>
