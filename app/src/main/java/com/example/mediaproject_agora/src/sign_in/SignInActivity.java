@@ -1,6 +1,7 @@
 package com.example.mediaproject_agora.src.sign_in;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,15 +11,22 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 
 import com.example.mediaproject_agora.R;
 import com.example.mediaproject_agora.src.BaseActivity;
 import com.example.mediaproject_agora.src.main.MainActivity;
 import com.example.mediaproject_agora.src.sign_in.interfaces.SignInActivityView;
+import com.example.mediaproject_agora.src.sign_in.models.SignInResponse;
 import com.example.mediaproject_agora.src.sign_up.SignUpActivity;
 import com.nhn.android.naverlogin.OAuthLogin;
 import com.nhn.android.naverlogin.OAuthLoginHandler;
 import com.nhn.android.naverlogin.ui.view.OAuthLoginButton;
+
+import static com.example.mediaproject_agora.src.ApplicationClass.X_ACCESS_TOKEN;
+import static com.example.mediaproject_agora.src.ApplicationClass.sSharedPreferences;
+
+import java.util.HashMap;
 
 public class SignInActivity extends BaseActivity implements SignInActivityView {
 
@@ -46,6 +54,9 @@ public class SignInActivity extends BaseActivity implements SignInActivityView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+
+//        sSharedPreferences = getSharedPreferences("jwt", MODE_PRIVATE);
+//        String jwt = sSharedPreferences.getString("jwt", null);
 
         // context 저장
         mContext = SignInActivity.this;
@@ -100,6 +111,59 @@ public class SignInActivity extends BaseActivity implements SignInActivityView {
 
     }
 
+    @Override
+    public void signInSuccess(SignInResponse signInResponse) {
+        hideProgressDialog();
+
+        switch (signInResponse.getCode()) {
+
+            case 100:
+                showCustomToast(signInResponse.getMessage());
+
+                sSharedPreferences = getSharedPreferences("jwt", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sSharedPreferences.edit();
+                editor.putString("jwt", signInResponse.getSignInResult().getJwt());
+                editor.apply();
+
+                X_ACCESS_TOKEN = sSharedPreferences.getString("jwt", "");
+
+                intent = new Intent(SignInActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+
+            // 우리 DB에 회원가입이 안되어있는 경우에는 자체회원가입 시키기
+            case 201:
+
+                new AlertDialog.Builder(SignInActivity.this) // TestActivity 부분에는 현재 Activity의 이름 입력.
+                        .setTitle("해당 네이버 아이디로\n가입된 계정이 없습니다")
+                        .setMessage("\n회원가입 하시겠습니까?")
+                        .setPositiveButton("예", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                intent = new Intent(SignInActivity.this, SignUpActivity.class);
+                                startActivity(intent);
+                                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                                finish();
+                            }
+                        })
+                        .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        })
+                        .setCancelable(false)
+                        .show();
+                break;
+
+            case 202:
+                showCustomToast(signInResponse.getMessage());
+
+            default:
+                showCustomToast("SignIn의 default response입니다");
+                break;
+        }
+    }
+
     private OAuthLoginHandler mOAthLoginHandler = new OAuthLoginHandler() {
         @Override
         public void run(boolean success) {
@@ -115,12 +179,15 @@ public class SignInActivity extends BaseActivity implements SignInActivityView {
                 // 회원가입이 되어있는 사람인지 확인해서,
                 // 가입이 되어있지 않다면 회원가입 액티비티로 보내고, 가입이 되어있다면 메인 액티비티로 보낸다.
 
-                saveAccessTokenToSharedPreferences(accessToken);
+//                saveAccessTokenToSharedPreferences(accessToken);
 
                 System.out.println(accessToken);
-                System.out.println(expriresAt);
+//                System.out.println(expriresAt);
 
-                redirectToNextActivity(checkAlreadyMember());
+                tryPostSignIn(accessToken);
+
+
+//                redirectToNextActivity(checkAlreadyMember());
 
             } else {
                 String errorCode = mOAthLoginInstance.getLastErrorCode(mContext).getCode();
@@ -130,7 +197,17 @@ public class SignInActivity extends BaseActivity implements SignInActivityView {
         }
     };
 
-    public boolean checkAlreadyMember(){
+    private void tryPostSignIn(String naverAccessToken) {
+        showProgressDialog();
+
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("accessToken", naverAccessToken);
+
+        final SignInService signInService = new SignInService(this, params);
+        signInService.postSignIn();
+    }
+
+    public boolean checkAlreadyMember() {
         // todo
         // 우리 DB에 가입되어있는지 여부 확인
         // 우리 DB에 가입되어 있다면 return true;
@@ -139,7 +216,7 @@ public class SignInActivity extends BaseActivity implements SignInActivityView {
         return true;
     }
 
-    public void saveAccessTokenToSharedPreferences(String token){
+    public void saveAccessTokenToSharedPreferences(String token) {
         SharedPreferences sharedPreferences = getSharedPreferences("naverAccessToken", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("naverAccessToken", token);
@@ -163,16 +240,14 @@ public class SignInActivity extends BaseActivity implements SignInActivityView {
     }
 
 
-
     @Override
     public void onBackPressed() {
 
-        if(System.currentTimeMillis() > mBackKeyPressedTime + 2000) {
+        if (System.currentTimeMillis() > mBackKeyPressedTime + 2000) {
             mBackKeyPressedTime = System.currentTimeMillis();
             mToast = Toast.makeText(this, "\'뒤로\' 버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT);
             mToast.show();
-        }
-        else if(System.currentTimeMillis() <= mBackKeyPressedTime + 2000) {
+        } else if (System.currentTimeMillis() <= mBackKeyPressedTime + 2000) {
 
             finish();
             mToast.cancel();
@@ -181,21 +256,14 @@ public class SignInActivity extends BaseActivity implements SignInActivityView {
     }
 
 
-
-
-
-
-
-
-
     // 이 밑으로는 템플릿
 
-    private void tryGetTest() {
-        showProgressDialog();
-
-        final SignInService signInService = new SignInService(this);
-        signInService.getTest();
-    }
+//    private void tryGetTest() {
+//        showProgressDialog();
+//
+//        final SignInService signInService = new SignInService(this);
+//        signInService.getTest();
+//    }
 
     @Override
     public void validateSuccess(String text) {
@@ -212,7 +280,7 @@ public class SignInActivity extends BaseActivity implements SignInActivityView {
     public void customOnClick(View view) {
         switch (view.getId()) {
             case R.id.main_btn_hello_world:
-                tryGetTest();
+//                tryGetTest();
                 break;
             default:
                 break;
