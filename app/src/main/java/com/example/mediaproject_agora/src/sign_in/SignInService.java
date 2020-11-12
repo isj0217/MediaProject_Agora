@@ -16,9 +16,9 @@ class SignInService {
     private final SignInActivityView mSignInActivityView;
     private HashMap<String, Object> mParams;
 
-    SignInService(final SignInActivityView signInActivityView) {
-        this.mSignInActivityView = signInActivityView;
-    }
+//    SignInService(final SignInActivityView signInActivityView) {
+//        this.mSignInActivityView = signInActivityView;
+//    }
 
     SignInService(final SignInActivityView signInActivityView, HashMap<String, Object> mParams) {
         this.mSignInActivityView = signInActivityView;

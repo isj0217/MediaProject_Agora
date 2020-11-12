@@ -134,6 +134,15 @@ public class SignInActivity extends BaseActivity implements SignInActivityView {
 
             // 우리 DB에 회원가입이 안되어있는 경우에는 자체회원가입 시키기
             case 201:
+                //일단 받아온 이름이랑 네이버서버아이디 저장하기!!
+
+                int server_id = signInResponse.getSignInResult().getServer_id();
+                String server_name = signInResponse.getSignInResult().getServer_name();
+
+                System.out.println(server_id);
+                System.out.println(server_name);
+
+                saveServerIdAndServerName(server_id, server_name);
 
                 new AlertDialog.Builder(SignInActivity.this) // TestActivity 부분에는 현재 Activity의 이름 입력.
                         .setTitle("해당 네이버 아이디로\n가입된 계정이 없습니다")
@@ -157,11 +166,20 @@ public class SignInActivity extends BaseActivity implements SignInActivityView {
 
             case 202:
                 showCustomToast(signInResponse.getMessage());
+                break;
 
             default:
                 showCustomToast("SignIn의 default response입니다");
                 break;
         }
+    }
+
+    public void saveServerIdAndServerName(int server_id, String server_name){
+        SharedPreferences sharedPreferences = getSharedPreferences("server_id_and_server_name", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("server_id", server_id);
+        editor.putString("server_name", server_name);
+        editor.apply();
     }
 
     private OAuthLoginHandler mOAthLoginHandler = new OAuthLoginHandler() {

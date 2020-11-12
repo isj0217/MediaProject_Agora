@@ -2,25 +2,28 @@ package com.example.mediaproject_agora.src.sign_up.interfaces;
 
 import com.example.mediaproject_agora.src.sign_up.models.SignUpResponse;
 
-import okhttp3.RequestBody;
+import java.util.HashMap;
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Path;
-import retrofit2.http.Query;
+
 
 public interface SignUpRetrofitInterface {
+
+    @POST("/user")
+    Call<SignUpResponse> signUpTest(@Body HashMap<String, Object> params);
+
+
     //    @GET("/test")
-    @GET("/jwt")
-    Call<SignUpResponse> getTest();
-
-    @GET("/test/{number}")
-    Call<SignUpResponse> getTestPathAndQuery(
-            @Path("number") int number,
-            @Query("content") final String content
-    );
-
-    @POST("/test")
-    Call<SignUpResponse> postTest(@Body RequestBody params);
+//    @GET("/jwt")
+//    Call<SignInResponse> getTest();
+//
+//    @GET("/test/{number}")
+//    Call<SignInResponse> getTestPathAndQuery(
+//            @Path("number") int number,
+//            @Query("content") final String content
+//    );
+//
+//    @POST("/test")
+//    Call<SignInResponse> postTest(@Body RequestBody params);
 }

@@ -8,8 +8,22 @@ public class SignInResponse {
         @SerializedName("jwt")
         private String jwt;
 
+        @SerializedName("server_id")
+        private int server_id;
+
+        @SerializedName("server_name")
+        private String server_name;
+
         public String getJwt() {
             return jwt;
+        }
+
+        public int getServer_id() {
+            return server_id;
+        }
+
+        public String getServer_name() {
+            return server_name;
         }
     }
 
