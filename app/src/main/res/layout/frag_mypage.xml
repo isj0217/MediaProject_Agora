@@ -18,16 +18,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:onClick="customOnClick"
-            android:src="@drawable/left_arrow_blue" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
             android:text="마이페이지"
             android:textColor="@color/black"
             android:textSize="20sp"

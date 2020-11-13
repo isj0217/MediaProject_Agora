@@ -35,7 +35,7 @@ public class SpecificBoardAdapter extends RecyclerView.Adapter<SpecificBoardAdap
     @Override
     public SpecificBoardAdapter.CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_summarized_post, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_summarized_department_post, parent, false);
         CustomViewHolder holder = new CustomViewHolder(view);
 
         return holder;

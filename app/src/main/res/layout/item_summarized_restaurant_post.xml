@@ -19,7 +19,8 @@
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:scaleType="fitXY"
-            android:src="@drawable/desk" />
+            android:src="@drawable/pizza" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,14 +31,56 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="top">
+                android:gravity="center_vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="책상 팔아요"
+                    android:text="피자스쿨"
                     android:textColor="@color/black"
                     android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/yellow_star" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="4.2"
+                    android:textColor="@color/orange" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="추천메뉴: "
+                    android:textColor="@color/dark_grey"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="불고기 피자"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -48,16 +91,37 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="100,000원"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:text="("
+                    android:textColor="@color/dark_grey"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10,900원"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=")"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="튼튼하고 야무진 책상(150*90*110) 십만원에 팝니다" />
+                android:layout_marginTop="4dp"
+                android:text="가성비 최고의 개꿀맛 피자입니다. 꼭 드세요 두번 드세요"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textSize="13sp" />
+
 
             <TextView
                 android:layout_width="match_parent"
@@ -92,7 +156,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="3dp"
-                    android:text="익명"
+                    android:text="망포동아붕이"
                     android:textColor="@color/light_grey"
                     android:textSize="11sp" />
 
@@ -123,13 +187,8 @@
                         android:textSize="12sp" />
 
                 </LinearLayout>
-
             </LinearLayout>
-
-
         </LinearLayout>
-
-
     </LinearLayout>
 
 
