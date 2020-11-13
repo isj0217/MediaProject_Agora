@@ -11,9 +11,9 @@ import com.example.mediaproject_agora.src.main.fragments.fragment_agora.view_pag
 import com.example.mediaproject_agora.src.main.fragments.fragment_agora.view_pager_in_frag_agora.frag_agora_favorite.FragAgoraFavorite;
 import com.example.mediaproject_agora.src.main.fragments.fragment_agora.view_pager_in_frag_agora.frag_agora_used_product.FragAgoraUsedProduct;
 
-public class ViewPagerAdapter extends FragmentPagerAdapter {
+public class AgoraViewPagerAdapter extends FragmentPagerAdapter {
 
-    public ViewPagerAdapter(@NonNull FragmentManager fm) {
+    public AgoraViewPagerAdapter(@NonNull FragmentManager fm) {
         super(fm);
     }
 

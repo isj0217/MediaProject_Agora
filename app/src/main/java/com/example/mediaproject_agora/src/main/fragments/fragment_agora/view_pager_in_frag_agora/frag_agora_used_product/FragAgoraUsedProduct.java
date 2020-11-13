@@ -83,7 +83,7 @@ public class FragAgoraUsedProduct extends Fragment {
         ll_agora_used_clothes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveRecentSectionAndCategory("used_product", "의류 및 신");
+                saveRecentSectionAndCategory("used_product", "의류 및 신발");
                 Intent intent = new Intent(view.getContext(), SpecificBoardActivity.class);
                 startActivity(intent);
             }

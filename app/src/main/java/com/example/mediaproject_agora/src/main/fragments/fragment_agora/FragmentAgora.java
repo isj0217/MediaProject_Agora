@@ -13,7 +13,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.mediaproject_agora.R;
-import com.example.mediaproject_agora.src.main.fragments.fragment_agora.view_pager_in_frag_agora.ViewPagerAdapter;
+import com.example.mediaproject_agora.src.main.fragments.fragment_agora.view_pager_in_frag_agora.AgoraViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 
 public class FragmentAgora extends Fragment {
@@ -26,13 +26,13 @@ public class FragmentAgora extends Fragment {
         viewGroup = (ViewGroup) inflater.inflate(R.layout.frag_agora_view_pager, container, false);
 
         ViewPager vp_frag_board = (ViewPager) viewGroup.findViewById(R.id.vp_frag_board);
-        fragmentPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
+        fragmentPagerAdapter = new AgoraViewPagerAdapter(getChildFragmentManager());
 
-        TabLayout tabLayout = viewGroup.findViewById(R.id.tabLayout);
+        TabLayout tabLayout = viewGroup.findViewById(R.id.tabLayout_board);
         vp_frag_board.setAdapter(fragmentPagerAdapter);
         tabLayout.setupWithViewPager(vp_frag_board);
 
-        tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#000000"));
+        tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#0033FF"));
         tabLayout.setTabTextColors(Color.parseColor("#666666"), Color.parseColor("#000000"));
 
 

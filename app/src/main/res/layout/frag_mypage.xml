@@ -174,7 +174,7 @@
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:gravity="center_vertical"
-            android:background="@drawable/button_corner_round_light_grey">
+            android:background="@drawable/btn_white_round_corner_light_grey">
             <TextView
                 android:layout_marginStart="25dp"
                 android:layout_width="wrap_content"
@@ -189,7 +189,7 @@
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:gravity="center_vertical"
-            android:background="@drawable/button_corner_round_light_grey">
+            android:background="@drawable/btn_white_round_corner_light_grey">
             <TextView
                 android:layout_marginStart="25dp"
                 android:layout_width="wrap_content"
@@ -204,7 +204,7 @@
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:gravity="center_vertical"
-            android:background="@drawable/button_corner_round_light_grey">
+            android:background="@drawable/btn_white_round_corner_light_grey">
             <TextView
                 android:layout_marginStart="25dp"
                 android:layout_width="wrap_content"
@@ -219,7 +219,7 @@
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:gravity="center_vertical"
-            android:background="@drawable/button_corner_round_light_grey">
+            android:background="@drawable/btn_white_round_corner_light_grey">
             <TextView
                 android:layout_marginStart="25dp"
                 android:layout_width="wrap_content"
@@ -234,7 +234,7 @@
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:gravity="center_vertical"
-            android:background="@drawable/button_corner_round_light_grey">
+            android:background="@drawable/btn_white_round_corner_light_grey">
             <TextView
                 android:layout_marginStart="25dp"
                 android:layout_width="wrap_content"
