@@ -118,7 +118,6 @@ public class SignInActivity extends BaseActivity implements SignInActivityView {
         switch (signInResponse.getCode()) {
 
             case 100:
-                showCustomToast(signInResponse.getMessage());
 
                 sSharedPreferences = getSharedPreferences("jwt", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sSharedPreferences.edit();

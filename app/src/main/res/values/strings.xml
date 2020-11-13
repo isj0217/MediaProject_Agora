@@ -32,6 +32,12 @@
         3. 기타 현행법에 어긋나는 행위\n
     </string>
 
+    <string name="activity_writing_used_product_content_hint">여기를 눌러서 글을 작성할 수 있습니다.\n\n
+
+        판매하려는 물건에 대한 간단한 설명을 적어주세요.\n
+        직거래 위치는 아주대학교 내부로 제한됩니다.
+    </string>
+
 
 
 </resources>

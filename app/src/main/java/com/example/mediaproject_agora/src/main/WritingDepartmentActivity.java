@@ -12,7 +12,6 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -20,12 +19,11 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.example.mediaproject_agora.R;
 import com.example.mediaproject_agora.src.BaseActivity;
-import com.example.mediaproject_agora.src.main.interfaces.SpecificBoardActivityView;
 import com.example.mediaproject_agora.src.main.interfaces.WritingActivityView;
 
 import java.io.InputStream;
 
-public class WritingActivity extends BaseActivity implements WritingActivityView {
+public class WritingDepartmentActivity extends BaseActivity implements WritingActivityView {
 
     private LinearLayout ll_writing_thumbnail;
     private LinearLayout ll_writing_attach_cancel;
@@ -47,7 +45,7 @@ public class WritingActivity extends BaseActivity implements WritingActivityView
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_writing);
+        setContentView(R.layout.activity_writing_department);
 
         bindViews();
 
@@ -81,12 +79,12 @@ public class WritingActivity extends BaseActivity implements WritingActivityView
         btn_writing_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new AlertDialog.Builder(WritingActivity.this)
+                new AlertDialog.Builder(WritingDepartmentActivity.this)
                         .setTitle("작성 취소")
                         .setMessage("글 작성을 취소하시겠습니까?")
                         .setPositiveButton("예", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(WritingActivity.this, SpecificBoardActivity.class);
+                                Intent intent = new Intent(WritingDepartmentActivity.this, SpecificBoardActivity.class);
                                 startActivity(intent);
                                 finish();
                             }
@@ -106,19 +104,19 @@ public class WritingActivity extends BaseActivity implements WritingActivityView
             public void onClick(View view) {
 
                 if (isEmptyTitle()) {
-                    Toast.makeText(WritingActivity.this, "글의 제목을 작성해주세요", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(WritingDepartmentActivity.this, "글의 제목을 작성해주세요", Toast.LENGTH_SHORT).show();
                     et_writing_title.requestFocus();
                 } else if (isEmptyContent()){
-                    Toast.makeText(WritingActivity.this, "글의 내용을 작성해주세요", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(WritingDepartmentActivity.this, "글의 내용을 작성해주세요", Toast.LENGTH_SHORT).show();
                     et_writing_content.requestFocus();
                 } else{
-                    new AlertDialog.Builder(WritingActivity.this) // TestActivity 부분에는 현재 Activity의 이름 입력.
+                    new AlertDialog.Builder(WritingDepartmentActivity.this) // TestActivity 부분에는 현재 Activity의 이름 입력.
                             .setTitle("작성 완료")
                             .setMessage("글을 게시하시겠습니까?")
                             .setPositiveButton("예", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     isEmptyTitle();
-                                    Intent intent = new Intent(WritingActivity.this, SpecificBoardActivity.class);
+                                    Intent intent = new Intent(WritingDepartmentActivity.this, SpecificBoardActivity.class);
                                     startActivity(intent);
                                     finish();
                                 }
@@ -147,7 +145,7 @@ public class WritingActivity extends BaseActivity implements WritingActivityView
         iv_writing_attach_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new AlertDialog.Builder(WritingActivity.this)
+                new AlertDialog.Builder(WritingDepartmentActivity.this)
                         .setTitle("첨부 취소")
                         .setMessage("사진 첨부를 취소하시겠습니까?")
                         .setPositiveButton("예", new DialogInterface.OnClickListener() {
@@ -196,12 +194,12 @@ public class WritingActivity extends BaseActivity implements WritingActivityView
     @Override
     public void onBackPressed() {
 
-        new AlertDialog.Builder(WritingActivity.this) // TestActivity 부분에는 현재 Activity의 이름 입력.
+        new AlertDialog.Builder(WritingDepartmentActivity.this) // TestActivity 부분에는 현재 Activity의 이름 입력.
                 .setTitle("작성 취소")
                 .setMessage("글 작성을 취소하시겠습니까?")
                 .setPositiveButton("예", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(WritingActivity.this, SpecificBoardActivity.class);
+                        Intent intent = new Intent(WritingDepartmentActivity.this, SpecificBoardActivity.class);
                         startActivity(intent);
                         finish();
                     }

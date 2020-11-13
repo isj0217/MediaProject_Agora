@@ -3,22 +3,19 @@ package com.example.mediaproject_agora.src.main;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.mediaproject_agora.R;
 import com.example.mediaproject_agora.src.BaseActivity;
 
-import com.example.mediaproject_agora.src.main.interfaces.MainActivityView;
 import com.example.mediaproject_agora.src.main.interfaces.SpecificBoardActivityView;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class SpecificBoardActivity extends BaseActivity implements SpecificBoardActivityView {
+
+    private Intent intent;
 
     private String section_in_agora;
     private String category_name;
@@ -65,11 +62,23 @@ public class SpecificBoardActivity extends BaseActivity implements SpecificBoard
             case R.id.iv_specific_board_search:
                 break;
             case R.id.iv_specific_board_write:
-                Intent intent = new Intent(SpecificBoardActivity.this, WritingActivity.class);
-//                intent.putExtra("section_in_agora", section_in_agora);
-//                intent.putExtra("category_name", used_product_category_name);
-                startActivity(intent);
-                finish();
+
+                loadRecentSectionAndCategory();
+
+                switch (section_in_agora){
+                    case "department":
+                        intent = new Intent(SpecificBoardActivity.this, WritingDepartmentActivity.class);
+                        startActivity(intent);
+                        finish();
+                        break;
+
+                    case "used_product":
+                        intent = new Intent(SpecificBoardActivity.this, WritingUsedProductActivity.class);
+                        startActivity(intent);
+                        finish();
+                        break;
+
+                }
                 break;
         }
 
