@@ -2,14 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/item_home_main"
-        android:checked="true"
-        android:enabled="true"
-        android:icon="@drawable/ic_baseline_home_24"
-        android:title="홈"
-        app:showAsAction="always" />
-
-    <item
         android:id="@+id/item_agora_main"
         android:checked="true"
         android:enabled="true"
@@ -18,11 +10,27 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/item_chat_main"
+        android:id="@+id/item_restaurant_main"
+        android:checked="true"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_restaurant_24"
+        android:title="아주맛집"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/item_message_main"
         android:checked="true"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_chat"
-        android:title="채팅"
+        android:title="쪽지"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/item_mypage_main"
+        android:checked="true"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_mypage_24"
+        android:title="마이페이지"
         app:showAsAction="always" />
 
 </menu>

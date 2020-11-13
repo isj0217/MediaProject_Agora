@@ -1,4 +1,4 @@
-package com.example.mediaproject_agora.src.main.fragments.fragment_chat;
+package com.example.mediaproject_agora.src.main.fragments.fragment_message;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,13 +11,13 @@ import androidx.fragment.app.Fragment;
 
 import com.example.mediaproject_agora.R;
 
-public class FragmentChat extends Fragment {
+public class FragmentMessage extends Fragment {
     ViewGroup viewGroup;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        viewGroup = (ViewGroup) inflater.inflate(R.layout.frag_chat, container, false);
+        viewGroup = (ViewGroup) inflater.inflate(R.layout.frag_message, container, false);
         return viewGroup;
     }
 }

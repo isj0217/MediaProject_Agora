@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.mediaproject_agora.src.main.fragments.fragment_agora.view_pager_in_frag_agora.frag_agora_club.FragAgoraClub;
 import com.example.mediaproject_agora.src.main.fragments.fragment_agora.view_pager_in_frag_agora.frag_agora_department.FragAgoraDepartment;
-import com.example.mediaproject_agora.src.main.fragments.fragment_agora.view_pager_in_frag_agora.frag_agora_restaurant.FragAgoraRestaurant;
+import com.example.mediaproject_agora.src.main.fragments.fragment_agora.view_pager_in_frag_agora.frag_agora_favorite.FragAgoraFavorite;
 import com.example.mediaproject_agora.src.main.fragments.fragment_agora.view_pager_in_frag_agora.frag_agora_used_product.FragAgoraUsedProduct;
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
@@ -28,11 +28,11 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return FragAgoraDepartment.newInstance();
             case 1:
-                return FragAgoraRestaurant.newInstance();
-            case 2:
                 return FragAgoraUsedProduct.newInstance();
-            case 3:
+            case 2:
                 return FragAgoraClub.newInstance();
+            case 3:
+                return FragAgoraFavorite.newInstance();
             default:
                 return null;
         }
@@ -54,11 +54,11 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return "학과 게시판";
             case 1:
-                return "아주 맛집";
-            case 2:
                 return "중고거래";
-            case 3:
+            case 2:
                 return "동아리";
+            case 3:
+                return "즐겨찾기";
             default:
                 return null;
         }
