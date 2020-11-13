@@ -15,7 +15,12 @@
 
     <color name="light_grey">#BBBBBB</color>
     <!--    <color name="blue_app_name">#0055A4</color>-->
-    <color name="blue_app_name">#0033FF</color>
+
+
+<!--    원래 아주대학교 로고 색은 0033FF-->
+<!--    <color name="blue_app_name">#0033FF</color>-->
+    <color name="blue_app_name">#4285F4</color>
+
     <color name="brown_ajou">#B38000</color>
 
     <color name="white">#FFFFFF</color>
@@ -27,6 +32,8 @@
     <color name="green">#32CD32</color>
 
     <color name="mint">#1aa2cb</color>
+
+    <color name="skyblue">#4285F4</color>
 
 
 

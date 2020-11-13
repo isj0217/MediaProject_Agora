@@ -32,7 +32,7 @@ public class FragmentAgora extends Fragment {
         vp_frag_board.setAdapter(fragmentPagerAdapter);
         tabLayout.setupWithViewPager(vp_frag_board);
 
-        tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#0033FF"));
+        tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#4285F4"));
         tabLayout.setTabTextColors(Color.parseColor("#666666"), Color.parseColor("#000000"));
 
 
