@@ -27,7 +27,7 @@ public class FragRestaurantJapanese extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.frag_restaurant, container, false);
+        view = inflater.inflate(R.layout.frag_restaurant_not_used, container, false);
 
         bindViews();
 

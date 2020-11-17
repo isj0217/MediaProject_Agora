@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<!--    1aa2cb-->
+
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/fab_restaurant_total"
+        android:onClick="customOnClick"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="15dp"
+        app:fab_addButtonColorNormal="@color/pink"
+        app:fab_addButtonColorPressed="@color/pink_pressed"
+        app:fab_addButtonPlusIconColor="@color/white"
+        app:fab_labelStyle="@style/custom_fab">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_action1"
+            android:onClick="customOnClick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/white"
+            app:fab_colorPressed="@color/white_pressed"
+            app:fab_icon="@drawable/ic_baseline_add_pink"
+            app:fab_size="mini"
+            app:fab_title="아주 맛집 리뷰 작성" />
+
+<!--        <com.getbase.floatingactionbutton.FloatingActionButton-->
+<!--            android:id="@+id/fab_action2"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:fab_colorNormal="@color/white"-->
+<!--            app:fab_colorPressed="@color/white_pressed"-->
+<!--            app:fab_icon="@drawable/ic_baseline_add_pink"-->
+<!--            app:fab_size="mini"-->
+<!--            app:fab_title="Fab Action 2" />-->
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+    
+<!--    <HorizontalScrollView-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:scrollbars="none">-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:padding="10dp">-->
+
+<!--        <Button-->
+<!--            android:id="@+id/btn_restaurant_filter_stars"-->
+<!--            android:paddingStart="15dp"-->
+<!--            android:paddingEnd="15dp"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="별점 순"-->
+<!--            android:background="@drawable/btn_white_round_corner_light_grey" />-->
+
+<!--        <Button-->
+<!--            android:id="@+id/btn_restaurant_filter_comments"-->
+<!--            android:paddingStart="15dp"-->
+<!--            android:paddingEnd="15dp"-->
+<!--            android:layout_marginStart="10dp"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="댓글 많은 순"-->
+<!--            android:background="@drawable/btn_white_round_corner_light_grey" />-->
+
+<!--        <Button-->
+<!--            android:id="@+id/btn_restaurant_filter_low_price"-->
+<!--            android:paddingStart="15dp"-->
+<!--            android:paddingEnd="15dp"-->
+<!--            android:layout_marginStart="10dp"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="낮은 가격 순"-->
+<!--            android:background="@drawable/btn_white_round_corner_light_grey" />-->
+
+<!--        <Button-->
+<!--            android:id="@+id/btn_restaurant_filter_high_price"-->
+<!--            android:paddingStart="15dp"-->
+<!--            android:paddingEnd="15dp"-->
+<!--            android:layout_marginStart="10dp"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="높은 가격 순"-->
+<!--            android:background="@drawable/btn_white_round_corner_light_grey" />-->
+
+<!--        <Button-->
+<!--            android:id="@+id/btn_restaurant_filter_recent"-->
+<!--            android:paddingStart="15dp"-->
+<!--            android:paddingEnd="15dp"-->
+<!--            android:layout_marginStart="10dp"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="최근 순"-->
+<!--            android:background="@drawable/btn_white_round_corner_light_grey" />-->
+
+<!--        <Button-->
+<!--            android:id="@+id/btn_restaurant_filter_old"-->
+<!--            android:paddingStart="15dp"-->
+<!--            android:paddingEnd="15dp"-->
+<!--            android:layout_marginStart="10dp"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="오래된 순"-->
+<!--            android:background="@drawable/btn_white_round_corner_light_grey" />-->
+
+
+
+
+<!--    </LinearLayout>-->
+
+<!--    </HorizontalScrollView>-->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="아주 맛집 전체"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

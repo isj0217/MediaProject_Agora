@@ -1,21 +1,15 @@
 package com.example.mediaproject_agora.src.main.fragments.fragment_restaurant.view_pager_in_frag_restaurant.frag_restaurant_korean;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.mediaproject_agora.R;
-import com.example.mediaproject_agora.src.main.SpecificBoardActivity;
 
 public class FragRestaurantKorean extends Fragment {
 
@@ -33,7 +27,7 @@ public class FragRestaurantKorean extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.frag_restaurant, container, false);
+        view = inflater.inflate(R.layout.frag_restaurant_not_used, container, false);
 
         bindViews();
 

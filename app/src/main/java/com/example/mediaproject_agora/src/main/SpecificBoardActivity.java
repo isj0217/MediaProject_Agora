@@ -1,5 +1,6 @@
 package com.example.mediaproject_agora.src.main;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -7,11 +8,20 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 
 import com.example.mediaproject_agora.R;
 import com.example.mediaproject_agora.src.BaseActivity;
 
 import com.example.mediaproject_agora.src.main.interfaces.SpecificBoardActivityView;
+import com.example.mediaproject_agora.src.main.models.SpecificBoardResponse;
+import com.example.mediaproject_agora.src.sign_in.SignInActivity;
+import com.example.mediaproject_agora.src.sign_up.SignUpActivity;
+
+import java.util.HashMap;
+
+import static com.example.mediaproject_agora.src.ApplicationClass.X_ACCESS_TOKEN;
+import static com.example.mediaproject_agora.src.ApplicationClass.sSharedPreferences;
 
 public class SpecificBoardActivity extends BaseActivity implements SpecificBoardActivityView {
 
@@ -32,6 +42,8 @@ public class SpecificBoardActivity extends BaseActivity implements SpecificBoard
 
         tv_specific_board_name = findViewById(R.id.tv_specific_board_name);
 
+
+
 //        Bundle bundle = getIntent().getExtras();
 //        if (bundle != null) {
 //            section_in_agora = bundle.getString("section_in_agora");
@@ -43,13 +55,31 @@ public class SpecificBoardActivity extends BaseActivity implements SpecificBoard
 
         tv_specific_board_name.setText(category_name);
 
+        switch (section_in_agora){
+            case "department":
+                department_name = category_name;
+                tryGetSpecificDepartmentBoard(department_name);
+                break;
+
+            case "used_product":
+                break;
+        }
+
 
 //        SharedPreferences sharedPreferences = getSharedPreferences("recent_section_and_category", MODE_PRIVATE);
 //        section_in_agora = sharedPreferences.getString("section_in_agora", "SECTION");
 //        category_name = sharedPreferences.getString("category_name", "CATEGORY");
 
+    }
 
+    private void tryGetSpecificDepartmentBoard(String department_name) {
+        showProgressDialog();
 
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("department_name", department_name);
+
+        final SpecificBoardService specificBoardService = new SpecificBoardService(this, params);
+        specificBoardService.getSpecificDepartmentBoard(department_name);
     }
 
     public void customOnClick(View view) {
@@ -110,6 +140,32 @@ public class SpecificBoardActivity extends BaseActivity implements SpecificBoard
     public void validateFailure(@Nullable String message) {
         hideProgressDialog();
         showCustomToast(message == null || message.isEmpty() ? getString(R.string.network_error) : message);
+    }
+
+    @Override
+    public void getSpecificDepartmentBoardSuccess(SpecificBoardResponse specificBoardResponse) {
+        hideProgressDialog();
+
+        switch (specificBoardResponse.getCode()) {
+
+            case 100:
+                showCustomToast("일단 여기까지는 성공!!!!");
+
+                break;
+
+            // 우리 DB에 회원가입이 안되어있는 경우에는 자체회원가입 시키기
+            case 201:
+                showCustomToast(specificBoardResponse.getMessage());
+                break;
+
+            case 202:
+                showCustomToast(specificBoardResponse.getMessage());
+                break;
+
+            default:
+                showCustomToast("SpecificBoard의 default response입니다");
+                break;
+        }
     }
 
 

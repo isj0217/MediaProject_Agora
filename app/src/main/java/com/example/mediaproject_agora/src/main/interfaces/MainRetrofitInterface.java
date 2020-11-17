@@ -1,6 +1,10 @@
 package com.example.mediaproject_agora.src.main.interfaces;
 
 import com.example.mediaproject_agora.src.main.models.DefaultResponse;
+import com.example.mediaproject_agora.src.main.models.MainResponse;
+import com.example.mediaproject_agora.src.sign_in.models.SignInResponse;
+
+import java.util.HashMap;
 
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -12,6 +16,10 @@ import retrofit2.http.Query;
 
 public interface MainRetrofitInterface {
     //    @GET("/test")
+
+
+
+
     @GET("/jwt")
     Call<DefaultResponse> getTest();
 

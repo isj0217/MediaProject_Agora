@@ -35,8 +35,6 @@ public class FragmentAgora extends Fragment {
         tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#4285F4"));
         tabLayout.setTabTextColors(Color.parseColor("#666666"), Color.parseColor("#000000"));
 
-
-
         return viewGroup;
     }
 }

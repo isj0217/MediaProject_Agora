@@ -5,6 +5,42 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#FFC0CB">
 
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="15dp"
+        app:fab_addButtonColorNormal="@color/pink"
+        app:fab_addButtonColorPressed="@color/pink_pressed"
+        app:fab_addButtonPlusIconColor="@color/white"
+        app:fab_labelStyle="@style/custom_fab">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_action1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/white"
+            app:fab_colorPressed="@color/white_pressed"
+            app:fab_icon="@drawable/ic_baseline_add_pink"
+            app:fab_size="mini"
+            app:fab_title="Fab Action 1" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_action2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/white"
+            app:fab_colorPressed="@color/white_pressed"
+            app:fab_icon="@drawable/ic_baseline_add_pink"
+            app:fab_size="mini"
+            app:fab_title="Fab Action 2" />
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

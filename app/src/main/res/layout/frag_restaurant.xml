@@ -1,102 +1,223 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    tools:context=".src.main.MainActivity">
 
-<!--    1aa2cb-->
-    
-<!--    <HorizontalScrollView-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:scrollbars="none">-->
+    <!--    <com.google.android.material.tabs.TabLayout-->
+    <!--        android:id="@+id/tabLayout_restaurant"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="60dp"-->
+    <!--        android:background="@color/more_lighter_grey"-->
+    <!--        app:tabIndicatorColor="@color/blue_app_name"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent">-->
 
-<!--    <LinearLayout-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="60dp"-->
-<!--        android:orientation="horizontal"-->
-<!--        android:padding="10dp">-->
+    <!--        <com.google.android.material.tabs.TabItem-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="전체" />-->
 
-<!--        <Button-->
-<!--            android:id="@+id/btn_restaurant_filter_stars"-->
-<!--            android:paddingStart="15dp"-->
-<!--            android:paddingEnd="15dp"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="별점 순"-->
-<!--            android:background="@drawable/btn_white_round_corner_light_grey" />-->
+    <!--        <com.google.android.material.tabs.TabItem-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="한식" />-->
 
-<!--        <Button-->
-<!--            android:id="@+id/btn_restaurant_filter_comments"-->
-<!--            android:paddingStart="15dp"-->
-<!--            android:paddingEnd="15dp"-->
-<!--            android:layout_marginStart="10dp"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="댓글 많은 순"-->
-<!--            android:background="@drawable/btn_white_round_corner_light_grey" />-->
+    <!--        <com.google.android.material.tabs.TabItem-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="중식" />-->
 
-<!--        <Button-->
-<!--            android:id="@+id/btn_restaurant_filter_low_price"-->
-<!--            android:paddingStart="15dp"-->
-<!--            android:paddingEnd="15dp"-->
-<!--            android:layout_marginStart="10dp"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="낮은 가격 순"-->
-<!--            android:background="@drawable/btn_white_round_corner_light_grey" />-->
+    <!--        <com.google.android.material.tabs.TabItem-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="일식" />-->
 
-<!--        <Button-->
-<!--            android:id="@+id/btn_restaurant_filter_high_price"-->
-<!--            android:paddingStart="15dp"-->
-<!--            android:paddingEnd="15dp"-->
-<!--            android:layout_marginStart="10dp"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="높은 가격 순"-->
-<!--            android:background="@drawable/btn_white_round_corner_light_grey" />-->
+    <!--    </com.google.android.material.tabs.TabLayout>-->
 
-<!--        <Button-->
-<!--            android:id="@+id/btn_restaurant_filter_recent"-->
-<!--            android:paddingStart="15dp"-->
-<!--            android:paddingEnd="15dp"-->
-<!--            android:layout_marginStart="10dp"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="최근 순"-->
-<!--            android:background="@drawable/btn_white_round_corner_light_grey" />-->
-
-<!--        <Button-->
-<!--            android:id="@+id/btn_restaurant_filter_old"-->
-<!--            android:paddingStart="15dp"-->
-<!--            android:paddingEnd="15dp"-->
-<!--            android:layout_marginStart="10dp"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="오래된 순"-->
-<!--            android:background="@drawable/btn_white_round_corner_light_grey" />-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_country_filter"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/more_lighter_grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_white_round_corner_light_grey"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:text="전체" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/btn_white_round_corner_light_grey"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:text="한식" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/btn_white_round_corner_light_grey"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:text="중식" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/btn_white_round_corner_light_grey"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:text="일식" />
+
+        </LinearLayout>
 
 
-<!--    </LinearLayout>-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--    </HorizontalScrollView>-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_restaurant_filter"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cl_country_filter">
 
-    <TextView
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <Button
+                    android:id="@+id/btn_restaurant_filter_stars"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_white_round_corner_light_grey"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:text="별점 순" />
+
+                <Button
+                    android:id="@+id/btn_restaurant_filter_comments"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/btn_white_round_corner_light_grey"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:text="댓글 많은 순" />
+
+                <Button
+                    android:id="@+id/btn_restaurant_filter_low_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/btn_white_round_corner_light_grey"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:text="낮은 가격 순" />
+
+                <Button
+                    android:id="@+id/btn_restaurant_filter_high_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/btn_white_round_corner_light_grey"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:text="높은 가격 순" />
+
+                <Button
+                    android:id="@+id/btn_restaurant_filter_recent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/btn_white_round_corner_light_grey"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:text="최근 순" />
+
+                <Button
+                    android:id="@+id/btn_restaurant_filter_old"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/btn_white_round_corner_light_grey"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:text="오래된 순" />
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="아주 맛집"
-        android:textColor="@color/black"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="15dp"
+        app:fab_addButtonColorNormal="@color/blue_app_name"
+        app:fab_addButtonColorPressed="@color/blue_app_name"
+        app:fab_addButtonPlusIconColor="@color/white"
+        app:fab_labelStyle="@style/custom_fab">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_action1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/white"
+            app:fab_colorPressed="@color/white_pressed"
+            app:fab_icon="@drawable/ic_baseline_add_blue"
+            app:fab_size="mini"
+            app:fab_title="맛집 추천하기" />
+
+<!--        <com.getbase.floatingactionbutton.FloatingActionButton-->
+<!--            android:id="@+id/fab_action2"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:fab_colorNormal="@color/white"-->
+<!--            app:fab_colorPressed="@color/white_pressed"-->
+<!--            app:fab_icon="@drawable/ic_baseline_add_pink"-->
+<!--            app:fab_size="mini"-->
+<!--            app:fab_title="Fab Action 2" />-->
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

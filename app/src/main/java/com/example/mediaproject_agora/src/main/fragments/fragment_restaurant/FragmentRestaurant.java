@@ -1,21 +1,21 @@
 package com.example.mediaproject_agora.src.main.fragments.fragment_restaurant;
 
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 
 import com.example.mediaproject_agora.R;
-import com.example.mediaproject_agora.src.main.fragments.fragment_restaurant.view_pager_in_frag_restaurant.RestaurantViewPagerAdapter;
-import com.google.android.material.tabs.TabLayout;
+import com.example.mediaproject_agora.src.main.SpecificBoardActivity;
+import com.getbase.floatingactionbutton.FloatingActionButton;
 
 public class FragmentRestaurant extends Fragment {
 
@@ -28,22 +28,19 @@ public class FragmentRestaurant extends Fragment {
 
     private boolean is_filtered_by_stars, is_filtered_by_comments, is_filtered_by_low_price, is_filtered_by_high_price, is_filtered_by_recent, is_filtered_by_old;
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        viewGroup = (ViewGroup) inflater.inflate(R.layout.frag_restaurant_view_pager, container, false);
+        viewGroup = (ViewGroup) inflater.inflate(R.layout.frag_restaurant, container, false);
 
-        ViewPager vp_frag_restaurant = (ViewPager) viewGroup.findViewById(R.id.vp_frag_restaurant);
-        fragmentPagerAdapter = new RestaurantViewPagerAdapter(getChildFragmentManager());
-
-        TabLayout tabLayout = viewGroup.findViewById(R.id.tabLayout_restaurant);
-        vp_frag_restaurant.setAdapter(fragmentPagerAdapter);
-        tabLayout.setupWithViewPager(vp_frag_restaurant);
-
-        tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#4285F4"));
-        tabLayout.setTabTextColors(Color.parseColor("#666666"), Color.parseColor("#000000"));
-
+        FloatingActionButton fab1 = viewGroup.findViewById(R.id.fab_action1);
+        fab1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), SpecificBoardActivity.class);
+                startActivity(intent);
+            }
+        });
 
         bindViews();
 
@@ -223,4 +220,17 @@ public class FragmentRestaurant extends Fragment {
         btn_restaurant_filter_recent = viewGroup.findViewById(R.id.btn_restaurant_filter_recent);
         btn_restaurant_filter_old = viewGroup.findViewById(R.id.btn_restaurant_filter_old);
     }
+
+//    public void customOnClick(View view) {
+//        switch (view.getId()) {
+////            case R.id.fab_action1:
+////                Toast.makeText(context, "ssssss", Toast.LENGTH_SHORT).show();
+////                break;
+//
+//            case R.id.floating_action_button:
+//                Toast.makeText(getContext(), "kkkkkk", Toast.LENGTH_SHORT).show();
+//            default:
+//                break;
+//        }
+//    }
 }

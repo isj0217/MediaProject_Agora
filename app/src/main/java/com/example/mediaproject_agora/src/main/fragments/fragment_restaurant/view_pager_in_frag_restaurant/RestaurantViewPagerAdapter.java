@@ -34,9 +34,9 @@ public class RestaurantViewPagerAdapter extends FragmentPagerAdapter {
             case 1:
                 return FragRestaurantKorean.newInstance();
             case 2:
-                return FragRestaurantJapanese.newInstance();
-            case 3:
                 return FragRestaurantChinese.newInstance();
+            case 3:
+                return FragRestaurantJapanese.newInstance();
             default:
                 return null;
         }
