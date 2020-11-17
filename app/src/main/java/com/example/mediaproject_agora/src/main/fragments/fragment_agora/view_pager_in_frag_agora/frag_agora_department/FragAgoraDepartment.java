@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,8 +17,9 @@ import androidx.fragment.app.Fragment;
 
 import com.example.mediaproject_agora.R;
 import com.example.mediaproject_agora.src.main.SpecificBoardActivity;
+import com.example.mediaproject_agora.src.main.fragments.fragment_agora.view_pager_in_frag_agora.frag_agora_department.models.DepartmentResponse;
 
-public class FragAgoraDepartment extends Fragment {
+public class FragAgoraDepartment extends Fragment implements FragAgoraDepartmentView {
 
     private View view;
 
@@ -53,10 +55,18 @@ public class FragAgoraDepartment extends Fragment {
 
         setClickListenersToDepartments();
 
+        tryGetDepartmentList();
+
 
 
 
         return view;
+    }
+
+    private void tryGetDepartmentList() {
+
+        final FragAgoraDepartmentService fragAgoraDepartmentService = new FragAgoraDepartmentService(this);
+        fragAgoraDepartmentService.getDepartmentList();
     }
 
     public void initializeFavorites(){
@@ -218,6 +228,22 @@ public class FragAgoraDepartment extends Fragment {
     }
 
 
+    @Override
+    public void validateSuccess(String text) {
+        Toast.makeText(getContext(), "validateSuccess", Toast.LENGTH_SHORT).show();
 
+    }
+
+    @Override
+    public void validateFailure(String message) {
+        Toast.makeText(getContext(), "validateFailure", Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void getDepartmentListSuccess(DepartmentResponse departmentResponse) {
+        Toast.makeText(getContext(), departmentResponse.getMessage(), Toast.LENGTH_SHORT).show();
+
+    }
 
 }

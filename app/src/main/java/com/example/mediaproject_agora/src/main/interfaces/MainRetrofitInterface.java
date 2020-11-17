@@ -17,6 +17,8 @@ import retrofit2.http.Query;
 public interface MainRetrofitInterface {
     //    @GET("/test")
 
+    @GET("/department")
+    Call<MainResponse> getDepartmentList();
 
 
 

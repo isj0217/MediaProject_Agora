@@ -8,4 +8,6 @@ public interface MainActivityView {
 
     void validateFailure(String message);
 
+//    void getDepartmentListSuccess(MainResponse mainResponse);
+
 }

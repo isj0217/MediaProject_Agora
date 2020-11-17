@@ -126,6 +126,8 @@ public class SignInActivity extends BaseActivity implements SignInActivityView {
 
                 X_ACCESS_TOKEN = sSharedPreferences.getString("jwt", "");
 
+                System.out.println("X_ACCESS_TOKEN에 담긴 값????? " + X_ACCESS_TOKEN);
+
                 intent = new Intent(SignInActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();

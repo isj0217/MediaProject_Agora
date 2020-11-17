@@ -93,14 +93,15 @@ public class MainActivity extends BaseActivity implements MainActivityView {
     }
 
 
+
     // 이 밑으로는 템플릿
 
-    private void tryGetTest() {
-        showProgressDialog();
-
-        final MainService mainService = new MainService(this);
-        mainService.getTest();
-    }
+//    private void tryGetTest() {
+//        showProgressDialog();
+//
+//        final MainService mainService = new MainService(this);
+//        mainService.getTest();
+//    }
 
     @Override
     public void validateSuccess(String text) {
@@ -114,13 +115,13 @@ public class MainActivity extends BaseActivity implements MainActivityView {
         showCustomToast(message == null || message.isEmpty() ? getString(R.string.network_error) : message);
     }
 
-    public void customOnClick(View view) {
-        switch (view.getId()) {
-            case R.id.main_btn_hello_world:
-                tryGetTest();
-                break;
-            default:
-                break;
-        }
-    }
+//    public void customOnClick(View view) {
+//        switch (view.getId()) {
+//            case R.id.main_btn_hello_world:
+//                tryGetTest();
+//                break;
+//            default:
+//                break;
+//        }
+//    }
 }
