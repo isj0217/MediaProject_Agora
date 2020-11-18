@@ -277,8 +277,6 @@ public class WritingDepartmentActivity extends BaseActivity implements WritingDe
         switch (defaultResponse.getCode()) {
 
             case 100:
-                showCustomToast("일단 성공?????");
-
                 break;
 
             default:

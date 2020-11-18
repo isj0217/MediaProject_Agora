@@ -1,5 +1,6 @@
 package com.example.mediaproject_agora.src.main;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -99,12 +100,20 @@ public class DepartmentBoardActivity extends BaseActivity implements DepartmentB
         departmentBoardService.getSpecificDepartmentBoard(department_name);
     }
 
+    private void restartActivity(Activity activity) {
+        Intent intent = new Intent();
+        intent.setClass(activity, activity.getClass());
+        activity.startActivity(intent);
+        activity.finish();
+    }
+
     public void customOnClick(View view) {
         switch (view.getId()) {
             case R.id.iv_specific_board_go_back:
                 onBackPressed();
                 break;
             case R.id.iv_specific_board_sync:
+                restartActivity(DepartmentBoardActivity.this);
                 break;
             case R.id.iv_specific_board_search:
                 break;

@@ -369,7 +369,7 @@ public class FragAgoraDepartment extends Fragment implements FragAgoraDepartment
                 break;
 
             default:
-                Toast.makeText(getContext(), departmentResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                System.out.println(departmentResponse.getMessage());
                 break;
         }
     }

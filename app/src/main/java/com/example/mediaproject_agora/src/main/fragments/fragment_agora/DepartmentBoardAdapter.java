@@ -46,6 +46,7 @@ public class DepartmentBoardAdapter extends RecyclerView.Adapter<DepartmentBoard
     @Override
     public void onBindViewHolder(@NonNull DepartmentBoardAdapter.CustomViewHolder holder, int position) {
 
+        holder.tv_item_post_dept_board_idx.setText(Integer.toString(department_post_item_list.get(position).getDepartment_board_idx()));
         holder.tv_item_post_title.setText(department_post_item_list.get(position).getTitle());
         holder.tv_item_post_content.setText(department_post_item_list.get(position).getContent());
         holder.tv_item_post_nickname.setText(department_post_item_list.get(position).getNickname());
@@ -73,7 +74,7 @@ public class DepartmentBoardAdapter extends RecyclerView.Adapter<DepartmentBoard
 
     public class CustomViewHolder extends RecyclerView.ViewHolder {
 
-        protected int department_board_idx;
+        protected TextView tv_item_post_dept_board_idx;
         protected TextView tv_item_post_title;
         protected TextView tv_item_post_content;
         protected TextView tv_item_post_nickname;
@@ -85,6 +86,7 @@ public class DepartmentBoardAdapter extends RecyclerView.Adapter<DepartmentBoard
         public CustomViewHolder(@NonNull final View itemView) {
             super(itemView);
 
+            this.tv_item_post_dept_board_idx = itemView.findViewById(R.id.tv_item_post_dept_board_idx_num);
             this.tv_item_post_title = itemView.findViewById(R.id.tv_item_post_title);
             this.tv_item_post_content = itemView.findViewById(R.id.tv_item_post_content);
             this.tv_item_post_nickname = itemView.findViewById(R.id.tv_item_post_nickname);
@@ -105,6 +107,8 @@ public class DepartmentBoardAdapter extends RecyclerView.Adapter<DepartmentBoard
 //                        System.out.println("보내기 전 pos: " + pos);
 
                         Intent intent = new Intent(view.getContext(), InPostActivity.class);
+                        intent.putExtra("index_of_this_post", department_post_item_list.get(pos).getDepartment_board_idx());
+
 //                        intent.putExtra("index_of_this_post", post_item_list.get(pos).getContent_index());
 //                        intent.putExtra("clicked_pos", pos);
 //                        intent.putExtra("clicked_content_index", post_item_list.get(pos).getContent_index());

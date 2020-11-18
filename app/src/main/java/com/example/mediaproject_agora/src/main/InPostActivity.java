@@ -1,19 +1,26 @@
 package com.example.mediaproject_agora.src.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediaproject_agora.R;
+import com.example.mediaproject_agora.src.BaseActivity;
+import com.example.mediaproject_agora.src.main.interfaces.InPostActivityView;
+import com.example.mediaproject_agora.src.main.models.InPostResponse;
+
+import java.util.HashMap;
 
 
-public class InPostActivity extends AppCompatActivity {
+public class InPostActivity extends BaseActivity implements InPostActivityView {
 
 //    private ArrayList<CommentItem> m_comment_item_list;
 
@@ -43,11 +50,19 @@ public class InPostActivity extends AppCompatActivity {
 
     private boolean m_from_frag_home;
 
+    private Intent intent;
+    private int index_of_this_post;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_in_department_post);
+
+        index_of_this_post = getIntent().getExtras().getInt("index_of_this_post", 0);
+
+        tryGetSpecificDepartmentPost(index_of_this_post);
+
 
 //        m_comment_item_list = new ArrayList<>();
 
@@ -60,18 +75,20 @@ public class InPostActivity extends AppCompatActivity {
 //        rv_in_post_comment.setAdapter(comment_adapter);
 
 
-//        inPostService = new InPostService(this);
-
         ViewBinding();
 
-        if (getIntent().getStringExtra("clicked") != null) {
-            clicked = getIntent().getStringExtra("clicked");
-            m_from_frag_home = true;
-        } else {
-            clicked = "";
-            m_from_frag_home = false;
-        }
+        Toast.makeText(this, index_of_this_post, Toast.LENGTH_SHORT).show();
 
+    }
+
+    private void tryGetSpecificDepartmentPost(int department_board_idx) {
+        showProgressDialog();
+
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("department_board_idx", department_board_idx);
+
+        final InPostService inPostService = new InPostService(this, params);
+        inPostService.getSpecificDepartmentPost(department_board_idx);
     }
 
 
@@ -91,7 +108,18 @@ public class InPostActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void validateSuccess(String text) {
 
+    }
 
+    @Override
+    public void validateFailure(String message) {
 
+    }
+
+    @Override
+    public void getDepartmentPostSuccess(InPostResponse inPostResponse) {
+        
+    }
 }
