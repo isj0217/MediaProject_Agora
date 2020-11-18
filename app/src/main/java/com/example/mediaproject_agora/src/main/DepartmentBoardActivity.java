@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -165,7 +166,6 @@ public class DepartmentBoardActivity extends BaseActivity implements DepartmentB
         switch (departmentBoardResponse.getCode()) {
 
             case 100:
-                showCustomToast("일단 여기까지는 성공!!!!");
 
                 /**
                  * PostItem 형식의 ArrayList에 모두 넣어두고 어댑터를 이용해서 하나하나 레이아웃에 갖다 붙이자!!
@@ -193,18 +193,8 @@ public class DepartmentBoardActivity extends BaseActivity implements DepartmentB
 
                 break;
 
-
-            // 우리 DB에 회원가입이 안되어있는 경우에는 자체회원가입 시키기
-//            case 201:
-//                showCustomToast(specificBoardResponse.getMessage());
-//                break;
-//
-//            case 202:
-//                showCustomToast(specificBoardResponse.getMessage());
-//                break;
-
             default:
-                showCustomToast("SpecificBoard의 default response입니다");
+                Toast.makeText(this, departmentBoardResponse.getMessage(), Toast.LENGTH_SHORT).show();
                 break;
         }
     }

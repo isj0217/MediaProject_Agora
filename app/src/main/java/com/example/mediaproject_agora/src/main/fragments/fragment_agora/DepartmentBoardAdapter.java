@@ -58,9 +58,6 @@ public class DepartmentBoardAdapter extends RecyclerView.Adapter<DepartmentBoard
         holder.tv_item_post_like_num.setText(Integer.toString(department_post_item_list.get(position).getLike_num()));
         holder.tv_item_post_comment_num.setText(Integer.toString(department_post_item_list.get(position).getComment_num()));
 
-//        holder.tv_item_post_like_num.setText(Integer.toString(post_item_list.get(position).getLike_num()));
-//        holder.tv_item_post_comment_num.setText(Integer.toString(post_item_list.get(position).getComment_num()));
-
         holder.itemView.setTag(position);
 
         /**

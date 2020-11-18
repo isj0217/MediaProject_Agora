@@ -6,7 +6,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="90dp"
         android:background="@color/white"
         android:gravity="center"
         android:orientation="vertical"
@@ -29,7 +29,7 @@
                 android:maxLength="20"
                 android:text="표시될 게시글의 제목"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="17sp" />
 
             <TextView
                 android:id="@+id/tv_item_post_content"
@@ -41,7 +41,7 @@
                 android:maxLength="20"
                 android:text="표시될 게시글의 내용"
                 android:textColor="@color/grey"
-                android:textSize="12sp" />
+                android:textSize="13sp" />
 
 
             <LinearLayout
@@ -57,7 +57,7 @@
                     android:layout_height="wrap_content"
                     android:text="12분 전"
                     android:textColor="@color/light_grey"
-                    android:textSize="11sp" />
+                    android:textSize="12sp" />
 
                 <View
                     android:layout_width="1dp"
@@ -74,7 +74,7 @@
                     android:layout_marginStart="3dp"
                     android:text="익명"
                     android:textColor="@color/light_grey"
-                    android:textSize="11sp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -89,8 +89,8 @@
 
                     <ImageView
                         android:id="@+id/iv_item_post_photo_status"
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
                         android:src="@drawable/photo" />
 
                 </LinearLayout>
@@ -103,8 +103,8 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="13dp"
-                        android:layout_height="13dp"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
                         android:src="@drawable/thumb_up" />
 
                     <TextView
@@ -125,8 +125,8 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="13dp"
-                        android:layout_height="13dp"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
                         android:src="@drawable/comment" />
 
                     <TextView
