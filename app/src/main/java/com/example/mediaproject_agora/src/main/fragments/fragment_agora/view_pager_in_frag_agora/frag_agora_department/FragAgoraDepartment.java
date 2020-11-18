@@ -41,6 +41,12 @@ public class FragAgoraDepartment extends Fragment implements FragAgoraDepartment
                         iv_agora_department_favorite_electronic_engineering,
                         iv_agora_department_favorite_military_digital_convergence;
 
+    private ImageView iv_agora_department_media_new,
+            iv_agora_department_software_new,
+            iv_agora_department_cyber_security_new,
+            iv_agora_department_electronic_engineering_new,
+            iv_agora_department_military_digital_convergence_new;
+
 
 
     @Nullable
@@ -69,6 +75,12 @@ public class FragAgoraDepartment extends Fragment implements FragAgoraDepartment
         fragAgoraDepartmentService.getDepartmentList();
     }
 
+    private void tryPatchFavoriteDepartment(String department_name) {
+
+        final FragAgoraDepartmentService fragAgoraDepartmentService = new FragAgoraDepartmentService(this);
+        fragAgoraDepartmentService.patchFavoriteDepartment(department_name);
+    }
+
     public void initializeFavorites(){
         favorite_media = false;
         favorite_software = false;
@@ -89,7 +101,15 @@ public class FragAgoraDepartment extends Fragment implements FragAgoraDepartment
         iv_agora_department_favorite_cyber_security = view.findViewById(R.id.iv_agora_department_favorite_cyber_security);
         iv_agora_department_favorite_electronic_engineering = view.findViewById(R.id.iv_agora_department_favorite_electronic_engineering);
         iv_agora_department_favorite_military_digital_convergence = view.findViewById(R.id.iv_agora_department_favorite_military_digital_convergence);
+
+        iv_agora_department_media_new = view.findViewById(R.id.iv_agora_department_media_new);
+        iv_agora_department_software_new = view.findViewById(R.id.iv_agora_department_software_new);
+        iv_agora_department_cyber_security_new = view.findViewById(R.id.iv_agora_department_cyber_security_new);
+        iv_agora_department_electronic_engineering_new = view.findViewById(R.id.iv_agora_department_electronic_engineering_new);
+        iv_agora_department_military_digital_convergence_new = view.findViewById(R.id.iv_agora_department_military_digital_convergence_new);
     }
+
+
 
     public void setClickListenersToStars(){
 
@@ -97,6 +117,9 @@ public class FragAgoraDepartment extends Fragment implements FragAgoraDepartment
         iv_agora_department_favorite_media.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+
+                tryPatchFavoriteDepartment("미디어학과");
+
                 if (favorite_media){
                     iv_agora_department_favorite_media.setImageResource(R.drawable.star_border);
                     favorite_media = false;
@@ -111,6 +134,9 @@ public class FragAgoraDepartment extends Fragment implements FragAgoraDepartment
         iv_agora_department_favorite_software.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+
+                tryPatchFavoriteDepartment("소프트웨어학과");
+
                 if (favorite_software){
                     iv_agora_department_favorite_software.setImageResource(R.drawable.star_border);
                     favorite_software = false;
@@ -125,6 +151,9 @@ public class FragAgoraDepartment extends Fragment implements FragAgoraDepartment
         iv_agora_department_favorite_cyber_security.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+
+                tryPatchFavoriteDepartment("사이버보안학과");
+
                 if (favorite_cyber_security){
                     iv_agora_department_favorite_cyber_security.setImageResource(R.drawable.star_border);
                     favorite_cyber_security = false;
@@ -139,6 +168,9 @@ public class FragAgoraDepartment extends Fragment implements FragAgoraDepartment
         iv_agora_department_favorite_electronic_engineering.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+
+                tryPatchFavoriteDepartment("전자공학과");
+
                 if (favorite_electronic_engineering){
                     iv_agora_department_favorite_electronic_engineering.setImageResource(R.drawable.star_border);
                     favorite_electronic_engineering = false;
@@ -153,6 +185,9 @@ public class FragAgoraDepartment extends Fragment implements FragAgoraDepartment
         iv_agora_department_favorite_military_digital_convergence.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+
+                tryPatchFavoriteDepartment("국방디지털융합학과");
+
                 if (favorite_military_digital_convergence){
                     iv_agora_department_favorite_military_digital_convergence.setImageResource(R.drawable.star_border);
                     favorite_military_digital_convergence = false;
@@ -242,8 +277,95 @@ public class FragAgoraDepartment extends Fragment implements FragAgoraDepartment
 
     @Override
     public void getDepartmentListSuccess(DepartmentResponse departmentResponse) {
-        Toast.makeText(getContext(), departmentResponse.getMessage(), Toast.LENGTH_SHORT).show();
+        loadFavoriteDepartments(departmentResponse);
 
+        Toast.makeText(getContext(), departmentResponse.getMessage(), Toast.LENGTH_SHORT).show();
+    }
+
+    public void loadFavoriteDepartments(DepartmentResponse departmentResponse){
+        switch (departmentResponse.getCode()){
+            case 100:
+                int num_of_departments_in_frag_agora_department = departmentResponse.getDepartmentResults().size();
+
+                System.out.println("학과 갯수: " + num_of_departments_in_frag_agora_department);
+
+                for (int i = 0; i < num_of_departments_in_frag_agora_department; i++){
+
+
+
+                    System.out.println(departmentResponse.getDepartmentResults().get(i).getIs_new());
+
+
+
+
+                    if (departmentResponse.getDepartmentResults().get(i).getDepartment_name().equals("미디어학과")){
+                        if (departmentResponse.getDepartmentResults().get(i).getStatus() == 1){
+                            iv_agora_department_favorite_media.setImageResource(R.drawable.star);
+                            favorite_media=true;
+                        }
+                        if (departmentResponse.getDepartmentResults().get(i).getIs_new() == 0){
+                            iv_agora_department_media_new.setVisibility(View.INVISIBLE);
+                        }else{
+                            iv_agora_department_media_new.setVisibility(View.VISIBLE);
+                        }
+                    }
+
+                    if (departmentResponse.getDepartmentResults().get(i).getDepartment_name().equals("소프트웨어학과")){
+                        if (departmentResponse.getDepartmentResults().get(i).getStatus() == 1){
+                            iv_agora_department_favorite_software.setImageResource(R.drawable.star);
+                            favorite_software=true;
+                        }
+                        if (departmentResponse.getDepartmentResults().get(i).getIs_new() == 0){
+                            iv_agora_department_software_new.setVisibility(View.INVISIBLE);
+                        }else{
+                            iv_agora_department_software_new.setVisibility(View.VISIBLE);
+                        }
+                    }
+
+                    if (departmentResponse.getDepartmentResults().get(i).getDepartment_name().equals("사이버보안학과")){
+                        if (departmentResponse.getDepartmentResults().get(i).getStatus() == 1){
+                            iv_agora_department_favorite_cyber_security.setImageResource(R.drawable.star);
+                            favorite_cyber_security=true;
+                        }
+                        if (departmentResponse.getDepartmentResults().get(i).getIs_new() == 0){
+                            iv_agora_department_cyber_security_new.setVisibility(View.INVISIBLE);
+                        }else{
+                            iv_agora_department_cyber_security_new.setVisibility(View.VISIBLE);
+                        }
+                    }
+
+                    if (departmentResponse.getDepartmentResults().get(i).getDepartment_name().equals("전자공학과")){
+                        if (departmentResponse.getDepartmentResults().get(i).getStatus() == 1){
+                            iv_agora_department_favorite_electronic_engineering.setImageResource(R.drawable.star);
+                            favorite_electronic_engineering=true;
+                        }
+                        if (departmentResponse.getDepartmentResults().get(i).getIs_new() == 0){
+                            iv_agora_department_electronic_engineering_new.setVisibility(View.INVISIBLE);
+                        }else{
+                            iv_agora_department_electronic_engineering_new.setVisibility(View.VISIBLE);
+                        }
+                    }
+
+                    if (departmentResponse.getDepartmentResults().get(i).getDepartment_name().equals("국방디지털융합학과")){
+                        if (departmentResponse.getDepartmentResults().get(i).getStatus() == 1){
+                            iv_agora_department_favorite_military_digital_convergence.setImageResource(R.drawable.star);
+                            favorite_media=true;
+                        }
+                        if (departmentResponse.getDepartmentResults().get(i).getIs_new() == 0){
+                            iv_agora_department_military_digital_convergence_new.setVisibility(View.INVISIBLE);
+                        }else{
+                            iv_agora_department_military_digital_convergence_new.setVisibility(View.VISIBLE);
+                        }
+                    }
+
+                }
+
+                break;
+
+            default:
+                Toast.makeText(getContext(), departmentResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
 
 }
