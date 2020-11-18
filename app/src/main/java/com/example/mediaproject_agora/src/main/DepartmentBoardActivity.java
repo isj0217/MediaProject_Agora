@@ -120,7 +120,7 @@ public class DepartmentBoardActivity extends BaseActivity implements DepartmentB
                         break;
 
                     case "used_product":
-                        intent = new Intent(DepartmentBoardActivity.this, WritingUsedProductActivity.class);
+                        intent = new Intent(DepartmentBoardActivity.this, WritingUsedProductDepartmentActivity.class);
                         startActivity(intent);
                         finish();
                         break;

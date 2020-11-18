@@ -17,11 +17,13 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.example.mediaproject_agora.R;
 import com.example.mediaproject_agora.src.BaseActivity;
-import com.example.mediaproject_agora.src.main.interfaces.WritingActivityView;
+import com.example.mediaproject_agora.src.main.interfaces.WritingDepartmentActivityView;
+import com.example.mediaproject_agora.src.main.interfaces.WritingUsedProductActivityView;
+import com.example.mediaproject_agora.src.main.models.DefaultResponse;
 
 import java.io.InputStream;
 
-public class WritingUsedProductActivity extends BaseActivity implements WritingActivityView {
+public class WritingUsedProductDepartmentActivity extends BaseActivity implements WritingUsedProductActivityView {
 
     private static final int REQUEST_CODE = 0;
 
@@ -100,12 +102,12 @@ public class WritingUsedProductActivity extends BaseActivity implements WritingA
         btn_writing_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new AlertDialog.Builder(WritingUsedProductActivity.this)
+                new AlertDialog.Builder(WritingUsedProductDepartmentActivity.this)
                         .setTitle("작성 취소")
                         .setMessage("글 작성을 취소하시겠습니까?")
                         .setPositiveButton("예", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(WritingUsedProductActivity.this, DepartmentBoardActivity.class);
+                                Intent intent = new Intent(WritingUsedProductDepartmentActivity.this, DepartmentBoardActivity.class);
                                 startActivity(intent);
                                 finish();
                             }
@@ -125,19 +127,19 @@ public class WritingUsedProductActivity extends BaseActivity implements WritingA
             public void onClick(View view) {
 
                 if (isEmptyTitle()) {
-                    Toast.makeText(WritingUsedProductActivity.this, "글의 제목을 작성해주세요", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(WritingUsedProductDepartmentActivity.this, "글의 제목을 작성해주세요", Toast.LENGTH_SHORT).show();
                     et_writing_title.requestFocus();
                 } else if (isEmptyContent()){
-                    Toast.makeText(WritingUsedProductActivity.this, "글의 내용을 작성해주세요", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(WritingUsedProductDepartmentActivity.this, "글의 내용을 작성해주세요", Toast.LENGTH_SHORT).show();
                     et_writing_content.requestFocus();
                 } else{
-                    new AlertDialog.Builder(WritingUsedProductActivity.this) // TestActivity 부분에는 현재 Activity의 이름 입력.
+                    new AlertDialog.Builder(WritingUsedProductDepartmentActivity.this) // TestActivity 부분에는 현재 Activity의 이름 입력.
                             .setTitle("작성 완료")
                             .setMessage("글을 게시하시겠습니까?")
                             .setPositiveButton("예", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     isEmptyTitle();
-                                    Intent intent = new Intent(WritingUsedProductActivity.this, DepartmentBoardActivity.class);
+                                    Intent intent = new Intent(WritingUsedProductDepartmentActivity.this, DepartmentBoardActivity.class);
                                     startActivity(intent);
                                     finish();
                                 }
@@ -161,12 +163,12 @@ public class WritingUsedProductActivity extends BaseActivity implements WritingA
     @Override
     public void onBackPressed() {
 
-        new AlertDialog.Builder(WritingUsedProductActivity.this) // TestActivity 부분에는 현재 Activity의 이름 입력.
+        new AlertDialog.Builder(WritingUsedProductDepartmentActivity.this) // TestActivity 부분에는 현재 Activity의 이름 입력.
                 .setTitle("작성 취소")
                 .setMessage("글 작성을 취소하시겠습니까?")
                 .setPositiveButton("예", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(WritingUsedProductActivity.this, DepartmentBoardActivity.class);
+                        Intent intent = new Intent(WritingUsedProductDepartmentActivity.this, DepartmentBoardActivity.class);
                         startActivity(intent);
                         finish();
                     }
@@ -216,6 +218,11 @@ public class WritingUsedProductActivity extends BaseActivity implements WritingA
     public void validateFailure(@Nullable String message) {
         hideProgressDialog();
         showCustomToast(message == null || message.isEmpty() ? getString(R.string.network_error) : message);
+    }
+
+    @Override
+    public void postUsedProductPostSuccess(DefaultResponse defaultResponse) {
+
     }
 
 

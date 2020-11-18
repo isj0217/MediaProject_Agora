@@ -30,7 +30,7 @@
         <activity android:name=".src.main.DepartmentBoardActivity" />
         <activity android:name=".src.main.InPostActivity" />
         <activity android:name=".src.main.WritingDepartmentActivity" />
-        <activity android:name=".src.main.WritingUsedProductActivity" />
+        <activity android:name=".src.main.WritingUsedProductDepartmentActivity" />
     </application>
 
 </manifest>

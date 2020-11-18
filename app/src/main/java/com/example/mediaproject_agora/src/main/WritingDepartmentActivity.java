@@ -19,11 +19,14 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.example.mediaproject_agora.R;
 import com.example.mediaproject_agora.src.BaseActivity;
-import com.example.mediaproject_agora.src.main.interfaces.WritingActivityView;
+import com.example.mediaproject_agora.src.main.interfaces.WritingDepartmentActivityView;
+import com.example.mediaproject_agora.src.main.items.DepartmentPostItem;
+import com.example.mediaproject_agora.src.main.models.DefaultResponse;
 
 import java.io.InputStream;
+import java.util.HashMap;
 
-public class WritingDepartmentActivity extends BaseActivity implements WritingActivityView {
+public class WritingDepartmentActivity extends BaseActivity implements WritingDepartmentActivityView {
 
     private LinearLayout ll_writing_thumbnail;
     private LinearLayout ll_writing_attach_cancel;
@@ -115,7 +118,11 @@ public class WritingDepartmentActivity extends BaseActivity implements WritingAc
                             .setMessage("글을 게시하시겠습니까?")
                             .setPositiveButton("예", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    isEmptyTitle();
+
+                                    loadRecentSectionAndCategory();
+
+                                    tryPostDepartmentWriting(category_name, et_writing_title.getText().toString(), et_writing_content.getText().toString(), null);
+
                                     Intent intent = new Intent(WritingDepartmentActivity.this, DepartmentBoardActivity.class);
                                     startActivity(intent);
                                     finish();
@@ -165,6 +172,18 @@ public class WritingDepartmentActivity extends BaseActivity implements WritingAc
         });
 
 
+    }
+
+    public void tryPostDepartmentWriting(String dept_name, String title, String content, String photo){
+        HashMap<String, Object> params = new HashMap<>();
+
+        params.put("department", dept_name);
+        params.put("title", title);
+        params.put("content", content);
+        params.put("photo", photo);
+
+        final WritingDepartmentService writingService = new WritingDepartmentService(this, params);
+        writingService.postDepartmentPost();
     }
 
     @Override
@@ -251,5 +270,20 @@ public class WritingDepartmentActivity extends BaseActivity implements WritingAc
         showCustomToast(message == null || message.isEmpty() ? getString(R.string.network_error) : message);
     }
 
+    @Override
+    public void postDepartmentPostSuccess(DefaultResponse defaultResponse) {
+        hideProgressDialog();
 
+        switch (defaultResponse.getCode()) {
+
+            case 100:
+                showCustomToast("일단 성공?????");
+
+                break;
+
+            default:
+                Toast.makeText(this, defaultResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
 }
