@@ -1,6 +1,7 @@
 package com.example.mediaproject_agora.src.main.fragments.fragment_agora.view_pager_in_frag_agora.frag_agora_department;
 
 
+import com.example.mediaproject_agora.src.main.fragments.fragment_agora.view_pager_in_frag_agora.frag_agora_department.models.AddFavoriteResponse;
 import com.example.mediaproject_agora.src.main.fragments.fragment_agora.view_pager_in_frag_agora.frag_agora_department.models.DepartmentResponse;
 
 import retrofit2.Call;
@@ -29,8 +30,6 @@ class FragAgoraDepartmentService {
             @Override
             public void onResponse(Call<DepartmentResponse> call, Response<DepartmentResponse> response) {
 
-                System.out.println("제발 여기로 좀 들어와");
-
                 final DepartmentResponse departmentResponse = response.body();
                 if (departmentResponse == null) {
                     mFragAgoraDepartmentView.validateFailure(null);
@@ -42,7 +41,28 @@ class FragAgoraDepartmentService {
             @Override
             public void onFailure(Call<DepartmentResponse> call, Throwable t) {
 
-                System.out.println("여기 가지 말고");
+                mFragAgoraDepartmentView.validateFailure(null);
+            }
+        });
+    }
+
+    void patchFavoriteDepartment(String department_name) {
+        final FragAgoraDepartmentRetrofitInterface fragAgoraDepartmentRetrofitInterface = getRetrofit().create(FragAgoraDepartmentRetrofitInterface.class);
+        fragAgoraDepartmentRetrofitInterface.patchFavoriteDepartment(X_ACCESS_TOKEN, department_name).enqueue(new Callback<AddFavoriteResponse>() {
+            @Override
+            public void onResponse(Call<AddFavoriteResponse> call, Response<AddFavoriteResponse> response) {
+
+                final AddFavoriteResponse addFavoriteResponse = response.body();
+                if (addFavoriteResponse == null) {
+                    mFragAgoraDepartmentView.validateFailure(null);
+                    return;
+                }
+                mFragAgoraDepartmentView.patchFavoriteDepartmentSuccess(addFavoriteResponse);
+            }
+
+            @Override
+            public void onFailure(Call<AddFavoriteResponse> call, Throwable t) {
+
                 mFragAgoraDepartmentView.validateFailure(null);
             }
         });

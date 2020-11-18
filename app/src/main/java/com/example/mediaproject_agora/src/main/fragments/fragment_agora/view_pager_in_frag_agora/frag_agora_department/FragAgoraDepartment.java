@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.mediaproject_agora.R;
 import com.example.mediaproject_agora.src.main.SpecificBoardActivity;
+import com.example.mediaproject_agora.src.main.fragments.fragment_agora.view_pager_in_frag_agora.frag_agora_department.models.AddFavoriteResponse;
 import com.example.mediaproject_agora.src.main.fragments.fragment_agora.view_pager_in_frag_agora.frag_agora_department.models.DepartmentResponse;
 
 public class FragAgoraDepartment extends Fragment implements FragAgoraDepartmentView {
@@ -69,17 +70,6 @@ public class FragAgoraDepartment extends Fragment implements FragAgoraDepartment
         return view;
     }
 
-    private void tryGetDepartmentList() {
-
-        final FragAgoraDepartmentService fragAgoraDepartmentService = new FragAgoraDepartmentService(this);
-        fragAgoraDepartmentService.getDepartmentList();
-    }
-
-    private void tryPatchFavoriteDepartment(String department_name) {
-
-        final FragAgoraDepartmentService fragAgoraDepartmentService = new FragAgoraDepartmentService(this);
-        fragAgoraDepartmentService.patchFavoriteDepartment(department_name);
-    }
 
     public void initializeFavorites(){
         favorite_media = false;
@@ -266,23 +256,48 @@ public class FragAgoraDepartment extends Fragment implements FragAgoraDepartment
     @Override
     public void validateSuccess(String text) {
         Toast.makeText(getContext(), "validateSuccess", Toast.LENGTH_SHORT).show();
-
     }
 
     @Override
     public void validateFailure(String message) {
         Toast.makeText(getContext(), "validateFailure", Toast.LENGTH_SHORT).show();
-
     }
 
     @Override
     public void getDepartmentListSuccess(DepartmentResponse departmentResponse) {
-        loadFavoriteDepartments(departmentResponse);
-
-        Toast.makeText(getContext(), departmentResponse.getMessage(), Toast.LENGTH_SHORT).show();
+        loadFavoriteAndNew(departmentResponse);
     }
 
-    public void loadFavoriteDepartments(DepartmentResponse departmentResponse){
+    @Override
+    public void patchFavoriteDepartmentSuccess(AddFavoriteResponse addFavoriteResponse) {
+
+        switch (addFavoriteResponse.getCode()){
+//            case 100:
+//                Toast.makeText(getContext(), addFavoriteResponse.getMessage(), Toast.LENGTH_SHORT).show();
+//                break;
+
+            default:
+                Toast.makeText(getContext(), addFavoriteResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
+
+
+
+    private void tryGetDepartmentList() {
+
+        final FragAgoraDepartmentService fragAgoraDepartmentService = new FragAgoraDepartmentService(this);
+        fragAgoraDepartmentService.getDepartmentList();
+    }
+
+    private void tryPatchFavoriteDepartment(String department_name) {
+
+        final FragAgoraDepartmentService fragAgoraDepartmentService = new FragAgoraDepartmentService(this);
+        fragAgoraDepartmentService.patchFavoriteDepartment(department_name);
+    }
+
+
+    public void loadFavoriteAndNew(DepartmentResponse departmentResponse){
         switch (departmentResponse.getCode()){
             case 100:
                 int num_of_departments_in_frag_agora_department = departmentResponse.getDepartmentResults().size();
@@ -349,7 +364,7 @@ public class FragAgoraDepartment extends Fragment implements FragAgoraDepartment
                     if (departmentResponse.getDepartmentResults().get(i).getDepartment_name().equals("국방디지털융합학과")){
                         if (departmentResponse.getDepartmentResults().get(i).getStatus() == 1){
                             iv_agora_department_favorite_military_digital_convergence.setImageResource(R.drawable.star);
-                            favorite_media=true;
+                            favorite_military_digital_convergence=true;
                         }
                         if (departmentResponse.getDepartmentResults().get(i).getIs_new() == 0){
                             iv_agora_department_military_digital_convergence_new.setVisibility(View.INVISIBLE);
