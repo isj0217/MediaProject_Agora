@@ -29,6 +29,18 @@ public class DepartmentResponse {
         return departmentResults;
     }
 
+    public int getCode() {
+        return code;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public boolean isSuccess() {
+        return isSuccess;
+    }
+
 //    public class DepartmentResult {
 //
 //        @SerializedName("department_name")
@@ -63,21 +75,5 @@ public class DepartmentResponse {
 //        @SerializedName("대학교")
 //        private String univName;
 //    }
-
-
-
-
-
-    public int getCode() {
-        return code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public boolean isSuccess() {
-        return isSuccess;
-    }
 
 }

@@ -1,29 +1,34 @@
 package com.example.mediaproject_agora.src.main;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediaproject_agora.R;
 import com.example.mediaproject_agora.src.BaseActivity;
 
-import com.example.mediaproject_agora.src.main.interfaces.SpecificBoardActivityView;
-import com.example.mediaproject_agora.src.main.models.SpecificBoardResponse;
-import com.example.mediaproject_agora.src.sign_in.SignInActivity;
-import com.example.mediaproject_agora.src.sign_up.SignUpActivity;
+import com.example.mediaproject_agora.src.main.fragments.fragment_agora.DepartmentBoardAdapter;
+import com.example.mediaproject_agora.src.main.interfaces.DepartmentBoardActivityView;
+import com.example.mediaproject_agora.src.main.items.DepartmentPostItem;
+import com.example.mediaproject_agora.src.main.models.DepartmentBoardResponse;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
-import static com.example.mediaproject_agora.src.ApplicationClass.X_ACCESS_TOKEN;
-import static com.example.mediaproject_agora.src.ApplicationClass.sSharedPreferences;
+public class DepartmentBoardActivity extends BaseActivity implements DepartmentBoardActivityView, PopupMenu.OnMenuItemClickListener{
 
-public class SpecificBoardActivity extends BaseActivity implements SpecificBoardActivityView {
+    private ArrayList<DepartmentPostItem> m_post_item_list;
+    private DepartmentBoardAdapter department_board_adapter;
+    private RecyclerView rv_department_board;
+    private LinearLayoutManager linear_layout_manager;
 
     private Intent intent;
 
@@ -41,6 +46,17 @@ public class SpecificBoardActivity extends BaseActivity implements SpecificBoard
         setContentView(R.layout.activity_specific_board);
 
         tv_specific_board_name = findViewById(R.id.tv_specific_board_name);
+
+
+
+        rv_department_board = findViewById(R.id.rv_specific_board_post_list);
+
+        linear_layout_manager = new LinearLayoutManager(getApplicationContext());
+        rv_department_board.setLayoutManager(linear_layout_manager);
+
+        m_post_item_list = new ArrayList<>();
+        department_board_adapter = new DepartmentBoardAdapter(m_post_item_list);
+        rv_department_board.setAdapter(department_board_adapter);
 
 
 
@@ -78,8 +94,8 @@ public class SpecificBoardActivity extends BaseActivity implements SpecificBoard
         HashMap<String, Object> params = new HashMap<>();
         params.put("department_name", department_name);
 
-        final SpecificBoardService specificBoardService = new SpecificBoardService(this, params);
-        specificBoardService.getSpecificDepartmentBoard(department_name);
+        final DepartmentBoardService departmentBoardService = new DepartmentBoardService(this, params);
+        departmentBoardService.getSpecificDepartmentBoard(department_name);
     }
 
     public void customOnClick(View view) {
@@ -97,13 +113,13 @@ public class SpecificBoardActivity extends BaseActivity implements SpecificBoard
 
                 switch (section_in_agora){
                     case "department":
-                        intent = new Intent(SpecificBoardActivity.this, WritingDepartmentActivity.class);
+                        intent = new Intent(DepartmentBoardActivity.this, WritingDepartmentActivity.class);
                         startActivity(intent);
                         finish();
                         break;
 
                     case "used_product":
-                        intent = new Intent(SpecificBoardActivity.this, WritingUsedProductActivity.class);
+                        intent = new Intent(DepartmentBoardActivity.this, WritingUsedProductActivity.class);
                         startActivity(intent);
                         finish();
                         break;
@@ -143,24 +159,49 @@ public class SpecificBoardActivity extends BaseActivity implements SpecificBoard
     }
 
     @Override
-    public void getSpecificDepartmentBoardSuccess(SpecificBoardResponse specificBoardResponse) {
+    public void getSpecificDepartmentBoardSuccess(DepartmentBoardResponse departmentBoardResponse) {
         hideProgressDialog();
 
-        switch (specificBoardResponse.getCode()) {
+        switch (departmentBoardResponse.getCode()) {
 
             case 100:
                 showCustomToast("일단 여기까지는 성공!!!!");
 
+                /**
+                 * PostItem 형식의 ArrayList에 모두 넣어두고 어댑터를 이용해서 하나하나 레이아웃에 갖다 붙이자!!
+                 * */
+
+                int num_of_posts_in_department_board = departmentBoardResponse.getDepartmentBoardResults().size();
+
+                System.out.println("몇개??? " + num_of_posts_in_department_board);
+
+                for (int i = 0; i < num_of_posts_in_department_board; i++){
+                    DepartmentPostItem departmentPostItem = new DepartmentPostItem();
+
+                    departmentPostItem.setDepartment_board_idx(departmentBoardResponse.getDepartmentBoardResults().get(i).getDepartment_board_idx());
+                    departmentPostItem.setTitle(departmentBoardResponse.getDepartmentBoardResults().get(i).getTitle());
+                    departmentPostItem.setContent(departmentBoardResponse.getDepartmentBoardResults().get(i).getContent());
+                    departmentPostItem.setNickname(departmentBoardResponse.getDepartmentBoardResults().get(i).getNickname());
+                    departmentPostItem.setTime(departmentBoardResponse.getDepartmentBoardResults().get(i).getTime());
+                    departmentPostItem.setPhoto_status(departmentBoardResponse.getDepartmentBoardResults().get(i).getPhoto_status());
+                    departmentPostItem.setLike_num(departmentBoardResponse.getDepartmentBoardResults().get(i).getLike_num());
+                    departmentPostItem.setComment_num(departmentBoardResponse.getDepartmentBoardResults().get(i).getComment_num());
+
+                    m_post_item_list.add(departmentPostItem);
+                }
+                department_board_adapter.notifyDataSetChanged();
+
                 break;
+
 
             // 우리 DB에 회원가입이 안되어있는 경우에는 자체회원가입 시키기
-            case 201:
-                showCustomToast(specificBoardResponse.getMessage());
-                break;
-
-            case 202:
-                showCustomToast(specificBoardResponse.getMessage());
-                break;
+//            case 201:
+//                showCustomToast(specificBoardResponse.getMessage());
+//                break;
+//
+//            case 202:
+//                showCustomToast(specificBoardResponse.getMessage());
+//                break;
 
             default:
                 showCustomToast("SpecificBoard의 default response입니다");
@@ -169,4 +210,8 @@ public class SpecificBoardActivity extends BaseActivity implements SpecificBoard
     }
 
 
+    @Override
+    public boolean onMenuItemClick(MenuItem menuItem) {
+        return false;
+    }
 }

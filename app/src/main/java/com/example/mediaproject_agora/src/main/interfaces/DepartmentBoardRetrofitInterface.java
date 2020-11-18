@@ -1,0 +1,29 @@
+package com.example.mediaproject_agora.src.main.interfaces;
+
+import com.example.mediaproject_agora.src.main.models.DepartmentBoardResponse;
+
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Path;
+
+public interface DepartmentBoardRetrofitInterface {
+    //    @GET("/test")
+
+    @GET("/department/{department_name}")
+    Call<DepartmentBoardResponse> getSpecificDepartmentBoardTest(@Header("x-access-token") String accessToken,
+                                                                 @Path("department_name") String department_name);
+
+
+//    @GET("/jwt")
+//    Call<DefaultResponse> getTest();
+//
+//    @GET("/test/{number}")
+//    Call<DefaultResponse> getTestPathAndQuery(
+//            @Path("number") int number,
+//            @Query("content") final String content
+//    );
+//
+//    @POST("/test")
+//    Call<DefaultResponse> postTest(@Body RequestBody params);
+}

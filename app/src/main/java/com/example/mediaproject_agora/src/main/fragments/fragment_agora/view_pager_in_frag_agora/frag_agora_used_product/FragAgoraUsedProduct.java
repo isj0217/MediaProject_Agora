@@ -14,7 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.mediaproject_agora.R;
-import com.example.mediaproject_agora.src.main.SpecificBoardActivity;
+import com.example.mediaproject_agora.src.main.DepartmentBoardActivity;
 
 public class FragAgoraUsedProduct extends Fragment {
 
@@ -54,7 +54,7 @@ public class FragAgoraUsedProduct extends Fragment {
             @Override
             public void onClick(View view) {
                 saveRecentSectionAndCategory("used_product", "중고책방");
-                Intent intent = new Intent(view.getContext(), SpecificBoardActivity.class);
+                Intent intent = new Intent(view.getContext(), DepartmentBoardActivity.class);
                 startActivity(intent);
             }
         });
@@ -64,7 +64,7 @@ public class FragAgoraUsedProduct extends Fragment {
             @Override
             public void onClick(View view) {
                 saveRecentSectionAndCategory("used_product", "가전기기");
-                Intent intent = new Intent(view.getContext(), SpecificBoardActivity.class);
+                Intent intent = new Intent(view.getContext(), DepartmentBoardActivity.class);
                 startActivity(intent);
             }
         });
@@ -74,7 +74,7 @@ public class FragAgoraUsedProduct extends Fragment {
             @Override
             public void onClick(View view) {
                 saveRecentSectionAndCategory("used_product", "자취방 가구");
-                Intent intent = new Intent(view.getContext(), SpecificBoardActivity.class);
+                Intent intent = new Intent(view.getContext(), DepartmentBoardActivity.class);
                 startActivity(intent);
             }
         });
@@ -84,7 +84,7 @@ public class FragAgoraUsedProduct extends Fragment {
             @Override
             public void onClick(View view) {
                 saveRecentSectionAndCategory("used_product", "의류 및 신발");
-                Intent intent = new Intent(view.getContext(), SpecificBoardActivity.class);
+                Intent intent = new Intent(view.getContext(), DepartmentBoardActivity.class);
                 startActivity(intent);
             }
         });

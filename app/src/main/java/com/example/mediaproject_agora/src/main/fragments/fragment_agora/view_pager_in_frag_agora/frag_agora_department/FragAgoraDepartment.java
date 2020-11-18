@@ -16,7 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.mediaproject_agora.R;
-import com.example.mediaproject_agora.src.main.SpecificBoardActivity;
+import com.example.mediaproject_agora.src.main.DepartmentBoardActivity;
 import com.example.mediaproject_agora.src.main.fragments.fragment_agora.view_pager_in_frag_agora.frag_agora_department.models.AddFavoriteResponse;
 import com.example.mediaproject_agora.src.main.fragments.fragment_agora.view_pager_in_frag_agora.frag_agora_department.models.DepartmentResponse;
 
@@ -197,7 +197,7 @@ public class FragAgoraDepartment extends Fragment implements FragAgoraDepartment
             @Override
             public void onClick(View view) {
                 saveRecentSectionAndCategory("department", "미디어학과");
-                Intent intent = new Intent(view.getContext(), SpecificBoardActivity.class);
+                Intent intent = new Intent(view.getContext(), DepartmentBoardActivity.class);
                 startActivity(intent);
             }
         });
@@ -207,7 +207,7 @@ public class FragAgoraDepartment extends Fragment implements FragAgoraDepartment
             @Override
             public void onClick(View view) {
                 saveRecentSectionAndCategory("department", "소프트웨어학과");
-                Intent intent = new Intent(view.getContext(), SpecificBoardActivity.class);
+                Intent intent = new Intent(view.getContext(), DepartmentBoardActivity.class);
                 startActivity(intent);
             }
         });
@@ -217,7 +217,7 @@ public class FragAgoraDepartment extends Fragment implements FragAgoraDepartment
             @Override
             public void onClick(View view) {
                 saveRecentSectionAndCategory("department", "사이버보안학과");
-                Intent intent = new Intent(view.getContext(), SpecificBoardActivity.class);
+                Intent intent = new Intent(view.getContext(), DepartmentBoardActivity.class);
                 startActivity(intent);
             }
         });
@@ -227,7 +227,7 @@ public class FragAgoraDepartment extends Fragment implements FragAgoraDepartment
             @Override
             public void onClick(View view) {
                 saveRecentSectionAndCategory("department", "전자공학과");
-                Intent intent = new Intent(view.getContext(), SpecificBoardActivity.class);
+                Intent intent = new Intent(view.getContext(), DepartmentBoardActivity.class);
                 startActivity(intent);
             }
         });
@@ -237,7 +237,7 @@ public class FragAgoraDepartment extends Fragment implements FragAgoraDepartment
             @Override
             public void onClick(View view) {
                 saveRecentSectionAndCategory("department", "국방디지털융합학과");
-                Intent intent = new Intent(view.getContext(), SpecificBoardActivity.class);
+                Intent intent = new Intent(view.getContext(), DepartmentBoardActivity.class);
                 startActivity(intent);
             }
         });
@@ -302,16 +302,7 @@ public class FragAgoraDepartment extends Fragment implements FragAgoraDepartment
             case 100:
                 int num_of_departments_in_frag_agora_department = departmentResponse.getDepartmentResults().size();
 
-                System.out.println("학과 갯수: " + num_of_departments_in_frag_agora_department);
-
                 for (int i = 0; i < num_of_departments_in_frag_agora_department; i++){
-
-
-
-                    System.out.println(departmentResponse.getDepartmentResults().get(i).getIs_new());
-
-
-
 
                     if (departmentResponse.getDepartmentResults().get(i).getDepartment_name().equals("미디어학과")){
                         if (departmentResponse.getDepartmentResults().get(i).getStatus() == 1){

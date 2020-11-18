@@ -84,7 +84,7 @@ public class WritingDepartmentActivity extends BaseActivity implements WritingAc
                         .setMessage("글 작성을 취소하시겠습니까?")
                         .setPositiveButton("예", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(WritingDepartmentActivity.this, SpecificBoardActivity.class);
+                                Intent intent = new Intent(WritingDepartmentActivity.this, DepartmentBoardActivity.class);
                                 startActivity(intent);
                                 finish();
                             }
@@ -116,7 +116,7 @@ public class WritingDepartmentActivity extends BaseActivity implements WritingAc
                             .setPositiveButton("예", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     isEmptyTitle();
-                                    Intent intent = new Intent(WritingDepartmentActivity.this, SpecificBoardActivity.class);
+                                    Intent intent = new Intent(WritingDepartmentActivity.this, DepartmentBoardActivity.class);
                                     startActivity(intent);
                                     finish();
                                 }
@@ -199,7 +199,7 @@ public class WritingDepartmentActivity extends BaseActivity implements WritingAc
                 .setMessage("글 작성을 취소하시겠습니까?")
                 .setPositiveButton("예", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(WritingDepartmentActivity.this, SpecificBoardActivity.class);
+                        Intent intent = new Intent(WritingDepartmentActivity.this, DepartmentBoardActivity.class);
                         startActivity(intent);
                         finish();
                     }

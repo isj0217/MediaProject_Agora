@@ -8,10 +8,8 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -107,7 +105,7 @@ public class WritingUsedProductActivity extends BaseActivity implements WritingA
                         .setMessage("글 작성을 취소하시겠습니까?")
                         .setPositiveButton("예", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(WritingUsedProductActivity.this, SpecificBoardActivity.class);
+                                Intent intent = new Intent(WritingUsedProductActivity.this, DepartmentBoardActivity.class);
                                 startActivity(intent);
                                 finish();
                             }
@@ -139,7 +137,7 @@ public class WritingUsedProductActivity extends BaseActivity implements WritingA
                             .setPositiveButton("예", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     isEmptyTitle();
-                                    Intent intent = new Intent(WritingUsedProductActivity.this, SpecificBoardActivity.class);
+                                    Intent intent = new Intent(WritingUsedProductActivity.this, DepartmentBoardActivity.class);
                                     startActivity(intent);
                                     finish();
                                 }
@@ -168,7 +166,7 @@ public class WritingUsedProductActivity extends BaseActivity implements WritingA
                 .setMessage("글 작성을 취소하시겠습니까?")
                 .setPositiveButton("예", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(WritingUsedProductActivity.this, SpecificBoardActivity.class);
+                        Intent intent = new Intent(WritingUsedProductActivity.this, DepartmentBoardActivity.class);
                         startActivity(intent);
                         finish();
                     }

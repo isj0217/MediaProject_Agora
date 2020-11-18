@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.mediaproject_agora.R;
-import com.example.mediaproject_agora.src.main.SpecificBoardActivity;
+import com.example.mediaproject_agora.src.main.DepartmentBoardActivity;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 
 public class FragmentRestaurant extends Fragment {
@@ -37,7 +36,7 @@ public class FragmentRestaurant extends Fragment {
         fab1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), SpecificBoardActivity.class);
+                Intent intent = new Intent(view.getContext(), DepartmentBoardActivity.class);
                 startActivity(intent);
             }
         });
