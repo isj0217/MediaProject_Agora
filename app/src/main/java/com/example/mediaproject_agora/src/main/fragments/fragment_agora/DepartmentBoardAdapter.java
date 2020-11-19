@@ -116,7 +116,7 @@ public class DepartmentBoardAdapter extends RecyclerView.Adapter<DepartmentBoard
 //                        System.out.println("보내기전 freeItem index: " + post_item_list.get(pos).getContent_index());
 
                         context.startActivity(intent);
-//                        ((Activity) context).finish();
+                        ((Activity) context).finish();
 
                         if (mListener != null) {
                             mListener.onItemClick(view, pos);

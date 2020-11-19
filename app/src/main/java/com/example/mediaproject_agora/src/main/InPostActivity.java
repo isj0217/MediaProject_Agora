@@ -102,6 +102,11 @@ public class InPostActivity extends BaseActivity implements InPostActivityView, 
 
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
+
     public void setClickListenersToButtons() {
 
         // 댓글 등록 버튼
@@ -196,6 +201,13 @@ public class InPostActivity extends BaseActivity implements InPostActivityView, 
 
         final InPostService inPostService = new InPostService(this);
         inPostService.patchThumbUpDepartmentPost(department_board_idx);
+    }
+
+    private void tryDeleteDepartmentPost(int department_board_idx) {
+        showProgressDialog();
+
+        final InPostService inPostService = new InPostService(this);
+        inPostService.deleteDepartmentPost(department_board_idx);
     }
 
 
@@ -338,6 +350,7 @@ public class InPostActivity extends BaseActivity implements InPostActivityView, 
                 like_num++;
                 tv_in_post_like_num.setText(Integer.toString(like_num));
                 break;
+
             case 101:
                 ll_in_post_like_btn.setBackgroundResource(R.drawable.white_btn_with_light_grey_border);
                 iv_in_post_thumb_up.setImageResource(R.drawable.thumb_up);
@@ -352,6 +365,24 @@ public class InPostActivity extends BaseActivity implements InPostActivityView, 
 
             default:
                 System.out.println(defaultResponse.getMessage());
+                break;
+        }
+    }
+
+    @Override
+    public void deleteDepartmentPostSuccess(DefaultResponse defaultResponse) {
+        hideProgressDialog();
+
+        switch (defaultResponse.getCode()) {
+            case 100:
+                showCustomToast("게시글 삭제 완료");
+                Intent intent = new Intent(InPostActivity.this, DepartmentBoardActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+
+            default:
+                Toast.makeText(this, defaultResponse.getMessage(), Toast.LENGTH_SHORT).show();
                 break;
         }
     }
@@ -384,10 +415,10 @@ public class InPostActivity extends BaseActivity implements InPostActivityView, 
 
     @Override
     public boolean onMenuItemClick(MenuItem menuItem) {
-        switch (menuItem.getItemId()){
+        switch (menuItem.getItemId()) {
             case R.id.menu_in_post_fix_post:
                 // todo
-                // 글 수정 API 엮기
+                // 일단 FixingActivity로 넘긴 후에 거기서 글 수정 API 엮기
                 int idx_of_post_we_are_fixing = Integer.parseInt(tv_in_post_department_board_idx.getText().toString());
 
                 Intent intent = new Intent(InPostActivity.this, FixingDepartmentActivity.class);
@@ -398,12 +429,15 @@ public class InPostActivity extends BaseActivity implements InPostActivityView, 
 
                 finish();
 
-
-
                 break;
             case R.id.menu_in_post_delete_post:
                 // todo
                 // 글 삭제 API 엮기
+
+                int idx_of_post_we_are_deleting = Integer.parseInt(tv_in_post_department_board_idx.getText().toString());
+
+                tryDeleteDepartmentPost(idx_of_post_we_are_deleting);
+
                 break;
             case R.id.menu_in_post_send_message:
                 // todo
@@ -413,5 +447,18 @@ public class InPostActivity extends BaseActivity implements InPostActivityView, 
 
 
         return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        loadRecentSectionAndCategory();
+        if (section_in_agora.equals("department")) {
+
+            Intent intent = new Intent(InPostActivity.this, DepartmentBoardActivity.class);
+            startActivity(intent);
+            finish();
+
+        }
     }
 }

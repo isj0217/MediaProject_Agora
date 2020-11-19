@@ -17,4 +17,6 @@ public interface InPostActivityView {
     void postDepartmentCommentSuccess(DefaultResponse defaultResponse);
 
     void patchThumbUpDepartmentPostSuccess(DefaultResponse defaultResponse);
+
+    void deleteDepartmentPostSuccess(DefaultResponse defaultResponse);
 }

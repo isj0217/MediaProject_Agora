@@ -117,6 +117,28 @@ class InPostService {
         });
     }
 
+    void deleteDepartmentPost(int department_board_idx) {
+
+        final InPostRetrofitInterface inPostRetrofitInterface = getRetrofit().create(InPostRetrofitInterface.class);
+        inPostRetrofitInterface.deleteDepartmentPost(X_ACCESS_TOKEN, department_board_idx).enqueue(new Callback<DefaultResponse>() {
+            @Override
+            public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
+
+                final DefaultResponse defaultResponse = response.body();
+                if (defaultResponse == null) {
+                    mInPostActivityView.validateFailure(null);
+                    return;
+                }
+                mInPostActivityView.deleteDepartmentPostSuccess(defaultResponse);
+            }
+
+            @Override
+            public void onFailure(Call<DefaultResponse> call, Throwable t) {
+                mInPostActivityView.validateFailure(null);
+            }
+        });
+    }
+
 
 }
 

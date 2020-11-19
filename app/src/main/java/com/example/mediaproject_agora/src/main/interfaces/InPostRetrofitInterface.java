@@ -8,6 +8,7 @@ import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.PATCH;
@@ -37,6 +38,13 @@ public interface InPostRetrofitInterface {
     @PATCH("/department-board-idx/{department_board_idx}/like")
     Call<DefaultResponse> patchThumbUpDepartmentPost(@Header("x-access-token") String accessToken,
                                                      @Path("department_board_idx") int department_board_idx);
+
+    // 학과별 게시판에서 특정 게시물 삭제
+    @DELETE("/department-board-idx/{department_board_idx}/delete")
+    Call<DefaultResponse> deleteDepartmentPost(@Header("x-access-token") String accessToken,
+                                               @Path("department_board_idx") int department_board_idx);
+
+
 
 
 //    @POST("/department")
