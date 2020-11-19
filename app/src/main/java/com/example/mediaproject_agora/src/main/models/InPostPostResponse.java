@@ -41,6 +41,8 @@ public class InPostPostResponse {
         @SerializedName("like_status")
         private int like_status;
 
+        @SerializedName("is_mine")
+        private int is_mine;
 
 
         public int getUser_idx() {
@@ -85,6 +87,10 @@ public class InPostPostResponse {
 
         public int getLike_status() {
             return like_status;
+        }
+
+        public int getIs_mine() {
+            return is_mine;
         }
     }
 

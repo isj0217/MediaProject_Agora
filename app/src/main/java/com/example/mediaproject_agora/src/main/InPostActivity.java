@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -59,6 +60,8 @@ public class InPostActivity extends BaseActivity implements InPostActivityView {
     private LinearLayout ll_in_post_like_btn;
     private ImageView iv_in_post_thumb_up;
     private TextView tv_in_post_thumb_up;
+
+    private int is_mine;
 
 
     @Override
@@ -136,8 +139,12 @@ public class InPostActivity extends BaseActivity implements InPostActivityView {
         ll_in_post_like_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                tryPatchThumbUpDepartmentPost(Integer.parseInt(tv_in_post_department_board_idx.getText().toString()));
+                if (is_mine == 1){
+                    Toast.makeText(InPostActivity.this, "자신의 글에는 공감할 수 없습니다", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    tryPatchThumbUpDepartmentPost(Integer.parseInt(tv_in_post_department_board_idx.getText().toString()));
+                }
             }
         });
 
@@ -255,6 +262,12 @@ public class InPostActivity extends BaseActivity implements InPostActivityView {
                     tv_in_post_thumb_up.setTextColor(getResources().getColor(R.color.white));
                 }
 
+                if (inPostPostResponse.getInPostPostResult().getIs_mine() == 1){
+                    is_mine = 1;
+                } else{
+                    is_mine = 0;
+                }
+
 
                 break;
 
@@ -335,6 +348,9 @@ public class InPostActivity extends BaseActivity implements InPostActivityView {
                 tv_in_post_like_num.setText(Integer.toString(like_num));
                 break;
 
+            default:
+                System.out.println(defaultResponse.getMessage());
+                break;
         }
     }
 }
