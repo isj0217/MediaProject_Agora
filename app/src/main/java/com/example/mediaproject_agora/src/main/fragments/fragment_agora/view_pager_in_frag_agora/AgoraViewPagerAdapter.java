@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.mediaproject_agora.src.main.fragments.fragment_agora.view_pager_in_frag_agora.frag_agora_club.FragAgoraClub;
-import com.example.mediaproject_agora.src.main.fragments.fragment_agora.view_pager_in_frag_agora.frag_agora_department.FragAgoraDepartment;
+import com.example.mediaproject_agora.src.main.fragments.fragment_agora.view_pager_in_frag_agora.frag_agora_department.FragAgoraDepartmentDepartment;
 import com.example.mediaproject_agora.src.main.fragments.fragment_agora.view_pager_in_frag_agora.frag_agora_favorite.FragAgoraFavorite;
 import com.example.mediaproject_agora.src.main.fragments.fragment_agora.view_pager_in_frag_agora.frag_agora_used_product.FragAgoraUsedProduct;
 
@@ -26,7 +26,7 @@ public class AgoraViewPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return FragAgoraDepartment.newInstance();
+                return FragAgoraDepartmentDepartment.newInstance();
             case 1:
                 return FragAgoraUsedProduct.newInstance();
             case 2:

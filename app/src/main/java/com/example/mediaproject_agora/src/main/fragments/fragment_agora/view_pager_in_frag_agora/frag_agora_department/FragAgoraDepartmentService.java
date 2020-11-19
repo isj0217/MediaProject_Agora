@@ -1,8 +1,10 @@
 package com.example.mediaproject_agora.src.main.fragments.fragment_agora.view_pager_in_frag_agora.frag_agora_department;
 
 
+import com.example.mediaproject_agora.src.main.fragments.fragment_agora.FragAgoraRetrofitInterface;
 import com.example.mediaproject_agora.src.main.fragments.fragment_agora.view_pager_in_frag_agora.frag_agora_department.models.AddFavoriteResponse;
 import com.example.mediaproject_agora.src.main.fragments.fragment_agora.view_pager_in_frag_agora.frag_agora_department.models.DepartmentResponse;
+import com.example.mediaproject_agora.src.main.models.FavoriteDepartmentResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -11,11 +13,11 @@ import retrofit2.Response;
 import static com.example.mediaproject_agora.src.ApplicationClass.X_ACCESS_TOKEN;
 import static com.example.mediaproject_agora.src.ApplicationClass.getRetrofit;
 
-class FragAgoraDepartmentService {
+public class FragAgoraDepartmentService {
     private final FragAgoraDepartmentView mFragAgoraDepartmentView;
 //    private HashMap<String, Object> mParams;
 
-    FragAgoraDepartmentService(final FragAgoraDepartmentView fragAgoraDepartmentView) {
+    public FragAgoraDepartmentService(final FragAgoraDepartmentView fragAgoraDepartmentView) {
         this.mFragAgoraDepartmentView = fragAgoraDepartmentView;
     }
 
@@ -25,8 +27,8 @@ class FragAgoraDepartmentService {
 //    }
 
     void getDepartmentList() {
-        final FragAgoraDepartmentRetrofitInterface fragAgoraDepartmentRetrofitInterface = getRetrofit().create(FragAgoraDepartmentRetrofitInterface.class);
-        fragAgoraDepartmentRetrofitInterface.getDepartmentList(X_ACCESS_TOKEN).enqueue(new Callback<DepartmentResponse>() {
+        final FragAgoraRetrofitInterface fragAgoraRetrofitInterface = getRetrofit().create(FragAgoraRetrofitInterface.class);
+        fragAgoraRetrofitInterface.getDepartmentList(X_ACCESS_TOKEN).enqueue(new Callback<DepartmentResponse>() {
             @Override
             public void onResponse(Call<DepartmentResponse> call, Response<DepartmentResponse> response) {
 
@@ -47,8 +49,8 @@ class FragAgoraDepartmentService {
     }
 
     void patchFavoriteDepartment(String department_name) {
-        final FragAgoraDepartmentRetrofitInterface fragAgoraDepartmentRetrofitInterface = getRetrofit().create(FragAgoraDepartmentRetrofitInterface.class);
-        fragAgoraDepartmentRetrofitInterface.patchFavoriteDepartment(X_ACCESS_TOKEN, department_name).enqueue(new Callback<AddFavoriteResponse>() {
+        final FragAgoraRetrofitInterface fragAgoraRetrofitInterface = getRetrofit().create(FragAgoraRetrofitInterface.class);
+        fragAgoraRetrofitInterface.patchFavoriteDepartment(X_ACCESS_TOKEN, department_name).enqueue(new Callback<AddFavoriteResponse>() {
             @Override
             public void onResponse(Call<AddFavoriteResponse> call, Response<AddFavoriteResponse> response) {
 
@@ -67,6 +69,7 @@ class FragAgoraDepartmentService {
             }
         });
     }
+
 
 //    void getDepartmentList() {
 //        final FragAgoraDepartmentRetrofitInterface fragAgoraDepartmentRetrofitInterface = getRetrofit().create(FragAgoraDepartmentRetrofitInterface.class);

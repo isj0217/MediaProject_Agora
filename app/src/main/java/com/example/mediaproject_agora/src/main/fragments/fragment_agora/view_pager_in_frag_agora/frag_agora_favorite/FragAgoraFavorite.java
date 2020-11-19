@@ -8,10 +8,22 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediaproject_agora.R;
+import com.example.mediaproject_agora.src.main.fragments.fragment_agora.FavoriteDepartmentAdapter;
+import com.example.mediaproject_agora.src.main.items.DepartmentItem;
+import com.example.mediaproject_agora.src.main.models.FavoriteDepartmentResponse;
 
-public class FragAgoraFavorite extends Fragment {
+import java.util.ArrayList;
+
+public class FragAgoraFavorite extends Fragment implements FragAgoraFavoriteView{
+
+    private ArrayList<DepartmentItem> m_department_item_list;
+    private FavoriteDepartmentAdapter favorite_department_adapter;
+    private RecyclerView rv_favorite_department;
+    private LinearLayoutManager linear_layout_manager;
 
     private View view;
 
@@ -25,7 +37,56 @@ public class FragAgoraFavorite extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.frag_agora_favorite, container, false);
 
+        rv_favorite_department = view.findViewById(R.id.rv_favorite_department_list);
+
+        linear_layout_manager = new LinearLayoutManager(view.getContext());
+        rv_favorite_department.setLayoutManager(linear_layout_manager);
+
+        m_department_item_list = new ArrayList<>();
+        favorite_department_adapter = new FavoriteDepartmentAdapter(m_department_item_list);
+
+        tryGetFavoriteDepartments();
+
         return view;
     }
-    
+
+    private void tryGetFavoriteDepartments() {
+
+        final FragAgoraFavoriteService fragAgoraFavoriteService = new FragAgoraFavoriteService(this);
+        fragAgoraFavoriteService.getFavoriteDepartmentsList();
+    }
+
+    @Override
+    public void validateSuccess(String text) {
+
+    }
+
+    @Override
+    public void validateFailure(String message) {
+
+    }
+
+    @Override
+    public void getFavoriteDepartmentListSuccess(FavoriteDepartmentResponse favoriteDepartmentResponse) {
+
+        switch (favoriteDepartmentResponse.getCode()){
+            case 100:
+                int num_of_favorite_departments = favoriteDepartmentResponse.getFavoriteDepartmentResults().size();
+                System.out.println("즐겨찾는 게시판 갯수: " + num_of_favorite_departments);
+
+                for (int i = 0; i < num_of_favorite_departments; i++){
+                    DepartmentItem departmentItem = new DepartmentItem();
+
+                    departmentItem.setDepartment(favoriteDepartmentResponse.getFavoriteDepartmentResults().get(i).getDepartment());
+
+                    m_department_item_list.add(departmentItem);
+                }
+                favorite_department_adapter.notifyDataSetChanged();
+                break;
+
+            default:
+                System.out.println("message:  " + favoriteDepartmentResponse.getMessage());
+        }
+
+    }
 }

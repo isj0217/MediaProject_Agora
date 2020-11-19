@@ -86,6 +86,8 @@ public class InPostActivity extends BaseActivity implements InPostActivityView {
     }
 
     public void setClickListenersToButtons() {
+
+        // 댓글 등록 버튼
         iv_in_post_register_comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,6 +122,9 @@ public class InPostActivity extends BaseActivity implements InPostActivityView {
                         .show();
             }
         });
+
+        // 게시물 좋아요 버튼
+
     }
 
     private void restartActivity(Activity activity) {

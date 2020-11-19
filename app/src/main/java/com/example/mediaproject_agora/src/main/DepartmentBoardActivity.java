@@ -48,9 +48,6 @@ public class DepartmentBoardActivity extends BaseActivity implements DepartmentB
         setContentView(R.layout.activity_specific_board);
 
         tv_specific_board_name = findViewById(R.id.tv_specific_board_name);
-
-
-
         rv_department_board = findViewById(R.id.rv_specific_board_post_list);
 
         linear_layout_manager = new LinearLayoutManager(getApplicationContext());
