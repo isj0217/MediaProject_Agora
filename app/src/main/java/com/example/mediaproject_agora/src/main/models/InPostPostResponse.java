@@ -38,6 +38,11 @@ public class InPostPostResponse {
         @SerializedName("comment_num")
         private int comment_num;
 
+        @SerializedName("like_status")
+        private int like_status;
+
+
+
         public int getUser_idx() {
             return user_idx;
         }
@@ -76,6 +81,10 @@ public class InPostPostResponse {
 
         public int getComment_num() {
             return comment_num;
+        }
+
+        public int getLike_status() {
+            return like_status;
         }
     }
 

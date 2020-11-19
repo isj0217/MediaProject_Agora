@@ -73,7 +73,7 @@ class InPostService {
         });
     }
 
-    void postDepartmentComment(int department_board_idx){
+    void postDepartmentComment(int department_board_idx) {
 
         final InPostRetrofitInterface inPostRetrofitInterface = getRetrofit().create(InPostRetrofitInterface.class);
         inPostRetrofitInterface.postDepartmentComment(X_ACCESS_TOKEN, department_board_idx, mParams).enqueue(new Callback<DefaultResponse>() {
@@ -95,8 +95,30 @@ class InPostService {
         });
     }
 
+    void patchThumbUpDepartmentPost(int department_board_idx) {
 
+        final InPostRetrofitInterface inPostRetrofitInterface = getRetrofit().create(InPostRetrofitInterface.class);
+        inPostRetrofitInterface.patchThumbUpDepartmentPost(X_ACCESS_TOKEN, department_board_idx).enqueue(new Callback<DefaultResponse>() {
+            @Override
+            public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
+
+                final DefaultResponse defaultResponse = response.body();
+                if (defaultResponse == null) {
+                    mInPostActivityView.validateFailure(null);
+                    return;
+                }
+                mInPostActivityView.patchThumbUpDepartmentPostSuccess(defaultResponse);
+            }
+
+            @Override
+            public void onFailure(Call<DefaultResponse> call, Throwable t) {
+                mInPostActivityView.validateFailure(null);
+            }
+        });
     }
+
+
+}
 
 
 //    void getTest() {

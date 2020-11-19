@@ -15,4 +15,6 @@ public interface InPostActivityView {
     void getSpecificDepartmentCommentSuccess(InPostCommentResponse inPostCommentResponse);
 
     void postDepartmentCommentSuccess(DefaultResponse defaultResponse);
+
+    void patchThumbUpDepartmentPostSuccess(DefaultResponse defaultResponse);
 }

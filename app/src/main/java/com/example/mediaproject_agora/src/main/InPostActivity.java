@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -55,11 +56,19 @@ public class InPostActivity extends BaseActivity implements InPostActivityView {
 
     private int index_of_this_post;
 
+    private LinearLayout ll_in_post_like_btn;
+    private ImageView iv_in_post_thumb_up;
+    private TextView tv_in_post_thumb_up;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_in_department_post);
+
+        ll_in_post_like_btn = findViewById(R.id.ll_in_post_like_btn);
+        iv_in_post_thumb_up = findViewById(R.id.iv_in_post_thumb_up);
+        tv_in_post_thumb_up = findViewById(R.id.tv_in_post_thumb_up);
 
         index_of_this_post = getIntent().getExtras().getInt("index_of_this_post", 0);
 
@@ -124,6 +133,13 @@ public class InPostActivity extends BaseActivity implements InPostActivityView {
         });
 
         // 게시물 좋아요 버튼
+        ll_in_post_like_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                tryPatchThumbUpDepartmentPost(Integer.parseInt(tv_in_post_department_board_idx.getText().toString()));
+            }
+        });
 
     }
 
@@ -163,6 +179,15 @@ public class InPostActivity extends BaseActivity implements InPostActivityView {
         final InPostService inPostService = new InPostService(this);
         inPostService.getSpecificDepartmentComments(department_board_idx);
     }
+
+    private void tryPatchThumbUpDepartmentPost(int department_board_idx) {
+        showProgressDialog();
+
+        final InPostService inPostService = new InPostService(this);
+        inPostService.patchThumbUpDepartmentPost(department_board_idx);
+    }
+
+
 
 
     public void bindViews() {
@@ -224,6 +249,12 @@ public class InPostActivity extends BaseActivity implements InPostActivityView {
                 tv_in_post_like_num.setText(Integer.toString(inPostPostResponse.getInPostPostResult().getLike_num()));
                 tv_in_post_comment_num.setText(Integer.toString(inPostPostResponse.getInPostPostResult().getComment_num()));
 
+                if (inPostPostResponse.getInPostPostResult().getLike_status() == 1){
+                    ll_in_post_like_btn.setBackgroundResource(R.drawable.blue_btn_with_light_grey_border);
+                    iv_in_post_thumb_up.setImageResource(R.drawable.thumb_up_white);
+                    tv_in_post_thumb_up.setTextColor(getResources().getColor(R.color.white));
+                }
+
 
                 break;
 
@@ -272,6 +303,38 @@ public class InPostActivity extends BaseActivity implements InPostActivityView {
         switch (defaultResponse.getCode()) {
             case 100:
                 System.out.println("댓글 달기 성공???????");
+        }
+    }
+
+    @Override
+    public void patchThumbUpDepartmentPostSuccess(DefaultResponse defaultResponse) {
+        hideProgressDialog();
+
+        int like_num;
+
+        switch (defaultResponse.getCode()){
+            case 100:
+                ll_in_post_like_btn.setBackgroundResource(R.drawable.blue_btn_with_light_grey_border);
+                iv_in_post_thumb_up.setImageResource(R.drawable.thumb_up_white);
+                tv_in_post_thumb_up.setTextColor(getResources().getColor(R.color.white));
+                showCustomToast("이 게시물을 공감하였습니다.");
+
+                like_num = Integer.parseInt(tv_in_post_like_num.getText().toString());
+                like_num++;
+                tv_in_post_like_num.setText(Integer.toString(like_num));
+                break;
+            case 101:
+                ll_in_post_like_btn.setBackgroundResource(R.drawable.white_btn_with_light_grey_border);
+                iv_in_post_thumb_up.setImageResource(R.drawable.thumb_up);
+                tv_in_post_thumb_up.setTextColor(getResources().getColor(R.color.black));
+                showCustomToast(defaultResponse.getMessage());
+                showCustomToast("이 게시물의 공감을 취소하였습니다.");
+
+                like_num = Integer.parseInt(tv_in_post_like_num.getText().toString());
+                like_num--;
+                tv_in_post_like_num.setText(Integer.toString(like_num));
+                break;
+
         }
     }
 }
