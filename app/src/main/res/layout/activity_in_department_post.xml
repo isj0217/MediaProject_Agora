@@ -20,6 +20,7 @@
         android:paddingBottom="8dp">
 
         <ImageView
+            android:onClick="customOnClick"
             android:id="@+id/btn_in_post_go_back"
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -37,12 +38,16 @@
             android:src="@drawable/notification_off" />
 
         <ImageView
+            android:id="@+id/iv_in_post_sync"
+            android:onClick="customOnClick"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginEnd="12dp"
             android:src="@drawable/blue_sync" />
 
         <ImageView
+            android:id="@+id/iv_in_post_more"
+            android:onClick="customOnClick"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:src="@drawable/more" />

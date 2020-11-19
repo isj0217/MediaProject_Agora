@@ -5,10 +5,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +22,6 @@ import com.example.mediaproject_agora.R;
 import com.example.mediaproject_agora.src.BaseActivity;
 import com.example.mediaproject_agora.src.main.interfaces.InPostActivityView;
 import com.example.mediaproject_agora.src.main.items.CommentItem;
-import com.example.mediaproject_agora.src.main.items.DepartmentPostItem;
 import com.example.mediaproject_agora.src.main.models.CommentAdapter;
 import com.example.mediaproject_agora.src.main.models.DefaultResponse;
 import com.example.mediaproject_agora.src.main.models.InPostCommentResponse;
@@ -30,7 +31,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class InPostActivity extends BaseActivity implements InPostActivityView {
+public class InPostActivity extends BaseActivity implements InPostActivityView, PopupMenu.OnMenuItemClickListener {
 
     private String section_in_agora;
     private String category_name;
@@ -63,6 +64,8 @@ public class InPostActivity extends BaseActivity implements InPostActivityView {
 
     private int is_mine;
 
+    private ImageView iv_in_post_more;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +75,8 @@ public class InPostActivity extends BaseActivity implements InPostActivityView {
         ll_in_post_like_btn = findViewById(R.id.ll_in_post_like_btn);
         iv_in_post_thumb_up = findViewById(R.id.iv_in_post_thumb_up);
         tv_in_post_thumb_up = findViewById(R.id.tv_in_post_thumb_up);
+        iv_in_post_more = findViewById(R.id.iv_in_post_more);
+
 
         index_of_this_post = getIntent().getExtras().getInt("index_of_this_post", 0);
 
@@ -139,10 +144,9 @@ public class InPostActivity extends BaseActivity implements InPostActivityView {
         ll_in_post_like_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (is_mine == 1){
+                if (is_mine == 1) {
                     Toast.makeText(InPostActivity.this, "자신의 글에는 공감할 수 없습니다", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     tryPatchThumbUpDepartmentPost(Integer.parseInt(tv_in_post_department_board_idx.getText().toString()));
                 }
             }
@@ -193,8 +197,6 @@ public class InPostActivity extends BaseActivity implements InPostActivityView {
         final InPostService inPostService = new InPostService(this);
         inPostService.patchThumbUpDepartmentPost(department_board_idx);
     }
-
-
 
 
     public void bindViews() {
@@ -256,15 +258,15 @@ public class InPostActivity extends BaseActivity implements InPostActivityView {
                 tv_in_post_like_num.setText(Integer.toString(inPostPostResponse.getInPostPostResult().getLike_num()));
                 tv_in_post_comment_num.setText(Integer.toString(inPostPostResponse.getInPostPostResult().getComment_num()));
 
-                if (inPostPostResponse.getInPostPostResult().getLike_status() == 1){
+                if (inPostPostResponse.getInPostPostResult().getLike_status() == 1) {
                     ll_in_post_like_btn.setBackgroundResource(R.drawable.blue_btn_with_light_grey_border);
                     iv_in_post_thumb_up.setImageResource(R.drawable.thumb_up_white);
                     tv_in_post_thumb_up.setTextColor(getResources().getColor(R.color.white));
                 }
 
-                if (inPostPostResponse.getInPostPostResult().getIs_mine() == 1){
+                if (inPostPostResponse.getInPostPostResult().getIs_mine() == 1) {
                     is_mine = 1;
-                } else{
+                } else {
                     is_mine = 0;
                 }
 
@@ -325,7 +327,7 @@ public class InPostActivity extends BaseActivity implements InPostActivityView {
 
         int like_num;
 
-        switch (defaultResponse.getCode()){
+        switch (defaultResponse.getCode()) {
             case 100:
                 ll_in_post_like_btn.setBackgroundResource(R.drawable.blue_btn_with_light_grey_border);
                 iv_in_post_thumb_up.setImageResource(R.drawable.thumb_up_white);
@@ -352,5 +354,64 @@ public class InPostActivity extends BaseActivity implements InPostActivityView {
                 System.out.println(defaultResponse.getMessage());
                 break;
         }
+    }
+
+    public void customOnClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_in_post_go_back:
+                onBackPressed();
+                break;
+            case R.id.iv_in_post_more:
+                showPopUp(view);
+                break;
+        }
+
+    }
+
+    public void showPopUp(View v) {
+        PopupMenu popupMenu = new PopupMenu(this, v);
+
+        popupMenu.setOnMenuItemClickListener(this);
+
+        if (is_mine == 1) {
+            popupMenu.inflate(R.menu.menu_in_post_mine);
+            popupMenu.show();
+        } else {
+            popupMenu.inflate(R.menu.menu_in_post_not_mine);
+            popupMenu.show();
+        }
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem menuItem) {
+        switch (menuItem.getItemId()){
+            case R.id.menu_in_post_fix_post:
+                // todo
+                // 글 수정 API 엮기
+                int idx_of_post_we_are_fixing = Integer.parseInt(tv_in_post_department_board_idx.getText().toString());
+
+                Intent intent = new Intent(InPostActivity.this, FixingDepartmentActivity.class);
+                intent.putExtra("idx_of_post_we_are_fixing", idx_of_post_we_are_fixing);
+                intent.putExtra("origin_title", tv_in_post_title.getText().toString());
+                intent.putExtra("origin_content", tv_in_post_content.getText().toString());
+                startActivity(intent);
+
+                finish();
+
+
+
+                break;
+            case R.id.menu_in_post_delete_post:
+                // todo
+                // 글 삭제 API 엮기
+                break;
+            case R.id.menu_in_post_send_message:
+                // todo
+                // 추후에 쪽지보내기 기능 생겼을 때 만들기
+                break;
+        }
+
+
+        return false;
     }
 }

@@ -31,6 +31,7 @@
         <activity android:name=".src.main.InPostActivity" />
         <activity android:name=".src.main.WritingDepartmentActivity" />
         <activity android:name=".src.main.WritingUsedProductDepartmentActivity" />
+        <activity android:name=".src.main.FixingDepartmentActivity" />
     </application>
 
 </manifest>
