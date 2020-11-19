@@ -182,7 +182,7 @@ public class DepartmentBoardActivity extends BaseActivity implements DepartmentB
 
                 int num_of_posts_in_department_board = departmentBoardResponse.getDepartmentBoardResults().size();
 
-                System.out.println("몇개??? " + num_of_posts_in_department_board);
+//                System.out.println("몇개??? " + num_of_posts_in_department_board);
 
                 for (int i = 0; i < num_of_posts_in_department_board; i++){
                     DepartmentPostItem departmentPostItem = new DepartmentPostItem();

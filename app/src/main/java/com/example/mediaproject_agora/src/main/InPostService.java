@@ -1,11 +1,8 @@
 package com.example.mediaproject_agora.src.main;
 
-import com.example.mediaproject_agora.src.main.interfaces.DepartmentBoardActivityView;
-import com.example.mediaproject_agora.src.main.interfaces.DepartmentBoardRetrofitInterface;
 import com.example.mediaproject_agora.src.main.interfaces.InPostActivityView;
 import com.example.mediaproject_agora.src.main.interfaces.InPostRetrofitInterface;
-import com.example.mediaproject_agora.src.main.models.DepartmentBoardResponse;
-import com.example.mediaproject_agora.src.main.models.InPostResponse;
+import com.example.mediaproject_agora.src.main.models.InPostPostResponse;
 
 import java.util.HashMap;
 
@@ -20,9 +17,9 @@ class InPostService {
     private final InPostActivityView mInPostActivityView;
     private HashMap<String, Object> mParams;
 
-//    SpecificBoardService(final SpecificBoardActivityView specificBoardActivityView) {
-//        this.mSpecificBoardActivityView = specificBoardActivityView;
-//    }
+    public InPostService(InPostActivityView mInPostActivityView) {
+        this.mInPostActivityView = mInPostActivityView;
+    }
 
     InPostService(final InPostActivityView inPostActivityView, HashMap<String, Object> mParams) {
         this.mInPostActivityView = inPostActivityView;
@@ -33,20 +30,20 @@ class InPostService {
     void getSpecificDepartmentPost(int department_board_idx) {
 
         final InPostRetrofitInterface inPostRetrofitInterface = getRetrofit().create(InPostRetrofitInterface.class);
-        inPostRetrofitInterface.getSpecificDepartmentPost(X_ACCESS_TOKEN, department_board_idx).enqueue(new Callback<InPostResponse>() {
+        inPostRetrofitInterface.getSpecificDepartmentPost(X_ACCESS_TOKEN, department_board_idx).enqueue(new Callback<InPostPostResponse>() {
             @Override
-            public void onResponse(Call<InPostResponse> call, Response<InPostResponse> response) {
+            public void onResponse(Call<InPostPostResponse> call, Response<InPostPostResponse> response) {
 
-                final InPostResponse inPostResponse = response.body();
-                if (inPostResponse == null) {
+                final InPostPostResponse inPostPostResponse = response.body();
+                if (inPostPostResponse == null) {
                     mInPostActivityView.validateFailure(null);
                     return;
                 }
-                mInPostActivityView.getDepartmentPostSuccess(inPostResponse);
+                mInPostActivityView.getDepartmentPostSuccess(inPostPostResponse);
             }
 
             @Override
-            public void onFailure(Call<InPostResponse> call, Throwable t) {
+            public void onFailure(Call<InPostPostResponse> call, Throwable t) {
                 mInPostActivityView.validateFailure(null);
             }
         });
