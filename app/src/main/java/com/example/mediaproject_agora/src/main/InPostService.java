@@ -2,6 +2,7 @@ package com.example.mediaproject_agora.src.main;
 
 import com.example.mediaproject_agora.src.main.interfaces.InPostActivityView;
 import com.example.mediaproject_agora.src.main.interfaces.InPostRetrofitInterface;
+import com.example.mediaproject_agora.src.main.models.InPostCommentResponse;
 import com.example.mediaproject_agora.src.main.models.InPostPostResponse;
 
 import java.util.HashMap;
@@ -44,6 +45,28 @@ class InPostService {
 
             @Override
             public void onFailure(Call<InPostPostResponse> call, Throwable t) {
+                mInPostActivityView.validateFailure(null);
+            }
+        });
+    }
+
+    void getSpecificDepartmentComments(int department_board_idx) {
+
+        final InPostRetrofitInterface inPostRetrofitInterface = getRetrofit().create(InPostRetrofitInterface.class);
+        inPostRetrofitInterface.getSpecificDepartmentComment(X_ACCESS_TOKEN, department_board_idx).enqueue(new Callback<InPostCommentResponse>() {
+            @Override
+            public void onResponse(Call<InPostCommentResponse> call, Response<InPostCommentResponse> response) {
+
+                final InPostCommentResponse inPostCommentResponse = response.body();
+                if (inPostCommentResponse == null) {
+                    mInPostActivityView.validateFailure(null);
+                    return;
+                }
+                mInPostActivityView.getSpecificDepartmentCommentSuccess(inPostCommentResponse);
+            }
+
+            @Override
+            public void onFailure(Call<InPostCommentResponse> call, Throwable t) {
                 mInPostActivityView.validateFailure(null);
             }
         });

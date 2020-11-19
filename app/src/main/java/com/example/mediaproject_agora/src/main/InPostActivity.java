@@ -1,8 +1,6 @@
 package com.example.mediaproject_agora.src.main;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,30 +11,35 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mediaproject_agora.R;
 import com.example.mediaproject_agora.src.BaseActivity;
 import com.example.mediaproject_agora.src.main.interfaces.InPostActivityView;
+import com.example.mediaproject_agora.src.main.items.CommentItem;
+import com.example.mediaproject_agora.src.main.items.DepartmentPostItem;
+import com.example.mediaproject_agora.src.main.models.CommentAdapter;
+import com.example.mediaproject_agora.src.main.models.InPostCommentResponse;
 import com.example.mediaproject_agora.src.main.models.InPostPostResponse;
+
+import java.util.ArrayList;
 
 
 public class InPostActivity extends BaseActivity implements InPostActivityView {
 
-//    private ArrayList<CommentItem> m_comment_item_list;
+    private ArrayList<CommentItem> m_comment_item_list;
 
-//    private CommentAdapter comment_adapter;
-
-    private CheckBox chk_in_post_anonymous;
+    private CommentAdapter comment_adapter;
 
     private RecyclerView rv_in_post_comment;
     private LinearLayoutManager linear_layout_manager;
 
     private TextView tv_in_post_user_idx, tv_in_post_department_board_idx, tv_in_post_nickname, tv_in_post_time, tv_in_post_title,
-            tv_in_post_content, tv_in_post_like_num, tv_in_post_comment_num, tv_in_post_scrap_num;
+            tv_in_post_content, tv_in_post_like_num, tv_in_post_comment_num;
+
+    // 댓글에 담긴 TextView 4개
+    private TextView tv_item_comment_content, tv_item_comment_time, tv_item_comment_nickname, tv_item_comment_department_comment_index;
+
     private ImageView iv_in_post_user_picture, iv_in_post_photo;
 
     private EditText et_in_post_comment;
     private ImageView iv_in_post_register_comment;
 
-    private int m_index_of_this_post;
-
-    private Intent intent;
     private int index_of_this_post;
 
 
@@ -49,16 +52,18 @@ public class InPostActivity extends BaseActivity implements InPostActivityView {
 
         tryGetSpecificDepartmentPost(index_of_this_post);
 
+        tryGetSpecificDepartmentComment(index_of_this_post);
 
-//        m_comment_item_list = new ArrayList<>();
 
-//        comment_adapter = new CommentAdapter(m_comment_item_list);
+        m_comment_item_list = new ArrayList<>();
+
+        comment_adapter = new CommentAdapter(m_comment_item_list);
         rv_in_post_comment = findViewById(R.id.rv_board_comment_list);
 
         linear_layout_manager = new LinearLayoutManager(getApplicationContext());
         rv_in_post_comment.setLayoutManager(linear_layout_manager);
 
-//        rv_in_post_comment.setAdapter(comment_adapter);
+        rv_in_post_comment.setAdapter(comment_adapter);
 
 
         bindViews();
@@ -74,9 +79,19 @@ public class InPostActivity extends BaseActivity implements InPostActivityView {
         inPostService.getSpecificDepartmentPost(department_board_idx);
     }
 
+    private void tryGetSpecificDepartmentComment(int department_board_idx) {
+        showProgressDialog();
+
+        final InPostService inPostService = new InPostService(this);
+        inPostService.getSpecificDepartmentComments(department_board_idx);
+    }
+
+
+
 
     public void bindViews() {
 
+        // 게시글 레이아웃
         tv_in_post_user_idx = findViewById(R.id.tv_in_post_user_idx);
         iv_in_post_user_picture = findViewById(R.id.iv_in_post_user_picture);
         tv_in_post_department_board_idx = findViewById(R.id.tv_in_post_department_board_idx);
@@ -87,6 +102,12 @@ public class InPostActivity extends BaseActivity implements InPostActivityView {
         iv_in_post_photo = findViewById(R.id.iv_in_post_photo);
         tv_in_post_like_num = findViewById(R.id.tv_in_post_like_num);
         tv_in_post_comment_num = findViewById(R.id.tv_in_post_comment_num);
+
+        // 댓글 레이아웃
+        tv_item_comment_content = findViewById(R.id.tv_item_comment_content);
+        tv_item_comment_time =findViewById(R.id.tv_item_comment_time);
+        tv_item_comment_nickname =findViewById(R.id.tv_item_comment_nickname);
+        tv_item_comment_department_comment_index =findViewById(R.id.tv_item_comment_department_comment_index);
 
         et_in_post_comment = findViewById(R.id.et_in_post_comment);
         iv_in_post_register_comment = findViewById(R.id.iv_in_post_register_comment);
@@ -133,6 +154,40 @@ public class InPostActivity extends BaseActivity implements InPostActivityView {
 
             default:
                 System.out.println("ㅇㅕ기로 가지 말구요");
+                break;
+        }
+    }
+
+    @Override
+    public void getSpecificDepartmentCommentSuccess(InPostCommentResponse inPostCommentResponse) {
+        hideProgressDialog();
+
+        switch (inPostCommentResponse.getCode()) {
+            case 100:
+                System.out.println("ㅇㅕ기로 오십쇼");
+
+                /**
+                 * CommentItem 형식의 ArrayList에 모두 넣어두고 어댑터를 이용해서 하나하나 레이아웃에 갖다 붙이자!!
+                 * */
+
+                int num_of_comments_in_the_post = inPostCommentResponse.getInPostCommentResults().size();
+
+                for (int i = 0; i < num_of_comments_in_the_post; i++){
+                    CommentItem commentItem = new CommentItem();
+
+                    commentItem.setComment(inPostCommentResponse.getInPostCommentResults().get(i).getComment());
+                    commentItem.setTime(inPostCommentResponse.getInPostCommentResults().get(i).getTime());
+                    commentItem.setNickname(inPostCommentResponse.getInPostCommentResults().get(i).getNickname());
+                    commentItem.setDepartment_comment_idx(inPostCommentResponse.getInPostCommentResults().get(i).getDepartment_board_idx());
+
+                    m_comment_item_list.add(commentItem);
+                }
+                comment_adapter.notifyDataSetChanged();
+
+                break;
+
+            default:
+                System.out.println("ㅇㅕ기로 가시지 마십쇼");
                 break;
         }
     }
