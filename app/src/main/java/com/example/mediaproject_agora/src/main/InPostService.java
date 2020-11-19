@@ -2,6 +2,7 @@ package com.example.mediaproject_agora.src.main;
 
 import com.example.mediaproject_agora.src.main.interfaces.InPostActivityView;
 import com.example.mediaproject_agora.src.main.interfaces.InPostRetrofitInterface;
+import com.example.mediaproject_agora.src.main.models.DefaultResponse;
 import com.example.mediaproject_agora.src.main.models.InPostCommentResponse;
 import com.example.mediaproject_agora.src.main.models.InPostPostResponse;
 
@@ -72,6 +73,32 @@ class InPostService {
         });
     }
 
+    void postDepartmentComment(int department_board_idx){
+
+        final InPostRetrofitInterface inPostRetrofitInterface = getRetrofit().create(InPostRetrofitInterface.class);
+        inPostRetrofitInterface.postDepartmentComment(X_ACCESS_TOKEN, department_board_idx, mParams).enqueue(new Callback<DefaultResponse>() {
+            @Override
+            public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
+
+                final DefaultResponse defaultResponse = response.body();
+                if (defaultResponse == null) {
+                    mInPostActivityView.validateFailure(null);
+                    return;
+                }
+                mInPostActivityView.postDepartmentCommentSuccess(defaultResponse);
+            }
+
+            @Override
+            public void onFailure(Call<DefaultResponse> call, Throwable t) {
+                mInPostActivityView.validateFailure(null);
+            }
+        });
+    }
+
+
+    }
+
+
 //    void getTest() {
 //        final SpecificBoardRetrofitInterface specificBoardRetrofitInterface = getRetrofit().create(SpecificBoardRetrofitInterface.class);
 //        specificBoardRetrofitInterface.getTest().enqueue(new Callback<DefaultResponse>() {
@@ -92,4 +119,4 @@ class InPostService {
 //            }
 //        });
 //    }
-}
+

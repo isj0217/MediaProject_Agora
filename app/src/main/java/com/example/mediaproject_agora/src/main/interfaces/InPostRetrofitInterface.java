@@ -1,11 +1,16 @@
 package com.example.mediaproject_agora.src.main.interfaces;
 
+import com.example.mediaproject_agora.src.main.models.DefaultResponse;
 import com.example.mediaproject_agora.src.main.models.InPostCommentResponse;
 import com.example.mediaproject_agora.src.main.models.InPostPostResponse;
 
+import java.util.HashMap;
+
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface InPostRetrofitInterface {
@@ -20,6 +25,12 @@ public interface InPostRetrofitInterface {
     @GET("/department-board-idx/{department_board_idx}/comment")
     Call<InPostCommentResponse> getSpecificDepartmentComment(@Header("x-access-token") String accessToken,
                                                              @Path("department_board_idx") int department_board_idx);
+
+    // 학과별 게시판에서 댓글 달기
+    @POST("/department-board-idx/{department_board_idx}/comment")
+    Call<DefaultResponse> postDepartmentComment(@Header("x-access-token") String accessToken,
+                                                @Path("department_board_idx") int department_board_idx,
+                                                @Body HashMap<String, Object> params);
 
 //    @POST("/department")
 //    Call<DefaultResponse> postDepartmentPost(@Header("x-access-token") String accessToken,

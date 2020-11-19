@@ -1,10 +1,16 @@
 package com.example.mediaproject_agora.src.main;
 
+import android.app.Activity;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,13 +20,20 @@ import com.example.mediaproject_agora.src.main.interfaces.InPostActivityView;
 import com.example.mediaproject_agora.src.main.items.CommentItem;
 import com.example.mediaproject_agora.src.main.items.DepartmentPostItem;
 import com.example.mediaproject_agora.src.main.models.CommentAdapter;
+import com.example.mediaproject_agora.src.main.models.DefaultResponse;
 import com.example.mediaproject_agora.src.main.models.InPostCommentResponse;
 import com.example.mediaproject_agora.src.main.models.InPostPostResponse;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class InPostActivity extends BaseActivity implements InPostActivityView {
+
+    private String section_in_agora;
+    private String category_name;
+
+    private String department;
 
     private ArrayList<CommentItem> m_comment_item_list;
 
@@ -68,8 +81,68 @@ public class InPostActivity extends BaseActivity implements InPostActivityView {
 
         bindViews();
 
-//        Toast.makeText(this, index_of_this_post, Toast.LENGTH_SHORT).show();
+        setClickListenersToButtons();
 
+    }
+
+    public void setClickListenersToButtons() {
+        iv_in_post_register_comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AlertDialog.Builder(InPostActivity.this) // TestActivity 부분에는 현재 Activity의 이름 입력.
+                        .setTitle("댓글 작성 완료")
+                        .setMessage("댓글을 등록하시겠습니까?")
+                        .setPositiveButton("예", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                // todo
+                                // 서버에 댓글 등록 해야함!!
+
+                                int department_board_idx = Integer.parseInt(tv_in_post_department_board_idx.getText().toString());
+
+                                System.out.println("몇번 idx에 달 것인가???? " + department_board_idx);
+
+                                tryPostDepartmentComment(department_board_idx, et_in_post_comment.getText().toString());
+
+//                                restartActivity(InPostActivity.this);
+
+                                Intent intent = new Intent(InPostActivity.this, DepartmentBoardActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        })
+                        .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        })
+                        .setCancelable(false)
+                        .show();
+            }
+        });
+    }
+
+    private void restartActivity(Activity activity) {
+        Intent intent = new Intent();
+        intent.setClass(activity, activity.getClass());
+        activity.startActivity(intent);
+        activity.finish();
+    }
+
+    public void loadRecentSectionAndCategory() {
+        SharedPreferences sharedPreferences = getSharedPreferences("recent_section_and_category", MODE_PRIVATE);
+        section_in_agora = sharedPreferences.getString("section_in_agora", "SECTION 불러오기 실패");
+        category_name = sharedPreferences.getString("category_name", "CATEGORY 불러오기 실패");
+    }
+
+    private void tryPostDepartmentComment(int department_board_idx, String comment) {
+        showProgressDialog();
+
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("comment", comment);
+
+        final InPostService inPostService = new InPostService(this, params);
+        inPostService.postDepartmentComment(department_board_idx);
     }
 
     private void tryGetSpecificDepartmentPost(int department_board_idx) {
@@ -85,8 +158,6 @@ public class InPostActivity extends BaseActivity implements InPostActivityView {
         final InPostService inPostService = new InPostService(this);
         inPostService.getSpecificDepartmentComments(department_board_idx);
     }
-
-
 
 
     public void bindViews() {
@@ -105,9 +176,9 @@ public class InPostActivity extends BaseActivity implements InPostActivityView {
 
         // 댓글 레이아웃
         tv_item_comment_content = findViewById(R.id.tv_item_comment_content);
-        tv_item_comment_time =findViewById(R.id.tv_item_comment_time);
-        tv_item_comment_nickname =findViewById(R.id.tv_item_comment_nickname);
-        tv_item_comment_department_comment_index =findViewById(R.id.tv_item_comment_department_comment_index);
+        tv_item_comment_time = findViewById(R.id.tv_item_comment_time);
+        tv_item_comment_nickname = findViewById(R.id.tv_item_comment_nickname);
+        tv_item_comment_department_comment_index = findViewById(R.id.tv_item_comment_department_comment_index);
 
         et_in_post_comment = findViewById(R.id.et_in_post_comment);
         iv_in_post_register_comment = findViewById(R.id.iv_in_post_register_comment);
@@ -149,7 +220,6 @@ public class InPostActivity extends BaseActivity implements InPostActivityView {
                 tv_in_post_comment_num.setText(Integer.toString(inPostPostResponse.getInPostPostResult().getComment_num()));
 
 
-
                 break;
 
             default:
@@ -164,7 +234,6 @@ public class InPostActivity extends BaseActivity implements InPostActivityView {
 
         switch (inPostCommentResponse.getCode()) {
             case 100:
-                System.out.println("ㅇㅕ기로 오십쇼");
 
                 /**
                  * CommentItem 형식의 ArrayList에 모두 넣어두고 어댑터를 이용해서 하나하나 레이아웃에 갖다 붙이자!!
@@ -172,7 +241,7 @@ public class InPostActivity extends BaseActivity implements InPostActivityView {
 
                 int num_of_comments_in_the_post = inPostCommentResponse.getInPostCommentResults().size();
 
-                for (int i = 0; i < num_of_comments_in_the_post; i++){
+                for (int i = 0; i < num_of_comments_in_the_post; i++) {
                     CommentItem commentItem = new CommentItem();
 
                     commentItem.setComment(inPostCommentResponse.getInPostCommentResults().get(i).getComment());
@@ -187,8 +256,17 @@ public class InPostActivity extends BaseActivity implements InPostActivityView {
                 break;
 
             default:
-                System.out.println("ㅇㅕ기로 가시지 마십쇼");
                 break;
+        }
+    }
+
+    @Override
+    public void postDepartmentCommentSuccess(DefaultResponse defaultResponse) {
+        hideProgressDialog();
+
+        switch (defaultResponse.getCode()) {
+            case 100:
+                System.out.println("댓글 달기 성공???????");
         }
     }
 }
