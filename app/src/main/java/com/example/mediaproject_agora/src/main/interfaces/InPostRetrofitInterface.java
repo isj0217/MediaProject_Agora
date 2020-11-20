@@ -44,6 +44,11 @@ public interface InPostRetrofitInterface {
     Call<DefaultResponse> deleteDepartmentPost(@Header("x-access-token") String accessToken,
                                                @Path("department_board_idx") int department_board_idx);
 
+    // 학과별 게시판에서 특정 댓글 삭제
+    @DELETE("/department-comment-idx/{department_comment_idx}/delete")
+    Call<DefaultResponse> deleteDepartmentComment(@Header("x-access-token") String accessToken,
+                                                  @Path("department_comment_idx") int department_comment_idx);
+
 
 
 

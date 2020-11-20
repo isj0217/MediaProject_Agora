@@ -15,7 +15,8 @@ import retrofit2.Response;
 import static com.example.mediaproject_agora.src.ApplicationClass.X_ACCESS_TOKEN;
 import static com.example.mediaproject_agora.src.ApplicationClass.getRetrofit;
 
-class InPostService {
+//Comment Adapter로부터의 접근을 위해 public 붙여줌
+public class InPostService {
     private final InPostActivityView mInPostActivityView;
     private HashMap<String, Object> mParams;
 
@@ -130,6 +131,28 @@ class InPostService {
                     return;
                 }
                 mInPostActivityView.deleteDepartmentPostSuccess(defaultResponse);
+            }
+
+            @Override
+            public void onFailure(Call<DefaultResponse> call, Throwable t) {
+                mInPostActivityView.validateFailure(null);
+            }
+        });
+    }
+
+    //Comment Adapter로부터의 접근을 위해 public 붙여줌
+    public void deleteDepartmentComment(int department_comment_idx) {
+        final InPostRetrofitInterface inPostRetrofitInterface = getRetrofit().create(InPostRetrofitInterface.class);
+        inPostRetrofitInterface.deleteDepartmentComment(X_ACCESS_TOKEN, department_comment_idx).enqueue(new Callback<DefaultResponse>() {
+            @Override
+            public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
+
+                final DefaultResponse defaultResponse = response.body();
+                if (defaultResponse == null) {
+                    mInPostActivityView.validateFailure(null);
+                    return;
+                }
+                mInPostActivityView.deleteDepartmentCommentSuccess(defaultResponse);
             }
 
             @Override

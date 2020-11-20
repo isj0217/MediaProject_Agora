@@ -87,7 +87,7 @@ public class InPostActivity extends BaseActivity implements InPostActivityView, 
 
         m_comment_item_list = new ArrayList<>();
 
-        comment_adapter = new CommentAdapter(m_comment_item_list);
+        comment_adapter = new CommentAdapter(m_comment_item_list, getApplicationContext());
         rv_in_post_comment = findViewById(R.id.rv_board_comment_list);
 
         linear_layout_manager = new LinearLayoutManager(getApplicationContext());
@@ -386,6 +386,12 @@ public class InPostActivity extends BaseActivity implements InPostActivityView, 
                 break;
         }
     }
+
+    @Override
+    public void deleteDepartmentCommentSuccess(DefaultResponse defaultResponse) {
+        //Adapter에서 처리함
+    }
+
 
     public void customOnClick(View view) {
         switch (view.getId()) {
