@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,9 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediaproject_agora.R;
-import com.example.mediaproject_agora.src.main.fragments.fragment_agora.DepartmentBoardAdapter;
-import com.example.mediaproject_agora.src.main.fragments.fragment_agora.view_pager_in_frag_agora.frag_agora_department.models.DepartmentResponse;
-import com.example.mediaproject_agora.src.main.items.DepartmentPostItem;
 import com.example.mediaproject_agora.src.main.items.MessageRoomItem;
 
 import java.util.ArrayList;
@@ -41,12 +39,13 @@ public class FragmentMessage extends Fragment implements FragmentMessageView{
         messageRoomAdapter = new MessageRoomAdapter(m_message_room_item_list);
         rv_message_box.setAdapter(messageRoomAdapter);
 
-        trygetMessageList();
+        tryGetMessageList();
 
         return viewGroup;
     }
 
-    private void trygetMessageList() {
+
+    private void tryGetMessageList() {
 
         final FragmentMessageService fragmentMessageService = new FragmentMessageService(this);
         fragmentMessageService.getMessageRoomList();
@@ -64,6 +63,8 @@ public class FragmentMessage extends Fragment implements FragmentMessageView{
 
     @Override
     public void getMessageRoomListSuccess(MessageRoomResponse messageRoomResponse) {
+
+        Toast.makeText(getContext(), messageRoomResponse.getMessage(), Toast.LENGTH_SHORT).show();
         switch (messageRoomResponse.getCode()){
             default:
                 System.out.println(messageRoomResponse.getMessage());
@@ -88,6 +89,7 @@ public class FragmentMessage extends Fragment implements FragmentMessageView{
 
                     m_message_room_item_list.add(messageRoomItem);
                 }
+                messageRoomAdapter.notifyDataSetChanged();
 
                 break;
 

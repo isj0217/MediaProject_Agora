@@ -44,6 +44,7 @@ public class FragAgoraFavorite extends Fragment implements FragAgoraFavoriteView
 
         m_department_item_list = new ArrayList<>();
         favorite_department_adapter = new FavoriteDepartmentAdapter(m_department_item_list);
+        rv_favorite_department.setAdapter(favorite_department_adapter);
 
         tryGetFavoriteDepartments();
 

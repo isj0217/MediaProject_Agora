@@ -47,6 +47,12 @@ public class FragmentMessageService {
         });
     }
 
+
+
+
+
+
+
 //    void patchFavoriteDepartment(String department_name) {
 //        final FragAgoraRetrofitInterface fragAgoraRetrofitInterface = getRetrofit().create(FragAgoraRetrofitInterface.class);
 //        fragAgoraRetrofitInterface.patchFavoriteDepartment(X_ACCESS_TOKEN, department_name).enqueue(new Callback<AddFavoriteResponse>() {
