@@ -27,7 +27,7 @@
                 android:gravity="center_vertical">
 
                 <TextView
-                    android:id="@+id/item_message_user_nickname"
+                    android:id="@+id/tv_item_message_user_nickname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="상대방 닉네임" />
@@ -38,7 +38,7 @@
                     android:layout_weight="1" />
 
                 <TextView
-                    android:id="@+id/item_message_time"
+                    android:id="@+id/tv_item_message_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="제일 최근에 주고받은 시간"/>
@@ -46,7 +46,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/item_message_content"
+                android:id="@+id/tv_item_message_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="제일 최근 메시지 내용"
@@ -64,7 +64,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/item_message_room_idx"
+                    android:id="@+id/tv_item_message_room_idx"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="쪽지방 idx"
@@ -80,7 +80,7 @@
                     android:background="@color/lighter_grey" />
 
                 <TextView
-                    android:id="@+id/item_message_user_idx"
+                    android:id="@+id/tv_item_message_user_idx"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="3dp"
@@ -94,7 +94,7 @@
                     android:layout_weight="1" />
 
                 <TextView
-                    android:id="@+id/item_message_message_idx"
+                    android:id="@+id/tv_item_message_message_idx"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="가장 최근 메시지 내용 idx" />
