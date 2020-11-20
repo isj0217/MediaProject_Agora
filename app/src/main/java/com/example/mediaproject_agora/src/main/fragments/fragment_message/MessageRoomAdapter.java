@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediaproject_agora.R;
+import com.example.mediaproject_agora.src.main.InMessageRoomActivity;
 import com.example.mediaproject_agora.src.main.InPostActivity;
 import com.example.mediaproject_agora.src.main.items.DepartmentPostItem;
 import com.example.mediaproject_agora.src.main.items.MessageRoomItem;
@@ -83,41 +84,33 @@ public class MessageRoomAdapter extends RecyclerView.Adapter<MessageRoomAdapter.
             this.tv_item_message_room_idx = itemView.findViewById(R.id.tv_item_message_room_idx);
             this.tv_item_message_user_idx = itemView.findViewById(R.id.tv_item_message_user_idx);
             this.tv_item_message_message_idx = itemView.findViewById(R.id.tv_item_message_message_idx);
+
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Context context = view.getContext();
+
+                    int pos = getAdapterPosition();
+                    if (pos != RecyclerView.NO_POSITION) {
+
+                        Intent intent = new Intent(view.getContext(), InMessageRoomActivity.class);
+                        intent.putExtra("nickname", message_room_item_list.get(pos).getUser_nickname());
+                        intent.putExtra("message_room_idx", message_room_item_list.get(pos).getMessage_room_idx());
+
+                        context.startActivity(intent);
+//                        ((Activity) context).finish();
+
+                        if (mListener != null) {
+                            mListener.onItemClick(view, pos);
+                        }
+                    }
+                }
+            });
         }
     }
+
 }
-
-
-//            itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//
-//                    Context context = view.getContext();
-//
-//                    int pos = getAdapterPosition();
-//                    if (pos != RecyclerView.NO_POSITION) {
-//
-//                        Intent intent = new Intent(view.getContext(), InPostActivity.class);
-//
-////                        intent.putExtra("index_of_this_post", post_item_list.get(pos).getContent_index());
-////                        intent.putExtra("clicked_pos", pos);
-////                        intent.putExtra("clicked_content_index", post_item_list.get(pos).getContent_index());
-////
-////                        System.out.println("보내기전 freeItem index: " + post_item_list.get(pos).getContent_index());
-//
-//                        context.startActivity(intent);
-//                        ((Activity) context).finish();
-//
-//                        if (mListener != null) {
-//                            mListener.onItemClick(view, pos);
-//                        }
-//                    }
-//                }
-//            });
-//        }
-//    }
-//
-//
-//}
 
 
