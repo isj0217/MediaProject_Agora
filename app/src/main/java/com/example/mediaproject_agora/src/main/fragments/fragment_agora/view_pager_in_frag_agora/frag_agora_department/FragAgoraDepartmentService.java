@@ -1,10 +1,9 @@
 package com.example.mediaproject_agora.src.main.fragments.fragment_agora.view_pager_in_frag_agora.frag_agora_department;
 
 
-import com.example.mediaproject_agora.src.main.fragments.fragment_agora.FragAgoraRetrofitInterface;
+import com.example.mediaproject_agora.src.main.fragments.fragment_agora.FragmentAgoraRetrofitInterface;
 import com.example.mediaproject_agora.src.main.fragments.fragment_agora.view_pager_in_frag_agora.frag_agora_department.models.AddFavoriteResponse;
 import com.example.mediaproject_agora.src.main.fragments.fragment_agora.view_pager_in_frag_agora.frag_agora_department.models.DepartmentResponse;
-import com.example.mediaproject_agora.src.main.models.FavoriteDepartmentResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,8 +26,8 @@ public class FragAgoraDepartmentService {
 //    }
 
     void getDepartmentList() {
-        final FragAgoraRetrofitInterface fragAgoraRetrofitInterface = getRetrofit().create(FragAgoraRetrofitInterface.class);
-        fragAgoraRetrofitInterface.getDepartmentList(X_ACCESS_TOKEN).enqueue(new Callback<DepartmentResponse>() {
+        final FragmentAgoraRetrofitInterface fragmentAgoraRetrofitInterface = getRetrofit().create(FragmentAgoraRetrofitInterface.class);
+        fragmentAgoraRetrofitInterface.getDepartmentList(X_ACCESS_TOKEN).enqueue(new Callback<DepartmentResponse>() {
             @Override
             public void onResponse(Call<DepartmentResponse> call, Response<DepartmentResponse> response) {
 
@@ -49,8 +48,8 @@ public class FragAgoraDepartmentService {
     }
 
     void patchFavoriteDepartment(String department_name) {
-        final FragAgoraRetrofitInterface fragAgoraRetrofitInterface = getRetrofit().create(FragAgoraRetrofitInterface.class);
-        fragAgoraRetrofitInterface.patchFavoriteDepartment(X_ACCESS_TOKEN, department_name).enqueue(new Callback<AddFavoriteResponse>() {
+        final FragmentAgoraRetrofitInterface fragmentAgoraRetrofitInterface = getRetrofit().create(FragmentAgoraRetrofitInterface.class);
+        fragmentAgoraRetrofitInterface.patchFavoriteDepartment(X_ACCESS_TOKEN, department_name).enqueue(new Callback<AddFavoriteResponse>() {
             @Override
             public void onResponse(Call<AddFavoriteResponse> call, Response<AddFavoriteResponse> response) {
 

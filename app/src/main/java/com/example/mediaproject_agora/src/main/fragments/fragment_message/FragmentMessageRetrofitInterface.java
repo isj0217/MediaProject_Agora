@@ -1,4 +1,4 @@
-package com.example.mediaproject_agora.src.main.fragments.fragment_agora;
+package com.example.mediaproject_agora.src.main.fragments.fragment_message;
 
 import com.example.mediaproject_agora.src.main.fragments.fragment_agora.view_pager_in_frag_agora.frag_agora_department.models.AddFavoriteResponse;
 import com.example.mediaproject_agora.src.main.fragments.fragment_agora.view_pager_in_frag_agora.frag_agora_department.models.DepartmentResponse;
@@ -10,11 +10,14 @@ import retrofit2.http.Header;
 import retrofit2.http.PATCH;
 import retrofit2.http.Path;
 
-public interface FragAgoraRetrofitInterface {
+public interface FragmentMessageRetrofitInterface {
     //    @GET("/test")
 
+    @GET("/message-room")
+    Call<MessageRoomResponse> getMessageRoomList(@Header("x-access-token") String accessToken);
+
     @GET("/department")
-    Call<DepartmentResponse> getDepartmentList(@Header("x-access-token")String accessToken);
+    Call<DepartmentResponse> getDepartmentList(@Header("x-access-token") String accessToken);
 
     @PATCH("/department/{department_name}/like")
     Call<AddFavoriteResponse>patchFavoriteDepartment(@Header("x-access-token") String accessToken,

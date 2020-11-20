@@ -1,8 +1,7 @@
 package com.example.mediaproject_agora.src.main.fragments.fragment_agora.view_pager_in_frag_agora.frag_agora_favorite;
 
 
-import com.example.mediaproject_agora.src.main.fragments.fragment_agora.FragAgoraRetrofitInterface;
-import com.example.mediaproject_agora.src.main.fragments.fragment_agora.view_pager_in_frag_agora.frag_agora_department.FragAgoraDepartmentView;
+import com.example.mediaproject_agora.src.main.fragments.fragment_agora.FragmentAgoraRetrofitInterface;
 import com.example.mediaproject_agora.src.main.models.FavoriteDepartmentResponse;
 
 import retrofit2.Call;
@@ -26,8 +25,8 @@ class FragAgoraFavoriteService {
 //    }
 
     void getFavoriteDepartmentsList(){
-        final FragAgoraRetrofitInterface fragAgoraRetrofitInterface = getRetrofit().create(FragAgoraRetrofitInterface.class);
-        fragAgoraRetrofitInterface.getFavoriteDepartmentsList(X_ACCESS_TOKEN).enqueue(new Callback<FavoriteDepartmentResponse>() {
+        final FragmentAgoraRetrofitInterface fragmentAgoraRetrofitInterface = getRetrofit().create(FragmentAgoraRetrofitInterface.class);
+        fragmentAgoraRetrofitInterface.getFavoriteDepartmentsList(X_ACCESS_TOKEN).enqueue(new Callback<FavoriteDepartmentResponse>() {
             @Override
             public void onResponse(Call<FavoriteDepartmentResponse> call, Response<FavoriteDepartmentResponse> response) {
 

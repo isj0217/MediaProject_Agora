@@ -4,16 +4,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.mediaproject_agora.R;
-import com.getbase.floatingactionbutton.FloatingActionButton;
 
-public class FragmentMessage extends Fragment {
+public class FragmentMessage extends Fragment implements FragmentMessageView{
     ViewGroup viewGroup;
 
     @Nullable
@@ -21,15 +19,32 @@ public class FragmentMessage extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         viewGroup = (ViewGroup) inflater.inflate(R.layout.frag_message, container, false);
 
-        FloatingActionButton fab1 = viewGroup.findViewById(R.id.fab_action1);
-
-        fab1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getContext(), "llllllll", Toast.LENGTH_SHORT).show();
-            }
-        });
+        trygetMessageList();
 
         return viewGroup;
+    }
+
+    private void trygetMessageList() {
+
+        final FragmentMessageService fragmentMessageService = new FragmentMessageService(this);
+        fragmentMessageService.getMessageRoomList();
+    }
+
+    @Override
+    public void validateSuccess(String text) {
+
+    }
+
+    @Override
+    public void validateFailure(String message) {
+
+    }
+
+    @Override
+    public void getMessageRoomListSuccess(MessageRoomResponse messageRoomResponse) {
+        switch (messageRoomResponse.getCode()){
+            default:
+                System.out.println(messageRoomResponse.getMessage());
+        }
     }
 }

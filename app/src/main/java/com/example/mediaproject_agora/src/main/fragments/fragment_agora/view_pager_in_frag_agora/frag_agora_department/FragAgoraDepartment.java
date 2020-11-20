@@ -19,14 +19,13 @@ import com.example.mediaproject_agora.R;
 import com.example.mediaproject_agora.src.main.DepartmentBoardActivity;
 import com.example.mediaproject_agora.src.main.fragments.fragment_agora.view_pager_in_frag_agora.frag_agora_department.models.AddFavoriteResponse;
 import com.example.mediaproject_agora.src.main.fragments.fragment_agora.view_pager_in_frag_agora.frag_agora_department.models.DepartmentResponse;
-import com.example.mediaproject_agora.src.main.models.FavoriteDepartmentResponse;
 
-public class FragAgoraDepartmentDepartment extends Fragment implements FragAgoraDepartmentView {
+public class FragAgoraDepartment extends Fragment implements FragAgoraDepartmentView {
 
     private View view;
 
-    public static FragAgoraDepartmentDepartment newInstance() {
-        FragAgoraDepartmentDepartment fragAgoraDepartment = new FragAgoraDepartmentDepartment();
+    public static FragAgoraDepartment newInstance() {
+        FragAgoraDepartment fragAgoraDepartment = new FragAgoraDepartment();
         return fragAgoraDepartment;
     }
 
