@@ -49,11 +49,11 @@ public class MessageRoomAdapter extends RecyclerView.Adapter<MessageRoomAdapter.
     public void onBindViewHolder(@NonNull MessageRoomAdapter.CustomViewHolder holder, int position) {
 
         holder.tv_item_message_room_idx.setText(Integer.toString(message_room_item_list.get(position).getMessage_room_idx()));
-        holder.tv_item_message_user_idx.setText(Integer.toString(message_room_item_list.get(position).getUser_idx()));
-        holder.tv_item_message_user_nickname.setText(message_room_item_list.get(position).getUser_nickname());
-        holder.tv_item_message_message_idx.setText(Integer.toString(message_room_item_list.get(position).getMessage_idx()));
-        holder.tv_item_message_content.setText(message_room_item_list.get(position).getContent());
-        holder.tv_item_message_time.setText(message_room_item_list.get(position).getTime());
+        holder.tv_item_message_room_user_idx.setText(Integer.toString(message_room_item_list.get(position).getUser_idx()));
+        holder.tv_item_message_room_user_nickname.setText(message_room_item_list.get(position).getUser_nickname());
+        holder.tv_item_message_room_message_idx.setText(Integer.toString(message_room_item_list.get(position).getMessage_idx()));
+        holder.tv_item_message_room_content.setText(message_room_item_list.get(position).getContent());
+        holder.tv_item_message_room_time.setText(message_room_item_list.get(position).getTime());
 
         holder.itemView.setTag(position);
         /**
@@ -68,22 +68,22 @@ public class MessageRoomAdapter extends RecyclerView.Adapter<MessageRoomAdapter.
 
     public class CustomViewHolder extends RecyclerView.ViewHolder {
 
-        protected TextView tv_item_message_user_nickname;
-        protected TextView tv_item_message_time;
-        protected TextView tv_item_message_content;
+        protected TextView tv_item_message_room_user_nickname;
+        protected TextView tv_item_message_room_time;
+        protected TextView tv_item_message_room_content;
         protected TextView tv_item_message_room_idx;
-        protected TextView tv_item_message_user_idx;
-        protected TextView tv_item_message_message_idx;
+        protected TextView tv_item_message_room_user_idx;
+        protected TextView tv_item_message_room_message_idx;
 
         public CustomViewHolder(@NonNull final View itemView) {
             super(itemView);
 
-            this.tv_item_message_user_nickname = itemView.findViewById(R.id.tv_item_message_user_nickname);
-            this.tv_item_message_time = itemView.findViewById(R.id.tv_item_message_time);
-            this.tv_item_message_content = itemView.findViewById(R.id.tv_item_message_content);
+            this.tv_item_message_room_user_nickname = itemView.findViewById(R.id.tv_item_message_room_user_nickname);
+            this.tv_item_message_room_time = itemView.findViewById(R.id.tv_item_message_room_time);
+            this.tv_item_message_room_content = itemView.findViewById(R.id.tv_item_message_room_content);
             this.tv_item_message_room_idx = itemView.findViewById(R.id.tv_item_message_room_idx);
-            this.tv_item_message_user_idx = itemView.findViewById(R.id.tv_item_message_user_idx);
-            this.tv_item_message_message_idx = itemView.findViewById(R.id.tv_item_message_message_idx);
+            this.tv_item_message_room_user_idx = itemView.findViewById(R.id.tv_item_message_room_user_idx);
+            this.tv_item_message_room_message_idx = itemView.findViewById(R.id.tv_item_message_room_message_idx);
 
 
             itemView.setOnClickListener(new View.OnClickListener() {

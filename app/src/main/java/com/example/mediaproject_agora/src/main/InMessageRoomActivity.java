@@ -20,10 +20,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediaproject_agora.R;
 import com.example.mediaproject_agora.src.BaseActivity;
+import com.example.mediaproject_agora.src.main.fragments.fragment_message.MessageListAdapter;
 import com.example.mediaproject_agora.src.main.fragments.fragment_message.MessageListResponse;
 import com.example.mediaproject_agora.src.main.interfaces.InMessageRoomActivityView;
 import com.example.mediaproject_agora.src.main.interfaces.InPostActivityView;
 import com.example.mediaproject_agora.src.main.items.CommentItem;
+import com.example.mediaproject_agora.src.main.items.MessageItem;
 import com.example.mediaproject_agora.src.main.models.CommentAdapter;
 import com.example.mediaproject_agora.src.main.models.DefaultResponse;
 import com.example.mediaproject_agora.src.main.models.InPostCommentResponse;
@@ -41,6 +43,11 @@ public class InMessageRoomActivity extends BaseActivity implements InMessageRoom
     private int message_room_idx;
     private String nickname;
 
+    private ArrayList<MessageItem> m_message_item_list;
+    private MessageListAdapter messageListAdapter;
+    private RecyclerView rv_message_room_message_list;
+    private LinearLayoutManager linear_layout_manager;
+
     private TextView tv_in_message_room_nickname;
 
     @Override
@@ -54,11 +61,23 @@ public class InMessageRoomActivity extends BaseActivity implements InMessageRoom
         nickname = getIntent().getExtras().getString("nickname", "상대방 닉네임 불러오기 실패");
         tv_in_message_room_nickname.setText(nickname);
 
+        linear_layout_manager = new LinearLayoutManager(getApplicationContext());
+        rv_message_room_message_list.setLayoutManager(linear_layout_manager);
+
+        m_message_item_list = new ArrayList<>();
+        messageListAdapter = new MessageListAdapter(m_message_item_list);
+        rv_message_room_message_list.setAdapter(messageListAdapter);
+
+
+
+
         tryGetSpecificMessageRoom(message_room_idx);
     }
 
     public void bindViews() {
         tv_in_message_room_nickname = findViewById(R.id.tv_in_message_room_nickname);
+
+        rv_message_room_message_list = findViewById(R.id.rv_message_room_message_list);
     }
 
     private void tryGetSpecificMessageRoom(int message_room_idx) {
@@ -85,6 +104,19 @@ public class InMessageRoomActivity extends BaseActivity implements InMessageRoom
         switch (messageListResponse.getCode()){
             case 100:
                 System.out.println("받아오는데 까지는 성공하셨군요");
+
+                int length_of_message_history = messageListResponse.getMessageResults().size();
+
+                for (int i = 0; i < length_of_message_history; i++){
+                    MessageItem messageItem = new MessageItem();
+
+                    messageItem.setStatus(messageListResponse.getMessageResults().get(i).getStatus());
+                    messageItem.setContent(messageListResponse.getMessageResults().get(i).getContent());
+                    messageItem.setTime(messageListResponse.getMessageResults().get(i).getTime());
+
+                    m_message_item_list.add(messageItem);
+                }
+                messageListAdapter.notifyDataSetChanged();
                 break;
 
             default:
