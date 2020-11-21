@@ -14,9 +14,10 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.mediaproject_agora.R;
 import com.example.mediaproject_agora.src.main.DepartmentBoardActivity;
+import com.example.mediaproject_agora.src.main.InMessageRoomService;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 
-public class FragmentRestaurant extends Fragment {
+public class FragmentRestaurant extends Fragment implements FragmentRestaurantView{
 
 
     // 맛집 카테고리 4가지 - 전체, 한식, 중식, 일식
@@ -69,8 +70,16 @@ public class FragmentRestaurant extends Fragment {
         setClickListenersToCategories();
         setClickListenersToFilters();
 
+        // 화면을 띄우면서 바로 '전체' - '별점순'으로 셋팅해야함
+        tryGetRestaurantTotal(1);
 
         return viewGroup;
+    }
+
+    private void tryGetRestaurantTotal(int filter) {
+
+        final FragmentRestaurantService fragmentRestaurantService = new FragmentRestaurantService(this);
+        fragmentRestaurantService.getRestaurantTotal(filter);
     }
 
     public void setClickListenersToCategories() {
@@ -80,6 +89,7 @@ public class FragmentRestaurant extends Fragment {
 
                 if (whichCategoryIsActivatedNow() != 0){
                     makeCategoryTotal();
+                    tryGetRestaurantTotal(whichFilterIsActivatedNow());
                 }
             }
         });
@@ -418,7 +428,26 @@ public class FragmentRestaurant extends Fragment {
         btn_restaurant_filter_old.setBackgroundResource(R.drawable.btn_orange_round_corner_light_grey);
     }
 
-//    public void customOnClick(View view) {
+    @Override
+    public void validateSuccess(String text) {
+
+    }
+
+    @Override
+    public void validateFailure(String message) {
+
+    }
+
+    @Override
+    public void getRestaurantTotalSuccess(RestaurantListResponse restaurantListResponse) {
+
+        switch (restaurantListResponse.getCode()) {
+            case 100:
+                System.out.println("레스토랑 리스트 받아오기 성공?!");
+        }
+    }
+
+    //    public void customOnClick(View view) {
 //        switch (view.getId()) {
 ////            case R.id.fab_action1:
 ////                Toast.makeText(context, "ssssss", Toast.LENGTH_SHORT).show();
