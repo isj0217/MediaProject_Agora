@@ -14,4 +14,6 @@ public interface InMessageRoomActivityView {
     void getSpecificMessageRoomSuccess(MessageListResponse messageListResponse);
 
     void deleteMessageRoomSuccess(DefaultResponse defaultResponse);
+
+    void sendMessageSuccess(DefaultResponse defaultResponse);
 }

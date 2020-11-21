@@ -3,6 +3,7 @@ package com.example.mediaproject_agora.src.main.fragments.fragment_message;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,8 @@ import com.example.mediaproject_agora.src.main.items.MessageRoomItem;
 import java.util.ArrayList;
 
 public class MessageRoomAdapter extends RecyclerView.Adapter<MessageRoomAdapter.CustomViewHolder> {
+
+    private Context context;
 
     private ArrayList<MessageRoomItem> message_room_item_list;
 
@@ -41,6 +44,8 @@ public class MessageRoomAdapter extends RecyclerView.Adapter<MessageRoomAdapter.
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message_room, parent, false);
         CustomViewHolder holder = new CustomViewHolder(view);
+
+        context = view.getContext();
 
         return holder;
     }
@@ -96,8 +101,14 @@ public class MessageRoomAdapter extends RecyclerView.Adapter<MessageRoomAdapter.
                     if (pos != RecyclerView.NO_POSITION) {
 
                         Intent intent = new Intent(view.getContext(), InMessageRoomActivity.class);
-                        intent.putExtra("nickname", message_room_item_list.get(pos).getUser_nickname());
-                        intent.putExtra("message_room_idx", message_room_item_list.get(pos).getMessage_room_idx());
+
+                        saveSpecificMessageRoomInfos(message_room_item_list.get(pos).getUser_nickname(),
+                                message_room_item_list.get(pos).getMessage_room_idx(),
+                                message_room_item_list.get(pos).getUser_idx());
+
+//                        intent.putExtra("nickname", message_room_item_list.get(pos).getUser_nickname());
+//                        intent.putExtra("message_room_idx", message_room_item_list.get(pos).getMessage_room_idx());
+//                        intent.putExtra("user_idx", message_room_item_list.get(pos).getUser_idx());
 
                         context.startActivity(intent);
 //                        ((Activity) context).finish();
@@ -109,6 +120,16 @@ public class MessageRoomAdapter extends RecyclerView.Adapter<MessageRoomAdapter.
                 }
             });
         }
+    }
+
+    public void saveSpecificMessageRoomInfos(String nickname, int message_room_idx, int user_idx){
+
+        SharedPreferences sharedPreferences = context.getSharedPreferences("specific_message_room_infos", context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("nickname", nickname);
+        editor.putInt("message_room_idx", message_room_idx);
+        editor.putInt("user_idx", user_idx);
+        editor.apply();
     }
 
 }

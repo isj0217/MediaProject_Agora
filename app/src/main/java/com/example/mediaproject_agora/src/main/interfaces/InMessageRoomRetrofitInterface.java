@@ -29,6 +29,11 @@ public interface InMessageRoomRetrofitInterface {
     Call<DefaultResponse> deleteMessageRoom(@Header("x-access-token") String accessToken,
                                             @Path("message_room_idx") int message_room_idx);
 
+    // 쪽지 보내기
+    @POST("/message")
+    Call<DefaultResponse> sendMessage(@Header("x-access-token") String accessToken,
+                                      @Body HashMap<String, Object> params);
+
 
 
 

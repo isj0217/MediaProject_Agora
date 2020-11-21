@@ -78,6 +78,29 @@ public class InMessageRoomService {
         });
     }
 
+    // 쪽지 보내기
+    void sendMessage() {
+
+        final InMessageRoomRetrofitInterface inMessageRoomRetrofitInterface = getRetrofit().create(InMessageRoomRetrofitInterface.class);
+        inMessageRoomRetrofitInterface.sendMessage(X_ACCESS_TOKEN, mParams).enqueue(new Callback<DefaultResponse>() {
+            @Override
+            public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
+
+                final DefaultResponse defaultResponse = response.body();
+                if (defaultResponse == null) {
+                    mInMessageRoomActivityView.validateFailure(null);
+                    return;
+                }
+                mInMessageRoomActivityView.sendMessageSuccess(defaultResponse);
+            }
+
+            @Override
+            public void onFailure(Call<DefaultResponse> call, Throwable t) {
+                mInMessageRoomActivityView.validateFailure(null);
+            }
+        });
+    }
+
 
 }
 

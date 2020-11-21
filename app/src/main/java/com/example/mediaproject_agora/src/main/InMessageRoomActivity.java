@@ -42,6 +42,7 @@ public class InMessageRoomActivity extends BaseActivity implements InMessageRoom
 
 
     private int message_room_idx;
+    private int user_idx;
     private String nickname;
 
     private ArrayList<MessageItem> m_message_item_list;
@@ -51,7 +52,8 @@ public class InMessageRoomActivity extends BaseActivity implements InMessageRoom
 
     private TextView tv_in_message_room_nickname;
 
-    private ImageView iv_in_message_room_more;
+    private ImageView iv_in_message_room_more, iv_in_message_room_send;
+    private EditText et_in_message_room_message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +62,12 @@ public class InMessageRoomActivity extends BaseActivity implements InMessageRoom
 
         bindViews();
 
-        message_room_idx = getIntent().getExtras().getInt("message_room_idx", 0);
-        nickname = getIntent().getExtras().getString("nickname", "상대방 닉네임 불러오기 실패");
-        tv_in_message_room_nickname.setText(nickname);
+        loadSpecificMessageRoomInfos();
+
+//        message_room_idx = getIntent().getExtras().getInt("message_room_idx", 0);
+//        user_idx = getIntent().getExtras().getInt("user_idx", 0);
+//        nickname = getIntent().getExtras().getString("nickname", "상대방 닉네임 불러오기 실패");
+//        tv_in_message_room_nickname.setText(nickname);
 
         linear_layout_manager = new LinearLayoutManager(getApplicationContext());
         rv_message_room_message_list.setLayoutManager(linear_layout_manager);
@@ -81,6 +86,8 @@ public class InMessageRoomActivity extends BaseActivity implements InMessageRoom
         rv_message_room_message_list = findViewById(R.id.rv_message_room_message_list);
 
         iv_in_message_room_more = findViewById(R.id.iv_in_message_room_more);
+        iv_in_message_room_send = findViewById(R.id.iv_in_message_room_send);
+        et_in_message_room_message = findViewById(R.id.et_in_message_room_message);
     }
 
     private void tryGetSpecificMessageRoom(int message_room_idx) {
@@ -89,6 +96,19 @@ public class InMessageRoomActivity extends BaseActivity implements InMessageRoom
         final InMessageRoomService inMessageRoomService = new InMessageRoomService(this);
         inMessageRoomService.getSpecificMessageRoom(message_room_idx);
     }
+
+    private void trySendMessage(String content, int user_idx) {
+        showProgressDialog();
+
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("content", content);
+        params.put("user_idx", user_idx);
+
+        final InMessageRoomService inMessageRoomService = new InMessageRoomService(this, params);
+        inMessageRoomService.sendMessage();
+    }
+
+
 
     @Override
     public void validateSuccess(String text) {
@@ -142,6 +162,23 @@ public class InMessageRoomActivity extends BaseActivity implements InMessageRoom
         }
     }
 
+    @Override
+    public void sendMessageSuccess(DefaultResponse defaultResponse) {
+        hideProgressDialog();
+
+        switch (defaultResponse.getCode()){
+            case 100:
+                System.out.println("쪽지 보내기 성공???");
+                et_in_message_room_message.setText("");
+                restartActivity(InMessageRoomActivity.this);
+                break;
+
+            default:
+                showCustomToast(defaultResponse.getMessage());
+                break;
+        }
+    }
+
     public void customOnClick(View view) {
         switch (view.getId()) {
             case R.id.iv_in_message_room_more:
@@ -152,7 +189,8 @@ public class InMessageRoomActivity extends BaseActivity implements InMessageRoom
                 onBackPressed();
                 break;
 
-            case R.id.iv_in_message_sync:
+            case R.id.iv_in_message_room_send:
+                trySendMessage(et_in_message_room_message.getText().toString(), user_idx);
                 break;
         }
     }
@@ -191,6 +229,22 @@ public class InMessageRoomActivity extends BaseActivity implements InMessageRoom
 
         final InMessageRoomService inMessageRoomService = new InMessageRoomService(this);
         inMessageRoomService.deleteMessageRoom(message_room_idx);
+    }
+
+    private void restartActivity(Activity activity) {
+        Intent intent = new Intent();
+        intent.setClass(activity, activity.getClass());
+        activity.startActivity(intent);
+        activity.finish();
+    }
+
+    public void loadSpecificMessageRoomInfos() {
+        SharedPreferences sharedPreferences = getSharedPreferences("specific_message_room_infos", MODE_PRIVATE);
+        nickname = sharedPreferences.getString("nickname", "SECTION 불러오기 실패");
+        message_room_idx = sharedPreferences.getInt("message_room_idx", 0);
+        user_idx = sharedPreferences.getInt("user_idx", 0);
+
+        tv_in_message_room_nickname.setText(nickname);
     }
 
 }

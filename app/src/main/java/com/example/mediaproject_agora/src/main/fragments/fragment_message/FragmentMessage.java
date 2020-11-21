@@ -64,7 +64,6 @@ public class FragmentMessage extends Fragment implements FragmentMessageView{
     @Override
     public void getMessageRoomListSuccess(MessageRoomResponse messageRoomResponse) {
 
-        Toast.makeText(getContext(), messageRoomResponse.getMessage(), Toast.LENGTH_SHORT).show();
         switch (messageRoomResponse.getCode()){
             default:
                 System.out.println(messageRoomResponse.getMessage());
