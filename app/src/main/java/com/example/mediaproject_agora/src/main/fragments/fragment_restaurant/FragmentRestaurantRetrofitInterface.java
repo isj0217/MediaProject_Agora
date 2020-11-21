@@ -18,6 +18,12 @@ public interface FragmentRestaurantRetrofitInterface {
     Call<RestaurantListResponse> getRestaurantTotal(@Header("x-access-token") String accessToken,
                                                 @Path("filter") int filter);
 
+
+
+
+
+
+
     @GET("/message-room")
     Call<MessageRoomResponse> getMessageRoomList(@Header("x-access-token") String accessToken);
 

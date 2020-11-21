@@ -11,14 +11,25 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediaproject_agora.R;
 import com.example.mediaproject_agora.src.main.DepartmentBoardActivity;
 import com.example.mediaproject_agora.src.main.InMessageRoomService;
+import com.example.mediaproject_agora.src.main.fragments.fragment_agora.FavoriteDepartmentAdapter;
+import com.example.mediaproject_agora.src.main.items.DepartmentItem;
+import com.example.mediaproject_agora.src.main.items.RestaurantItem;
 import com.getbase.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
 
 public class FragmentRestaurant extends Fragment implements FragmentRestaurantView{
 
+    private ArrayList<RestaurantItem> m_restaurant_item_list;
+    private RestaurantListAdapter restaurant_list_adapter;
+    private RecyclerView rv_restaurant;
+    private LinearLayoutManager linear_layout_manager;
 
     // 맛집 카테고리 4가지 - 전체, 한식, 중식, 일식
     private Button btn_restaurant_category_total;
@@ -70,6 +81,20 @@ public class FragmentRestaurant extends Fragment implements FragmentRestaurantVi
         setClickListenersToCategories();
         setClickListenersToFilters();
 
+        rv_restaurant = viewGroup.findViewById(R.id.rv_restaurant);
+
+        linear_layout_manager = new LinearLayoutManager(viewGroup.getContext());
+        rv_restaurant.setLayoutManager(linear_layout_manager);
+
+        m_restaurant_item_list = new ArrayList<>();
+        restaurant_list_adapter = new RestaurantListAdapter(m_restaurant_item_list);
+        rv_restaurant.setAdapter(restaurant_list_adapter);
+
+
+
+
+
+
         // 화면을 띄우면서 바로 '전체' - '별점순'으로 셋팅해야함
         tryGetRestaurantTotal(1);
 
@@ -89,6 +114,7 @@ public class FragmentRestaurant extends Fragment implements FragmentRestaurantVi
 
                 if (whichCategoryIsActivatedNow() != 0){
                     makeCategoryTotal();
+                    m_restaurant_item_list.clear();
                     tryGetRestaurantTotal(whichFilterIsActivatedNow());
                 }
             }
@@ -444,6 +470,27 @@ public class FragmentRestaurant extends Fragment implements FragmentRestaurantVi
         switch (restaurantListResponse.getCode()) {
             case 100:
                 System.out.println("레스토랑 리스트 받아오기 성공?!");
+
+                int num_of_restaurants = restaurantListResponse.getRestaurantResults().size();
+
+                for (int i = 0; i < num_of_restaurants; i++){
+                    RestaurantItem restaurantItem = new RestaurantItem();
+
+                    restaurantItem.setTastehouse_idx(restaurantListResponse.getRestaurantResults().get(i).getTastehouse_idx());
+                    restaurantItem.setTastehouse_name(restaurantListResponse.getRestaurantResults().get(i).getTastehouse_name());
+                    restaurantItem.setTastehouse_star(restaurantListResponse.getRestaurantResults().get(i).getTastehouse_star());
+                    restaurantItem.setMenu_picture(restaurantListResponse.getRestaurantResults().get(i).getMenu_picture());
+                    restaurantItem.setMenu_name(restaurantListResponse.getRestaurantResults().get(i).getMenu_name());
+                    restaurantItem.setMenu_price(restaurantListResponse.getRestaurantResults().get(i).getMenu_price());
+                    restaurantItem.setTastehouse_content(restaurantListResponse.getRestaurantResults().get(i).getTastehouse_content());
+                    restaurantItem.setNickname(restaurantListResponse.getRestaurantResults().get(i).getNickname());
+                    restaurantItem.setComment_num(restaurantListResponse.getRestaurantResults().get(i).getComment_num());
+                    restaurantItem.setTime(restaurantListResponse.getRestaurantResults().get(i).getTime());
+
+                    m_restaurant_item_list.add(restaurantItem);
+                }
+                restaurant_list_adapter.notifyDataSetChanged();
+                break;
         }
     }
 
