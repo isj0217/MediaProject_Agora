@@ -32,6 +32,7 @@ public class InMessageRoomService {
         this.mParams = mParams;
     }
 
+    // 특정 쪽지방 안의 쪽지내역 다 가져오기
     void getSpecificMessageRoom(int message_room_idx) {
 
         final InMessageRoomRetrofitInterface inMessageRoomRetrofitInterface = getRetrofit().create(InMessageRoomRetrofitInterface.class);
@@ -49,6 +50,29 @@ public class InMessageRoomService {
 
             @Override
             public void onFailure(Call<MessageListResponse> call, Throwable t) {
+                mInMessageRoomActivityView.validateFailure(null);
+            }
+        });
+    }
+
+    // 특정 쪽지방 삭제하기
+    void deleteMessageRoom(int message_room_idx) {
+
+        final InMessageRoomRetrofitInterface inMessageRoomRetrofitInterface = getRetrofit().create(InMessageRoomRetrofitInterface.class);
+        inMessageRoomRetrofitInterface.deleteMessageRoom(X_ACCESS_TOKEN, message_room_idx).enqueue(new Callback<DefaultResponse>() {
+            @Override
+            public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
+
+                final DefaultResponse defaultResponse = response.body();
+                if (defaultResponse == null) {
+                    mInMessageRoomActivityView.validateFailure(null);
+                    return;
+                }
+                mInMessageRoomActivityView.deleteMessageRoomSuccess(defaultResponse);
+            }
+
+            @Override
+            public void onFailure(Call<DefaultResponse> call, Throwable t) {
                 mInMessageRoomActivityView.validateFailure(null);
             }
         });

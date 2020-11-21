@@ -24,6 +24,15 @@ public interface InMessageRoomRetrofitInterface {
     Call<MessageListResponse> getSpecificMessageRoom(@Header("x-access-token") String accessToken,
                                                      @Path("message_room_idx") int message_room_idx);
 
+    // 특정 쪽지방 삭제
+    @DELETE("/message-room-idx/{message_room_idx}/delete")
+    Call<DefaultResponse> deleteMessageRoom(@Header("x-access-token") String accessToken,
+                                            @Path("message_room_idx") int message_room_idx);
+
+
+
+
+
 
 
 

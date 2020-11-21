@@ -12,4 +12,6 @@ public interface InMessageRoomActivityView {
     void validateFailure(String message);
 
     void getSpecificMessageRoomSuccess(MessageListResponse messageListResponse);
+
+    void deleteMessageRoomSuccess(DefaultResponse defaultResponse);
 }

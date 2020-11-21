@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediaproject_agora.R;
 import com.example.mediaproject_agora.src.BaseActivity;
+import com.example.mediaproject_agora.src.main.fragments.fragment_message.FragmentMessage;
 import com.example.mediaproject_agora.src.main.fragments.fragment_message.MessageListAdapter;
 import com.example.mediaproject_agora.src.main.fragments.fragment_message.MessageListResponse;
 import com.example.mediaproject_agora.src.main.interfaces.InMessageRoomActivityView;
@@ -50,6 +51,8 @@ public class InMessageRoomActivity extends BaseActivity implements InMessageRoom
 
     private TextView tv_in_message_room_nickname;
 
+    private ImageView iv_in_message_room_more;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,8 +72,6 @@ public class InMessageRoomActivity extends BaseActivity implements InMessageRoom
         rv_message_room_message_list.setAdapter(messageListAdapter);
 
 
-
-
         tryGetSpecificMessageRoom(message_room_idx);
     }
 
@@ -78,6 +79,8 @@ public class InMessageRoomActivity extends BaseActivity implements InMessageRoom
         tv_in_message_room_nickname = findViewById(R.id.tv_in_message_room_nickname);
 
         rv_message_room_message_list = findViewById(R.id.rv_message_room_message_list);
+
+        iv_in_message_room_more = findViewById(R.id.iv_in_message_room_more);
     }
 
     private void tryGetSpecificMessageRoom(int message_room_idx) {
@@ -101,13 +104,13 @@ public class InMessageRoomActivity extends BaseActivity implements InMessageRoom
     public void getSpecificMessageRoomSuccess(MessageListResponse messageListResponse) {
         hideProgressDialog();
 
-        switch (messageListResponse.getCode()){
+        switch (messageListResponse.getCode()) {
             case 100:
-                System.out.println("받아오는데 까지는 성공하셨군요");
+//                System.out.println("받아오는데 까지는 성공하셨군요");
 
                 int length_of_message_history = messageListResponse.getMessageResults().size();
 
-                for (int i = 0; i < length_of_message_history; i++){
+                for (int i = 0; i < length_of_message_history; i++) {
                     MessageItem messageItem = new MessageItem();
 
                     messageItem.setStatus(messageListResponse.getMessageResults().get(i).getStatus());
@@ -125,8 +128,69 @@ public class InMessageRoomActivity extends BaseActivity implements InMessageRoom
     }
 
     @Override
+    public void deleteMessageRoomSuccess(DefaultResponse defaultResponse) {
+        hideProgressDialog();
+
+        switch (defaultResponse.getCode()){
+            case 100:
+                System.out.println("쪽지함 삭제 성공??");
+                break;
+
+            default:
+                showCustomToast(defaultResponse.getMessage());
+                break;
+        }
+    }
+
+    public void customOnClick(View view) {
+        switch (view.getId()) {
+            case R.id.iv_in_message_room_more:
+                showPopUp(view);
+                break;
+
+            case R.id.iv_in_message_room_go_back:
+                onBackPressed();
+                break;
+
+            case R.id.iv_in_message_sync:
+                break;
+        }
+    }
+
+    public void showPopUp(View v) {
+        PopupMenu popupMenu = new PopupMenu(this, v);
+
+        popupMenu.setOnMenuItemClickListener(this);
+
+            popupMenu.inflate(R.menu.menu_in_message_room);
+            popupMenu.show();
+    }
+
+
+    @Override
     public boolean onMenuItemClick(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.menu_in_message_room_delete_message_room:
+                // todo
+                // 쪽지방 삭제 API 엮기
+
+                tryDeleteMessageRoom(message_room_idx);
+
+//                Intent intent = new Intent(InMessageRoomActivity.this, FragmentMessage.class);
+//                startActivity(intent);
+
+                finish();
+
+                break;
+        }
         return false;
+    }
+
+    private void tryDeleteMessageRoom(int message_room_idx) {
+        showProgressDialog();
+
+        final InMessageRoomService inMessageRoomService = new InMessageRoomService(this);
+        inMessageRoomService.deleteMessageRoom(message_room_idx);
     }
 
 }

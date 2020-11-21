@@ -35,7 +35,7 @@
             android:layout_weight="1" />
 
         <ImageView
-            android:id="@+id/iv_specific_board_sync"
+            android:id="@+id/iv_in_message_sync"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginEnd="10dp"
