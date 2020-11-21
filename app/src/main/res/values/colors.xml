@@ -36,6 +36,8 @@
     <color name="skyblue">#4285F4</color>
 
     <color name="orange">#FF7F00</color>
+    <color name="orange_light">#FFA500</color>
+    <color name="orange_dark">#F7570B</color>
 
 
 <!--    플로팅버튼에서 따온거-->
