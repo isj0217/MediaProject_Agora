@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediaproject_agora.R;
@@ -22,6 +23,8 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
     private ArrayList<MessageItem> message_item_list;
 
     private OnItemClickListener mListener = null;
+
+    private Context mContext;
 
     public MessageListAdapter(ArrayList<MessageItem> message_item_list) {
         this.message_item_list = message_item_list;
@@ -39,6 +42,8 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message, parent, false);
         CustomViewHolder holder = new CustomViewHolder(view);
 
+        mContext = view.getContext();
+
         return holder;
     }
 
@@ -48,6 +53,15 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
         holder.tv_item_message_send_or_receive.setText(message_item_list.get(position).getStatus());
         holder.tv_item_message_time.setText(message_item_list.get(position).getTime());
         holder.tv_item_message_content.setText(message_item_list.get(position).getContent());
+
+        int colorOrange = ContextCompat.getColor(mContext, R.color.orange_light);
+        int colorGreen = ContextCompat.getColor(mContext, R.color.green);
+
+        if (holder.tv_item_message_send_or_receive.getText().equals("보낸 쪽지")){
+            holder.tv_item_message_send_or_receive.setTextColor(colorOrange);
+        } else {
+            holder.tv_item_message_send_or_receive.setTextColor(colorGreen);
+        }
 
         holder.itemView.setTag(position);
         /**

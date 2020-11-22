@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -68,8 +69,11 @@ public class FragmentRestaurant extends Fragment implements FragmentRestaurantVi
         fab1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), DepartmentBoardActivity.class);
-                startActivity(intent);
+
+                Toast.makeText(getContext(), "준비중입니다", Toast.LENGTH_SHORT).show();
+                
+//                Intent intent = new Intent(view.getContext(), DepartmentBoardActivity.class);
+//                startActivity(intent);
             }
         });
 
