@@ -34,6 +34,7 @@
         <activity android:name=".src.main.FixingDepartmentActivity" />
         <activity android:name=".src.main.InMessageRoomActivity" />
         <activity android:name=".src.main.InRestaurantPostActivity" />
+        <activity android:name=".src.main.WritingRestaurantActivity" />
 
     </application>
 

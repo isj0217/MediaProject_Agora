@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mediaproject_agora.R;
 import com.example.mediaproject_agora.src.main.DepartmentBoardActivity;
 import com.example.mediaproject_agora.src.main.InMessageRoomService;
+import com.example.mediaproject_agora.src.main.WritingRestaurantActivity;
 import com.example.mediaproject_agora.src.main.fragments.fragment_agora.FavoriteDepartmentAdapter;
 import com.example.mediaproject_agora.src.main.items.DepartmentItem;
 import com.example.mediaproject_agora.src.main.items.RestaurantItem;
@@ -70,10 +71,11 @@ public class FragmentRestaurant extends Fragment implements FragmentRestaurantVi
             @Override
             public void onClick(View view) {
 
-                Toast.makeText(getContext(), "준비중입니다", Toast.LENGTH_SHORT).show();
+
                 
-//                Intent intent = new Intent(view.getContext(), DepartmentBoardActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(view.getContext(), WritingRestaurantActivity.class);
+                startActivity(intent);
+                
             }
         });
 
