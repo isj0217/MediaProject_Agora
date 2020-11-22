@@ -9,5 +9,5 @@ public interface FragmentRestaurantView {
 
     void validateFailure(String message);
 
-    void getRestaurantTotalSuccess(RestaurantListResponse restaurantListResponse);
+    void getRestaurantListSuccess(RestaurantListResponse restaurantListResponse);
 }

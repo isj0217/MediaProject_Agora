@@ -1,10 +1,6 @@
 package com.example.mediaproject_agora.src.main.fragments.fragment_restaurant;
 
 
-import com.example.mediaproject_agora.src.main.fragments.fragment_message.FragmentMessageRetrofitInterface;
-import com.example.mediaproject_agora.src.main.fragments.fragment_message.FragmentMessageView;
-import com.example.mediaproject_agora.src.main.fragments.fragment_message.MessageRoomResponse;
-
 import java.util.HashMap;
 
 import retrofit2.Call;
@@ -38,7 +34,29 @@ public class FragmentRestaurantService {
                     mFragmentRestaurantView.validateFailure(null);
                     return;
                 }
-                mFragmentRestaurantView.getRestaurantTotalSuccess(restaurantListResponse);
+                mFragmentRestaurantView.getRestaurantListSuccess(restaurantListResponse);
+            }
+
+            @Override
+            public void onFailure(Call<RestaurantListResponse> call, Throwable t) {
+
+                mFragmentRestaurantView.validateFailure(null);
+            }
+        });
+    }
+
+    void getCategorizedRestaurant(int filter, int category) {
+        final FragmentRestaurantRetrofitInterface fragmentRestaurantRetrofitInterface = getRetrofit().create(FragmentRestaurantRetrofitInterface.class);
+        fragmentRestaurantRetrofitInterface.getCategorizedRestaurant(X_ACCESS_TOKEN, filter, category).enqueue(new Callback<RestaurantListResponse>() {
+            @Override
+            public void onResponse(Call<RestaurantListResponse> call, Response<RestaurantListResponse> response) {
+
+                final RestaurantListResponse restaurantListResponse = response.body();
+                if (restaurantListResponse == null) {
+                    mFragmentRestaurantView.validateFailure(null);
+                    return;
+                }
+                mFragmentRestaurantView.getRestaurantListSuccess(restaurantListResponse);
             }
 
             @Override

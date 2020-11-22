@@ -18,6 +18,11 @@ public interface FragmentRestaurantRetrofitInterface {
     Call<RestaurantListResponse> getRestaurantTotal(@Header("x-access-token") String accessToken,
                                                 @Path("filter") int filter);
 
+    @GET("/tastehouse/filter/{filter}/category/{category}")
+    Call<RestaurantListResponse> getCategorizedRestaurant(@Header("x-access-token") String accessToken,
+                                                          @Path("filter") int filter,
+                                                          @Path("category") int category);
+
 
 
 

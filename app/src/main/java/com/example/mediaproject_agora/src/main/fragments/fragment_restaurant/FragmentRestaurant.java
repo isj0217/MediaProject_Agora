@@ -24,7 +24,7 @@ import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-public class FragmentRestaurant extends Fragment implements FragmentRestaurantView{
+public class FragmentRestaurant extends Fragment implements FragmentRestaurantView {
 
     private ArrayList<RestaurantItem> m_restaurant_item_list;
     private RestaurantListAdapter restaurant_list_adapter;
@@ -91,10 +91,6 @@ public class FragmentRestaurant extends Fragment implements FragmentRestaurantVi
         rv_restaurant.setAdapter(restaurant_list_adapter);
 
 
-
-
-
-
         // 화면을 띄우면서 바로 '전체' - '별점순'으로 셋팅해야함
         tryGetRestaurantTotal(1);
 
@@ -107,12 +103,19 @@ public class FragmentRestaurant extends Fragment implements FragmentRestaurantVi
         fragmentRestaurantService.getRestaurantTotal(filter);
     }
 
+    private void tryGetCategorizedRestaurant(int filter, int category) {
+
+        final FragmentRestaurantService fragmentRestaurantService = new FragmentRestaurantService(this);
+        fragmentRestaurantService.getCategorizedRestaurant(filter, category);
+    }
+
     public void setClickListenersToCategories() {
         btn_restaurant_category_total.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if (whichCategoryIsActivatedNow() != 0){
+                if (whichCategoryIsActivatedNow() != 0) {
+
                     makeCategoryTotal();
                     m_restaurant_item_list.clear();
                     tryGetRestaurantTotal(whichFilterIsActivatedNow());
@@ -124,8 +127,13 @@ public class FragmentRestaurant extends Fragment implements FragmentRestaurantVi
             @Override
             public void onClick(View view) {
 
-                if (whichCategoryIsActivatedNow() != 1){
+                if (whichCategoryIsActivatedNow() != 1) {
+
                     makeCategoryKorean();
+                    m_restaurant_item_list.clear();
+                    // todo
+                    // 24번 API 엮기
+                    tryGetCategorizedRestaurant(whichFilterIsActivatedNow(), whichCategoryIsActivatedNow());
                 }
             }
         });
@@ -134,8 +142,13 @@ public class FragmentRestaurant extends Fragment implements FragmentRestaurantVi
             @Override
             public void onClick(View view) {
 
-                if (whichCategoryIsActivatedNow() != 2){
+                if (whichCategoryIsActivatedNow() != 2) {
+
                     makeCategoryChinese();
+                    m_restaurant_item_list.clear();
+                    // todo
+                    // 24번 API 엮기
+                    tryGetCategorizedRestaurant(whichFilterIsActivatedNow(), whichCategoryIsActivatedNow());
                 }
             }
         });
@@ -144,8 +157,13 @@ public class FragmentRestaurant extends Fragment implements FragmentRestaurantVi
             @Override
             public void onClick(View view) {
 
-                if (whichCategoryIsActivatedNow() != 3){
+                if (whichCategoryIsActivatedNow() != 3) {
+
                     makeCategoryJapanese();
+                    m_restaurant_item_list.clear();
+                    // todo
+                    // 24번 API 엮기
+                    tryGetCategorizedRestaurant(whichFilterIsActivatedNow(), whichCategoryIsActivatedNow());
                 }
             }
         });
@@ -157,9 +175,23 @@ public class FragmentRestaurant extends Fragment implements FragmentRestaurantVi
             @Override
             public void onClick(View view) {
 
+                // 이미 선택되지 않았을 때만 시행
                 if (whichFilterIsActivatedNow() != 1) {
+
                     makeStarsFilter();
+                    m_restaurant_item_list.clear();
+
+                    if (whichCategoryIsActivatedNow() == 0) {
+                        tryGetRestaurantTotal(whichFilterIsActivatedNow());
+                        restaurant_list_adapter.notifyDataSetChanged();
+                    } else {
+                        // todo
+                        // 24번 API 엮기
+                        tryGetCategorizedRestaurant(whichFilterIsActivatedNow(), whichCategoryIsActivatedNow());
+                    }
+
                 }
+
             }
         });
 
@@ -167,9 +199,23 @@ public class FragmentRestaurant extends Fragment implements FragmentRestaurantVi
             @Override
             public void onClick(View view) {
 
+                // 이미 선택되지 않았을 때만 시행
                 if (whichFilterIsActivatedNow() != 2) {
+
                     makeCommentsFilter();
+                    m_restaurant_item_list.clear();
+
+                    if (whichCategoryIsActivatedNow() == 0) {
+                        tryGetRestaurantTotal(whichFilterIsActivatedNow());
+                        restaurant_list_adapter.notifyDataSetChanged();
+                    } else {
+                        // todo
+                        // 24번 API 엮기
+                        tryGetCategorizedRestaurant(whichFilterIsActivatedNow(), whichCategoryIsActivatedNow());
+                    }
+
                 }
+
             }
         });
 
@@ -177,8 +223,21 @@ public class FragmentRestaurant extends Fragment implements FragmentRestaurantVi
             @Override
             public void onClick(View view) {
 
+                // 이미 선택되지 않았을 때만 시행
                 if (whichFilterIsActivatedNow() != 3) {
+
                     makeLowPriceFilter();
+                    m_restaurant_item_list.clear();
+
+                    if (whichCategoryIsActivatedNow() == 0) {
+                        tryGetRestaurantTotal(whichFilterIsActivatedNow());
+                        restaurant_list_adapter.notifyDataSetChanged();
+                    } else {
+                        // todo
+                        // 24번 API 엮기
+                        tryGetCategorizedRestaurant(whichFilterIsActivatedNow(), whichCategoryIsActivatedNow());
+                    }
+
                 }
             }
         });
@@ -187,8 +246,21 @@ public class FragmentRestaurant extends Fragment implements FragmentRestaurantVi
             @Override
             public void onClick(View view) {
 
+                // 이미 선택되지 않았을 때만 시행
                 if (whichFilterIsActivatedNow() != 4) {
+
                     makeHighPriceFilter();
+                    m_restaurant_item_list.clear();
+
+                    if (whichCategoryIsActivatedNow() == 0) {
+                        tryGetRestaurantTotal(whichFilterIsActivatedNow());
+                        restaurant_list_adapter.notifyDataSetChanged();
+                    } else {
+                        // todo
+                        // 24번 API 엮기
+                        tryGetCategorizedRestaurant(whichFilterIsActivatedNow(), whichCategoryIsActivatedNow());
+                    }
+
                 }
             }
         });
@@ -197,8 +269,21 @@ public class FragmentRestaurant extends Fragment implements FragmentRestaurantVi
             @Override
             public void onClick(View view) {
 
+                // 이미 선택되지 않았을 때만 시행
                 if (whichFilterIsActivatedNow() != 5) {
+
                     makeRecentFilter();
+                    m_restaurant_item_list.clear();
+
+                    if (whichCategoryIsActivatedNow() == 0) {
+                        tryGetRestaurantTotal(whichFilterIsActivatedNow());
+                        restaurant_list_adapter.notifyDataSetChanged();
+                    } else {
+                        // todo
+                        // 24번 API 엮기
+                        tryGetCategorizedRestaurant(whichFilterIsActivatedNow(), whichCategoryIsActivatedNow());
+                    }
+
                 }
             }
         });
@@ -207,8 +292,21 @@ public class FragmentRestaurant extends Fragment implements FragmentRestaurantVi
             @Override
             public void onClick(View view) {
 
+                // 이미 선택되지 않았을 때만 시행
                 if (whichFilterIsActivatedNow() != 6) {
+
                     makeOldFilter();
+                    m_restaurant_item_list.clear();
+
+                    if (whichCategoryIsActivatedNow() == 0) {
+                        tryGetRestaurantTotal(whichFilterIsActivatedNow());
+                        restaurant_list_adapter.notifyDataSetChanged();
+                    } else {
+                        // todo
+                        // 24번 API 엮기
+                        tryGetCategorizedRestaurant(whichFilterIsActivatedNow(), whichCategoryIsActivatedNow());
+                    }
+
                 }
             }
         });
@@ -318,6 +416,7 @@ public class FragmentRestaurant extends Fragment implements FragmentRestaurantVi
         is_category_japanese = false;
         btn_restaurant_category_japanese.setBackgroundResource(R.drawable.btn_white_round_corner_light_grey);
     }
+
     public void makeCategoryKorean() {
         is_category_total = false;
         btn_restaurant_category_total.setBackgroundResource(R.drawable.btn_white_round_corner_light_grey);
@@ -331,6 +430,7 @@ public class FragmentRestaurant extends Fragment implements FragmentRestaurantVi
         is_category_japanese = false;
         btn_restaurant_category_japanese.setBackgroundResource(R.drawable.btn_white_round_corner_light_grey);
     }
+
     public void makeCategoryChinese() {
         is_category_total = false;
         btn_restaurant_category_total.setBackgroundResource(R.drawable.btn_white_round_corner_light_grey);
@@ -344,6 +444,7 @@ public class FragmentRestaurant extends Fragment implements FragmentRestaurantVi
         is_category_japanese = false;
         btn_restaurant_category_japanese.setBackgroundResource(R.drawable.btn_white_round_corner_light_grey);
     }
+
     public void makeCategoryJapanese() {
         is_category_total = false;
         btn_restaurant_category_total.setBackgroundResource(R.drawable.btn_white_round_corner_light_grey);
@@ -374,6 +475,7 @@ public class FragmentRestaurant extends Fragment implements FragmentRestaurantVi
         is_filtered_by_old = false;
         btn_restaurant_filter_old.setBackgroundResource(R.drawable.btn_white_round_corner_light_grey);
     }
+
     public void makeCommentsFilter() {
         is_filtered_by_stars = false;
         btn_restaurant_filter_stars.setBackgroundResource(R.drawable.btn_white_round_corner_light_grey);
@@ -390,6 +492,7 @@ public class FragmentRestaurant extends Fragment implements FragmentRestaurantVi
         is_filtered_by_old = false;
         btn_restaurant_filter_old.setBackgroundResource(R.drawable.btn_white_round_corner_light_grey);
     }
+
     public void makeLowPriceFilter() {
         is_filtered_by_stars = false;
         btn_restaurant_filter_stars.setBackgroundResource(R.drawable.btn_white_round_corner_light_grey);
@@ -406,6 +509,7 @@ public class FragmentRestaurant extends Fragment implements FragmentRestaurantVi
         is_filtered_by_old = false;
         btn_restaurant_filter_old.setBackgroundResource(R.drawable.btn_white_round_corner_light_grey);
     }
+
     public void makeHighPriceFilter() {
         is_filtered_by_stars = false;
         btn_restaurant_filter_stars.setBackgroundResource(R.drawable.btn_white_round_corner_light_grey);
@@ -422,6 +526,7 @@ public class FragmentRestaurant extends Fragment implements FragmentRestaurantVi
         is_filtered_by_old = false;
         btn_restaurant_filter_old.setBackgroundResource(R.drawable.btn_white_round_corner_light_grey);
     }
+
     public void makeRecentFilter() {
         is_filtered_by_stars = false;
         btn_restaurant_filter_stars.setBackgroundResource(R.drawable.btn_white_round_corner_light_grey);
@@ -438,6 +543,7 @@ public class FragmentRestaurant extends Fragment implements FragmentRestaurantVi
         is_filtered_by_old = false;
         btn_restaurant_filter_old.setBackgroundResource(R.drawable.btn_white_round_corner_light_grey);
     }
+
     public void makeOldFilter() {
         is_filtered_by_stars = false;
         btn_restaurant_filter_stars.setBackgroundResource(R.drawable.btn_white_round_corner_light_grey);
@@ -465,15 +571,17 @@ public class FragmentRestaurant extends Fragment implements FragmentRestaurantVi
     }
 
     @Override
-    public void getRestaurantTotalSuccess(RestaurantListResponse restaurantListResponse) {
+    public void getRestaurantListSuccess(RestaurantListResponse restaurantListResponse) {
+
+        System.out.println(restaurantListResponse.getMessage());
 
         switch (restaurantListResponse.getCode()) {
-            case 100:
+            default:
                 System.out.println("레스토랑 리스트 받아오기 성공?!");
 
                 int num_of_restaurants = restaurantListResponse.getRestaurantResults().size();
 
-                for (int i = 0; i < num_of_restaurants; i++){
+                for (int i = 0; i < num_of_restaurants; i++) {
                     RestaurantItem restaurantItem = new RestaurantItem();
 
                     restaurantItem.setTastehouse_idx(restaurantListResponse.getRestaurantResults().get(i).getTastehouse_idx());
