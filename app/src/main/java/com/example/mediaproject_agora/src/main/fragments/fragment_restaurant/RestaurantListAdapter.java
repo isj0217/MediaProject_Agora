@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediaproject_agora.R;
 import com.example.mediaproject_agora.src.main.DepartmentBoardActivity;
+import com.example.mediaproject_agora.src.main.InRestaurantPostActivity;
 import com.example.mediaproject_agora.src.main.items.DepartmentItem;
 import com.example.mediaproject_agora.src.main.items.RestaurantItem;
 
@@ -112,10 +113,9 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
                     int pos = getAdapterPosition();
                     if (pos != RecyclerView.NO_POSITION) {
 
-//                        Intent intent = new Intent(view.getContext(), InRestaurantPostActivity.class);
+                        Intent intent = new Intent(view.getContext(), InRestaurantPostActivity.class);
+                        context.startActivity(intent);
 
-
-//                        context.startActivity(intent);
 //                        ((Activity) context).finish();
 
                         if (mListener != null) {

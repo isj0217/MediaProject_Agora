@@ -33,6 +33,7 @@
         <activity android:name=".src.main.WritingUsedProductDepartmentActivity" />
         <activity android:name=".src.main.FixingDepartmentActivity" />
         <activity android:name=".src.main.InMessageRoomActivity" />
+        <activity android:name=".src.main.InRestaurantPostActivity" />
 
     </application>
 
