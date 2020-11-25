@@ -142,7 +142,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CustomVi
 
     @Override
     public void deleteDepartmentCommentSuccess(DefaultResponse defaultResponse) {
-        System.out.println("으아아아아아아악!!!!!!!!!!!!");
 
         switch (defaultResponse.getCode()){
 

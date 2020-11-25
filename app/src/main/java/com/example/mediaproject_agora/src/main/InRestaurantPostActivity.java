@@ -245,4 +245,9 @@ public class InRestaurantPostActivity extends BaseActivity implements InRestaura
                 break;
         }
     }
+
+    @Override
+    public void deleteRestaurantCommentSuccess(DefaultResponse defaultResponse) {
+        // RestaurantCommentAdapter에서 처리함
+    }
 }

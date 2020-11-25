@@ -37,6 +37,11 @@ public interface InRestaurantPostRetrofitInterface {
                                                 @Path("tastehouse_idx") int tastehouse_idx,
                                                 @Body HashMap<String, Object> params);
 
+    // 아주 맛집에서 특정 게시물의 댓글 삭제
+    @DELETE("/tastehouse/comment/{comment_idx}")
+    Call<DefaultResponse> deleteRestaurantComment(@Header("x-access-token") String accessToken,
+                                                  @Path("comment_idx") int comment_idx);
+
 
 
 

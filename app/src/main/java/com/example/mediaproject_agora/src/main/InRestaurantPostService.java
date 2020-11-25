@@ -100,6 +100,28 @@ public class InRestaurantPostService {
 
     }
 
+    // RestaurantCommentAdapter로부터의 접근을 위해 public 붙여줌
+    public void deleteRestaurantComment(int restaurant_comment_idx) {
+        final InRestaurantPostRetrofitInterface inRestaurantPostRetrofitInterface = getRetrofit().create(InRestaurantPostRetrofitInterface.class);
+        inRestaurantPostRetrofitInterface.deleteRestaurantComment(X_ACCESS_TOKEN, restaurant_comment_idx).enqueue(new Callback<DefaultResponse>() {
+            @Override
+            public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
+
+                final DefaultResponse defaultResponse = response.body();
+                if (defaultResponse == null) {
+                    mInRestaurantPostActivityView.validateFailure(null);
+                    return;
+                }
+                mInRestaurantPostActivityView.deleteRestaurantCommentSuccess(defaultResponse);
+            }
+
+            @Override
+            public void onFailure(Call<DefaultResponse> call, Throwable t) {
+                mInRestaurantPostActivityView.validateFailure(null);
+            }
+        });
+    }
+
 
 }
 

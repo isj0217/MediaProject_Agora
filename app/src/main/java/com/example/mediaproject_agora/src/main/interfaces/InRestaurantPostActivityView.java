@@ -18,4 +18,6 @@ public interface InRestaurantPostActivityView {
 
     void postRestaurantCommentSuccess(DefaultResponse defaultResponse);
 
+    void deleteRestaurantCommentSuccess(DefaultResponse defaultResponse);
+
 }

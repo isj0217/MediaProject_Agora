@@ -15,13 +15,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediaproject_agora.R;
 import com.example.mediaproject_agora.src.main.InPostService;
+import com.example.mediaproject_agora.src.main.InRestaurantPostService;
+import com.example.mediaproject_agora.src.main.fragments.fragment_restaurant.RestaurantResponse;
 import com.example.mediaproject_agora.src.main.interfaces.InPostActivityView;
+import com.example.mediaproject_agora.src.main.interfaces.InRestaurantPostActivityView;
 import com.example.mediaproject_agora.src.main.items.CommentItem;
 import com.example.mediaproject_agora.src.main.items.RestaurantCommentItem;
 
 import java.util.ArrayList;
 
-public class RestaurantCommentAdapter extends RecyclerView.Adapter<RestaurantCommentAdapter.CustomViewHolder> implements InPostActivityView {
+public class RestaurantCommentAdapter extends RecyclerView.Adapter<RestaurantCommentAdapter.CustomViewHolder> implements InRestaurantPostActivityView {
 
     private ArrayList<RestaurantCommentItem> restaurant_comment_item_list;
 //    private OnItemClickListener mListener = null ;
@@ -73,7 +76,7 @@ public class RestaurantCommentAdapter extends RecyclerView.Adapter<RestaurantCom
 
 //                                Toast.makeText(view.getContext(), holder.tv_item_comment_department_comment_index.getText().toString(), Toast.LENGTH_SHORT).show();
 
-//                                tryDeleteDepartmentComment(Integer.parseInt(holder.tv_item_comment_department_comment_index.getText().toString()));
+                                tryDeleteRestaurantComment(Integer.parseInt(holder.tv_item_restaurant_comment_restaurant_comment_index.getText().toString()));
                             }
                         })
                         .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
@@ -87,10 +90,10 @@ public class RestaurantCommentAdapter extends RecyclerView.Adapter<RestaurantCom
         });
     }
 
-    public void tryDeleteDepartmentComment(int department_comment_idx) {
+    public void tryDeleteRestaurantComment(int restaurant_comment_idx) {
 
-        final InPostService inPostService = new InPostService(this);
-        inPostService.deleteDepartmentComment(department_comment_idx);
+        final InRestaurantPostService inRestaurantPostService = new InRestaurantPostService(this);
+        inRestaurantPostService.deleteRestaurantComment(restaurant_comment_idx);
 
     }
 
@@ -110,42 +113,25 @@ public class RestaurantCommentAdapter extends RecyclerView.Adapter<RestaurantCom
     }
 
     @Override
-    public void getDepartmentPostSuccess(InPostPostResponse inPostPostResponse) {
+    public void getRestaurantPostSuccess(RestaurantResponse restaurantResponse) {
 
     }
 
     @Override
-    public void getSpecificDepartmentCommentSuccess(InPostCommentResponse inPostCommentResponse) {
+    public void getRestaurantCommentSuccess(InRestaurantPostCommentResponse inRestaurantPostCommentResponse) {
 
     }
 
     @Override
-    public void postDepartmentCommentSuccess(DefaultResponse defaultResponse) {
+    public void postRestaurantCommentSuccess(DefaultResponse defaultResponse) {
 
     }
 
     @Override
-    public void patchThumbUpDepartmentPostSuccess(DefaultResponse defaultResponse) {
-
-    }
-
-    @Override
-    public void deleteDepartmentPostSuccess(DefaultResponse defaultResponse) {
-
-    }
-
-    @Override
-    public void deleteDepartmentCommentSuccess(DefaultResponse defaultResponse) {
-        System.out.println("으아아아아아아악!!!!!!!!!!!!");
-
-        switch (defaultResponse.getCode()){
-
-            case 100:
-//                Intent intent = new Intent(adapter_context, DepartmentBoardActivity.class);
-//                ((Application)adapter_context).startActivity(intent);
-
+    public void deleteRestaurantCommentSuccess(DefaultResponse defaultResponse) {
+        switch (defaultResponse.getCode()) {
             default:
-                Toast.makeText(adapter_context, defaultResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                System.out.println(defaultResponse.getMessage());
                 break;
         }
     }
