@@ -4,6 +4,7 @@ import com.example.mediaproject_agora.src.main.fragments.fragment_restaurant.Res
 import com.example.mediaproject_agora.src.main.models.DefaultResponse;
 import com.example.mediaproject_agora.src.main.models.InPostCommentResponse;
 import com.example.mediaproject_agora.src.main.models.InPostPostResponse;
+import com.example.mediaproject_agora.src.main.models.InRestaurantPostCommentResponse;
 
 import java.util.HashMap;
 
@@ -24,6 +25,11 @@ public interface InRestaurantPostRetrofitInterface {
     @GET("/tastehouse/{tastehouse_idx}")
     Call<RestaurantResponse> getSpecificRestaurantPost(@Header("x-access-token") String accessToken,
                                                        @Path("tastehouse_idx") int tastehouse_idx);
+
+    // 아주 맛집에서 특정 게시물의 댓글 조회
+    @GET("/tastehouse/{tastehouse_idx}/comment")
+    Call<InRestaurantPostCommentResponse> getSpecificRestaurantComment(@Header("x-access-token") String accessToken,
+                                                                       @Path("tastehouse_idx") int tastehouse_idx);
 
 
 

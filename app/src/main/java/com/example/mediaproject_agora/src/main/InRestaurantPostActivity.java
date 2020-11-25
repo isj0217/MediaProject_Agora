@@ -24,16 +24,24 @@ import com.example.mediaproject_agora.src.main.fragments.fragment_restaurant.Res
 import com.example.mediaproject_agora.src.main.interfaces.InPostActivityView;
 import com.example.mediaproject_agora.src.main.interfaces.InRestaurantPostActivityView;
 import com.example.mediaproject_agora.src.main.items.CommentItem;
+import com.example.mediaproject_agora.src.main.items.RestaurantCommentItem;
 import com.example.mediaproject_agora.src.main.models.CommentAdapter;
 import com.example.mediaproject_agora.src.main.models.DefaultResponse;
 import com.example.mediaproject_agora.src.main.models.InPostCommentResponse;
 import com.example.mediaproject_agora.src.main.models.InPostPostResponse;
+import com.example.mediaproject_agora.src.main.models.InRestaurantPostCommentResponse;
+import com.example.mediaproject_agora.src.main.models.RestaurantCommentAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 
 public class InRestaurantPostActivity extends BaseActivity implements InRestaurantPostActivityView, PopupMenu.OnMenuItemClickListener {
+
+    private ArrayList<RestaurantCommentItem> m_restaurant_comment_item_list;
+    private RestaurantCommentAdapter comment_adapter;
+    private RecyclerView rv_in_restaurant_post_comment;
+    private LinearLayoutManager linear_layout_manager;
 
 
     private int index_of_this_restaurant_post;
@@ -55,11 +63,22 @@ public class InRestaurantPostActivity extends BaseActivity implements InRestaura
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_in_restaurant_post);
 
+        m_restaurant_comment_item_list = new ArrayList<>();
+        comment_adapter = new RestaurantCommentAdapter(m_restaurant_comment_item_list, getApplicationContext());
+        rv_in_restaurant_post_comment = findViewById(R.id.rv_in_restaurant_post_comment);
+
+        linear_layout_manager = new LinearLayoutManager(getApplicationContext());
+        rv_in_restaurant_post_comment.setLayoutManager(linear_layout_manager);
+
+        rv_in_restaurant_post_comment.setAdapter(comment_adapter);
+
         bindViews();
 
         index_of_this_restaurant_post = getIntent().getExtras().getInt("index_of_this_restaurant_post", 0);
 
         tryGetSpecificRestaurantPost(index_of_this_restaurant_post);
+
+        tryGetSpecificRestaurantComment(index_of_this_restaurant_post);
 
     }
 
@@ -78,8 +97,18 @@ public class InRestaurantPostActivity extends BaseActivity implements InRestaura
     }
 
     public void tryGetSpecificRestaurantPost(int index_of_this_restaurant_post) {
+        showProgressDialog();
+
         final InRestaurantPostService inRestaurantPostService = new InRestaurantPostService(this);
         inRestaurantPostService.getSpecificRestaurantPost(index_of_this_restaurant_post);
+    }
+
+
+    public void tryGetSpecificRestaurantComment(int index_of_this_restaurant_post) {
+        showProgressDialog();
+
+        final InRestaurantPostService inRestaurantPostService = new InRestaurantPostService(this);
+        inRestaurantPostService.getSpecificRestaurantComment(index_of_this_restaurant_post);
     }
 
     @Override
@@ -121,5 +150,36 @@ public class InRestaurantPostActivity extends BaseActivity implements InRestaura
 
         }
 
+    }
+
+
+    @Override
+    public void getRestaurantCommentSuccess(InRestaurantPostCommentResponse inRestaurantPostCommentResponse) {
+        hideProgressDialog();
+
+        switch (inRestaurantPostCommentResponse.getCode()) {
+            case 100:
+                /**
+                 * CommentItem 형식의 ArrayList에 모두 넣어두고 어댑터를 이용해서 하나하나 레이아웃에 갖다 붙이자!!
+                 * */
+
+                int num_of_comments_in_the_restaurant_post = inRestaurantPostCommentResponse.getInRestaurantPostCommentResults().size();
+
+                for (int i = 0; i < num_of_comments_in_the_restaurant_post; i++) {
+                    RestaurantCommentItem restaurantCommentItem = new RestaurantCommentItem();
+
+                    restaurantCommentItem.setComment_content(inRestaurantPostCommentResponse.getInRestaurantPostCommentResults().get(i).getComment_content());
+                    restaurantCommentItem.setTime(inRestaurantPostCommentResponse.getInRestaurantPostCommentResults().get(i).getTime());
+                    restaurantCommentItem.setNickname(inRestaurantPostCommentResponse.getInRestaurantPostCommentResults().get(i).getNickname());
+                    restaurantCommentItem.setComment_idx(inRestaurantPostCommentResponse.getInRestaurantPostCommentResults().get(i).getComment_idx());
+
+                    m_restaurant_comment_item_list.add(restaurantCommentItem);
+                }
+                comment_adapter.notifyDataSetChanged();
+
+                break;
+            default:
+                break;
+        }
     }
 }

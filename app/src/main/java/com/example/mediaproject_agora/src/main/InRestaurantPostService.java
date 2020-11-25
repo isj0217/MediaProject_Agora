@@ -8,6 +8,7 @@ import com.example.mediaproject_agora.src.main.interfaces.InRestaurantPostRetrof
 import com.example.mediaproject_agora.src.main.models.DefaultResponse;
 import com.example.mediaproject_agora.src.main.models.InPostCommentResponse;
 import com.example.mediaproject_agora.src.main.models.InPostPostResponse;
+import com.example.mediaproject_agora.src.main.models.InRestaurantPostCommentResponse;
 
 import java.util.HashMap;
 
@@ -49,6 +50,28 @@ public class InRestaurantPostService {
 
             @Override
             public void onFailure(Call<RestaurantResponse> call, Throwable t) {
+                mInRestaurantPostActivityView.validateFailure(null);
+            }
+        });
+    }
+
+    void getSpecificRestaurantComment(int restaurant_post_idx) {
+
+        final InRestaurantPostRetrofitInterface inRestaurantPostRetrofitInterface = getRetrofit().create(InRestaurantPostRetrofitInterface.class);
+        inRestaurantPostRetrofitInterface.getSpecificRestaurantComment(X_ACCESS_TOKEN, restaurant_post_idx).enqueue(new Callback<InRestaurantPostCommentResponse>() {
+            @Override
+            public void onResponse(Call<InRestaurantPostCommentResponse> call, Response<InRestaurantPostCommentResponse> response) {
+
+                final InRestaurantPostCommentResponse inRestaurantPostCommentResponse = response.body();
+                if (inRestaurantPostCommentResponse == null) {
+                    mInRestaurantPostActivityView.validateFailure(null);
+                    return;
+                }
+                mInRestaurantPostActivityView.getRestaurantCommentSuccess(inRestaurantPostCommentResponse);
+            }
+
+            @Override
+            public void onFailure(Call<InRestaurantPostCommentResponse> call, Throwable t) {
                 mInRestaurantPostActivityView.validateFailure(null);
             }
         });
