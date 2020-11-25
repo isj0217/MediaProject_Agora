@@ -28,6 +28,13 @@ public interface WritingRetrofitInterface {
     Call<AddFavoriteResponse>patchFavoriteDepartment(@Header("x-access-token") String accessToken,
                                                      @Path("department_name") String department_name);
 
+
+
+    // 맛집 게시글 추가
+    @POST("/tastehouse")
+    Call<DefaultResponse> postRestaurantPost(@Header("x-access-token") String accessToken,
+                                             @Body HashMap<String, Object> params);
+
 //
 //
 //    @GET("/jwt")

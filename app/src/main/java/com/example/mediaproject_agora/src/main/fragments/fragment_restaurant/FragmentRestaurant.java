@@ -72,10 +72,9 @@ public class FragmentRestaurant extends Fragment implements FragmentRestaurantVi
             public void onClick(View view) {
 
 
-                
                 Intent intent = new Intent(view.getContext(), WritingRestaurantActivity.class);
                 startActivity(intent);
-                
+
             }
         });
 
@@ -102,6 +101,113 @@ public class FragmentRestaurant extends Fragment implements FragmentRestaurantVi
 
         return viewGroup;
     }
+
+
+    // 글 게시 후에 자동으로 다시 새로고침 하려다가 계속 중복으로 나와서 포기
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//
+//        m_restaurant_item_list.clear();
+//        restaurant_list_adapter.notifyDataSetChanged();
+//
+//        if (is_category_total) {
+//            switch (whichFilterIsActivatedNow()) {
+//                case 1:
+//                    tryGetRestaurantTotal(1);
+//                    break;
+//
+//                case 2:
+//                    tryGetRestaurantTotal(2);
+//                    break;
+//
+//                case 3:
+//                    tryGetRestaurantTotal(3);
+//                    break;
+//            }
+//        } else {
+//            if (whichCategoryIsActivatedNow() == 1) {
+//                switch (whichFilterIsActivatedNow()) {
+//                    case 1:
+//                        tryGetCategorizedRestaurant(1, 1);
+//                        break;
+//
+//                    case 2:
+//                        tryGetCategorizedRestaurant(2, 1);
+//                        break;
+//
+//                    case 3:
+//                        tryGetCategorizedRestaurant(3, 1);
+//                        break;
+//
+//                    case 4:
+//                        tryGetCategorizedRestaurant(4, 1);
+//                        break;
+//
+//                    case 5:
+//                        tryGetCategorizedRestaurant(5, 1);
+//                        break;
+//
+//                    case 6:
+//                        tryGetCategorizedRestaurant(6, 1);
+//                        break;
+//                }
+//            } else if (whichCategoryIsActivatedNow() == 2) {
+//                switch (whichFilterIsActivatedNow()) {
+//                    case 1:
+//                        tryGetCategorizedRestaurant(1, 2);
+//                        break;
+//
+//                    case 2:
+//                        tryGetCategorizedRestaurant(2, 2);
+//                        break;
+//
+//                    case 3:
+//                        tryGetCategorizedRestaurant(3, 2);
+//                        break;
+//
+//                    case 4:
+//                        tryGetCategorizedRestaurant(4, 2);
+//                        break;
+//
+//                    case 5:
+//                        tryGetCategorizedRestaurant(5, 2);
+//                        break;
+//
+//                    case 6:
+//                        tryGetCategorizedRestaurant(6, 2);
+//                        break;
+//                }
+//            } else if (whichCategoryIsActivatedNow() == 3) {
+//                switch (whichFilterIsActivatedNow()) {
+//                    case 1:
+//                        tryGetCategorizedRestaurant(1, 3);
+//                        break;
+//
+//                    case 2:
+//                        tryGetCategorizedRestaurant(2, 3);
+//                        break;
+//
+//                    case 3:
+//                        tryGetCategorizedRestaurant(3, 3);
+//                        break;
+//
+//                    case 4:
+//                        tryGetCategorizedRestaurant(4, 3);
+//                        break;
+//
+//                    case 5:
+//                        tryGetCategorizedRestaurant(5, 3);
+//                        break;
+//
+//                    case 6:
+//                        tryGetCategorizedRestaurant(6, 3);
+//                        break;
+//                }
+//            }
+//        }
+//
+//    }
 
     private void tryGetRestaurantTotal(int filter) {
 
