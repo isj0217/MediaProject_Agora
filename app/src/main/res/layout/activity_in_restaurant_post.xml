@@ -275,29 +275,7 @@
         android:paddingStart="2dp"
         android:paddingEnd="2dp">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:scaleX="0.7"
-            android:scaleY="0.7">
 
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:buttonTint="@color/blue_app_name"
-                android:checked="true" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="익명"
-                android:textColor="@color/blue_app_name"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-        </LinearLayout>
 
         <EditText
             android:id="@+id/et_in_restaurant_post_comment"
@@ -313,7 +291,7 @@
             android:textSize="13sp" />
 
         <ImageView
-            android:id="@+id/iv_in_restaurant_post_send"
+            android:id="@+id/iv_in_restaurant_post_register_comment"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginStart="20dp"

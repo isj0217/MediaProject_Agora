@@ -16,4 +16,6 @@ public interface InRestaurantPostActivityView {
 
     void getRestaurantCommentSuccess(InRestaurantPostCommentResponse inRestaurantPostCommentResponse);
 
+    void postRestaurantCommentSuccess(DefaultResponse defaultResponse);
+
 }

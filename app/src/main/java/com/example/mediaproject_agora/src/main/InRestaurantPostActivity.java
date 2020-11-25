@@ -58,6 +58,9 @@ public class InRestaurantPostActivity extends BaseActivity implements InRestaura
     private TextView tv_in_restaurant_post_star;
     private TextView tv_in_restaurant_post_comment_num;
 
+    private ImageView iv_in_restaurant_post_register_comment;
+    private EditText et_in_restaurant_post_comment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +76,8 @@ public class InRestaurantPostActivity extends BaseActivity implements InRestaura
         rv_in_restaurant_post_comment.setAdapter(comment_adapter);
 
         bindViews();
+
+        setClickListenersToButtons();
 
         index_of_this_restaurant_post = getIntent().getExtras().getInt("index_of_this_restaurant_post", 0);
 
@@ -94,6 +99,43 @@ public class InRestaurantPostActivity extends BaseActivity implements InRestaura
         tv_in_restaurant_post_content = findViewById(R.id.tv_in_restaurant_post_content);
         tv_in_restaurant_post_star = findViewById(R.id.tv_in_restaurant_post_star);
         tv_in_restaurant_post_comment_num = findViewById(R.id.tv_in_restaurant_post_comment_num);
+
+        iv_in_restaurant_post_register_comment = findViewById(R.id.iv_in_restaurant_post_register_comment);
+        et_in_restaurant_post_comment = findViewById(R.id.et_in_restaurant_post_comment);
+    }
+
+    public void setClickListenersToButtons() {
+        iv_in_restaurant_post_register_comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AlertDialog.Builder(InRestaurantPostActivity.this) // TestActivity 부분에는 현재 Activity의 이름 입력.
+                        .setTitle("댓글 작성 완료")
+                        .setMessage("댓글을 등록하시겠습니까?")
+                        .setPositiveButton("예", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                // todo
+                                // 서버에 댓글 등록 해야함!!
+
+                                int restaurant_idx = Integer.parseInt(tv_in_restaurant_post_restaurant_idx.getText().toString());
+
+                                tryPostRestaurantComment(restaurant_idx, et_in_restaurant_post_comment.getText().toString());
+
+                                finish();
+
+                            }
+                        })
+                        .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        })
+                        .setCancelable(false)
+                        .show();
+            }
+        });
+
+
     }
 
     public void tryGetSpecificRestaurantPost(int index_of_this_restaurant_post) {
@@ -109,6 +151,16 @@ public class InRestaurantPostActivity extends BaseActivity implements InRestaura
 
         final InRestaurantPostService inRestaurantPostService = new InRestaurantPostService(this);
         inRestaurantPostService.getSpecificRestaurantComment(index_of_this_restaurant_post);
+    }
+
+    private void tryPostRestaurantComment(int restaurant_idx, String comment) {
+        showProgressDialog();
+
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("comment_content", comment);
+
+        final InRestaurantPostService inRestaurantPostService = new InRestaurantPostService(this, params);
+        inRestaurantPostService.postRestaurantComment(restaurant_idx);
     }
 
     @Override
@@ -179,6 +231,17 @@ public class InRestaurantPostActivity extends BaseActivity implements InRestaura
 
                 break;
             default:
+                break;
+        }
+    }
+
+    @Override
+    public void postRestaurantCommentSuccess(DefaultResponse defaultResponse) {
+        hideProgressDialog();
+
+        switch (defaultResponse.getCode()) {
+            default:
+                System.out.println(defaultResponse.getMessage());
                 break;
         }
     }

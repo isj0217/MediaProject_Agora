@@ -31,6 +31,12 @@ public interface InRestaurantPostRetrofitInterface {
     Call<InRestaurantPostCommentResponse> getSpecificRestaurantComment(@Header("x-access-token") String accessToken,
                                                                        @Path("tastehouse_idx") int tastehouse_idx);
 
+    // 아주 맛집에서 특정 게시물에 댓글 달기
+    @POST("/tastehouse/{tastehouse_idx}/comment")
+    Call<DefaultResponse> postRestaurantComment(@Header("x-access-token") String accessToken,
+                                                @Path("tastehouse_idx") int tastehouse_idx,
+                                                @Body HashMap<String, Object> params);
+
 
 
 

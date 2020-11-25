@@ -77,6 +77,29 @@ public class InRestaurantPostService {
         });
     }
 
+    void postRestaurantComment(int restaurant_idx) {
+
+        final InRestaurantPostRetrofitInterface inRestaurantPostRetrofitInterface = getRetrofit().create(InRestaurantPostRetrofitInterface.class);
+        inRestaurantPostRetrofitInterface.postRestaurantComment(X_ACCESS_TOKEN, restaurant_idx, mParams).enqueue(new Callback<DefaultResponse>() {
+            @Override
+            public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
+
+                final DefaultResponse defaultResponse = response.body();
+                if (defaultResponse == null) {
+                    mInRestaurantPostActivityView.validateFailure(null);
+                    return;
+                }
+                mInRestaurantPostActivityView.postRestaurantCommentSuccess(defaultResponse);
+            }
+
+            @Override
+            public void onFailure(Call<DefaultResponse> call, Throwable t) {
+                mInRestaurantPostActivityView.validateFailure(null);
+            }
+        });
+
+    }
+
 
 }
 
