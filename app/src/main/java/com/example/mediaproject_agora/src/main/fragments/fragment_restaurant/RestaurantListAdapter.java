@@ -114,6 +114,7 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
                     if (pos != RecyclerView.NO_POSITION) {
 
                         Intent intent = new Intent(view.getContext(), InRestaurantPostActivity.class);
+                        intent.putExtra("index_of_this_restaurant_post", restaurant_item_list.get(pos).getTastehouse_idx());
                         context.startActivity(intent);
 
 //                        ((Activity) context).finish();
