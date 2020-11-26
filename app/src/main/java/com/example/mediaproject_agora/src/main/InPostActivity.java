@@ -286,7 +286,6 @@ public class InPostActivity extends BaseActivity implements InPostActivityView, 
                 break;
 
             default:
-                System.out.println("ㅇㅕ기로 가지 말구요");
                 break;
         }
     }

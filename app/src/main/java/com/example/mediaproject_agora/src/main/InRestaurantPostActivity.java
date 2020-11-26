@@ -1,6 +1,7 @@
 package com.example.mediaproject_agora.src.main;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -60,6 +61,8 @@ public class InRestaurantPostActivity extends BaseActivity implements InRestaura
 
     private ImageView iv_in_restaurant_post_register_comment;
     private EditText et_in_restaurant_post_comment;
+
+    private int is_mine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -163,10 +166,89 @@ public class InRestaurantPostActivity extends BaseActivity implements InRestaura
         inRestaurantPostService.postRestaurantComment(restaurant_idx);
     }
 
+
+    public void customOnClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_in_restaurant_post_go_back:
+                onBackPressed();
+                break;
+            case R.id.btn_in_restaurant_post_more:
+                showPopUp(view);
+                break;
+        }
+
+    }
+
+    public void showPopUp(View v) {
+        PopupMenu popupMenu = new PopupMenu(this, v);
+
+        popupMenu.setOnMenuItemClickListener(this);
+
+        // 치언이가 서버 반영해주기 전까지 임시로 1로 설정
+        is_mine = 1;
+
+        if (is_mine == 1) {
+            popupMenu.inflate(R.menu.menu_in_restaurant_post_mine);
+            popupMenu.show();
+        } else {
+            popupMenu.inflate(R.menu.menu_in_restaurant_post_not_mine);
+            popupMenu.show();
+        }
+    }
+
+    public void saveCurrentRestaurantPostInfos() {
+        SharedPreferences sharedPreferences = getSharedPreferences("currentRestaurantPostInfos", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("restaurant_idx", Integer.parseInt(tv_in_restaurant_post_restaurant_idx.getText().toString()));
+        editor.putString("restaurant_name", tv_in_restaurant_post_restaurant_name.getText().toString());
+        editor.putString("menu_name", tv_in_restaurant_post_menu_name.getText().toString());
+        editor.putInt("price", Integer.parseInt(tv_in_restaurant_post_price.getText().toString()));
+        editor.putFloat("stars", Float.parseFloat(tv_in_restaurant_post_star.getText().toString()));
+        editor.putString("content", tv_in_restaurant_post_content.getText().toString());
+        editor.apply();
+    }
+
     @Override
     public boolean onMenuItemClick(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.menu_in_restaurant_post_fix_post:
+                // todo
+                // 일단 FixingRestaurantActivity로 넘긴 후에 거기서 글 수정 API 엮기
+
+                saveCurrentRestaurantPostInfos();
+
+//                int idx_of_restaurant_post_we_are_fixing = Integer.parseInt(tv_in_restaurant_post_restaurant_idx.getText().toString());
+
+                Intent intent = new Intent(InRestaurantPostActivity.this, FixingRestaurantActivity.class);
+//                intent.putExtra("idx_of_restaurant_post_we_are_fixing", idx_of_restaurant_post_we_are_fixing);
+
+
+//                intent.putExtra("origin_title", tv_in_post_title.getText().toString());
+//                intent.putExtra("origin_content", tv_in_post_content.getText().toString());
+                startActivity(intent);
+
+                finish();
+
+                break;
+            case R.id.menu_in_post_delete_post:
+                // todo
+                // 글 삭제 API 엮기
+
+//                int idx_of_post_we_are_deleting = Integer.parseInt(tv_in_post_department_board_idx.getText().toString());
+//
+//                tryDeleteDepartmentPost(idx_of_post_we_are_deleting);
+
+                break;
+            case R.id.menu_in_post_send_message:
+                // todo
+                // 추후에 쪽지보내기 기능 생겼을 때 만들기
+                break;
+        }
+
+
         return false;
     }
+
 
     @Override
     public void validateSuccess(String text) {
@@ -197,6 +279,12 @@ public class InRestaurantPostActivity extends BaseActivity implements InRestaura
                 tv_in_restaurant_post_content.setText(restaurantResponse.getRestaurantResult().getTastehouse_content());
                 tv_in_restaurant_post_star.setText(Float.toString(restaurantResponse.getRestaurantResult().getTastehouse_star()));
                 tv_in_restaurant_post_comment_num.setText(Integer.toString(restaurantResponse.getRestaurantResult().getComment_num()));
+
+                if (restaurantResponse.getRestaurantResult().getIs_mine() == 1) {
+                    is_mine = 1;
+                } else {
+                    is_mine = 0;
+                }
 
                 break;
 

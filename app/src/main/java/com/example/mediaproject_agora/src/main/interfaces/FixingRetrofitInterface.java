@@ -17,9 +17,16 @@ import retrofit2.http.Path;
 public interface FixingRetrofitInterface {
     //    @GET("/test")
 
+    // 학과별 게시판의 게시물 수정
     @PATCH("/department-board-idx/{department_board_idx}/patch")
     Call<DefaultResponse> patchDepartmentPost(@Header("x-access-token") String accessToken,
                                               @Path("department_board_idx") int department_board_idx,
+                                              @Body HashMap<String, Object> params);
+
+    // 아주 맛집 추천 게시물 수정
+    @PATCH("/tastehouse/{tastehouse_idx}")
+    Call<DefaultResponse> patchRestaurantPost(@Header("x-access-token") String accessToken,
+                                              @Path("tastehouse_idx") int tastehouse_idx,
                                               @Body HashMap<String, Object> params);
 
 

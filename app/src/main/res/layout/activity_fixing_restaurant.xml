@@ -13,7 +13,7 @@
         android:padding="5dp">
 
         <ImageView
-            android:id="@+id/iv_writing_restaurant_cancel"
+            android:id="@+id/iv_fixing_restaurant_cancel"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginStart="10dp"
@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="7dp"
-            android:text="맛집 추천글 작성"
+            android:text="맛집 추천글 수정"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
@@ -33,7 +33,7 @@
             android:layout_weight="1" />
 
         <Button
-            android:id="@+id/btn_writing_restaurant_complete"
+            android:id="@+id/btn_fixing_restaurant_complete"
             android:layout_width="55dp"
             android:layout_height="30dp"
             android:layout_marginEnd="14dp"
@@ -60,7 +60,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="0dp"
@@ -68,7 +69,7 @@
                     android:layout_weight="1" />
 
                 <Button
-                    android:id="@+id/btn_writing_restaurant_korean"
+                    android:id="@+id/btn_fixing_restaurant_korean"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -81,7 +82,7 @@
                     android:layout_weight="1" />
 
                 <Button
-                    android:id="@+id/btn_writing_restaurant_chinese"
+                    android:id="@+id/btn_fixing_restaurant_chinese"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -94,7 +95,7 @@
                     android:layout_weight="1" />
 
                 <Button
-                    android:id="@+id/btn_writing_restaurant_japanese"
+                    android:id="@+id/btn_fixing_restaurant_japanese"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -109,6 +110,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -124,7 +126,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/et_writing_restaurant_restaurant_name"
+                    android:id="@+id/et_fixing_restaurant_restaurant_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
@@ -153,7 +155,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/et_writing_restaurant_menu"
+                    android:id="@+id/et_fixing_restaurant_menu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
@@ -182,7 +184,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/et_writing_restaurant_price"
+                    android:id="@+id/et_fixing_restaurant_price"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
@@ -211,7 +213,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/et_writing_restaurant_stars"
+                    android:id="@+id/et_fixing_restaurant_stars"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
@@ -241,7 +243,7 @@
                 android:src="@drawable/add_circle" />
 
             <EditText
-                android:id="@+id/et_writing_restaurant_content"
+                android:id="@+id/et_fixing_restaurant_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
