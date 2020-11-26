@@ -136,6 +136,11 @@ public class RestaurantCommentAdapter extends RecyclerView.Adapter<RestaurantCom
         }
     }
 
+    @Override
+    public void deleteRestaurantPostSuccess(DefaultResponse defaultResponse) {
+
+    }
+
     public class CustomViewHolder extends RecyclerView.ViewHolder {
 
         protected ImageView iv_item_restaurant_comment_trash_can;

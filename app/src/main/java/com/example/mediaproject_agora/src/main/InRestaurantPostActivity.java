@@ -184,7 +184,7 @@ public class InRestaurantPostActivity extends BaseActivity implements InRestaura
 
         popupMenu.setOnMenuItemClickListener(this);
 
-        // 치언이가 서버 반영해주기 전까지 임시로 1로 설정
+        // 치언이가 서버 반영해주기 전까지 임시로 설정
         is_mine = 1;
 
         if (is_mine == 1) {
@@ -217,29 +217,23 @@ public class InRestaurantPostActivity extends BaseActivity implements InRestaura
 
                 saveCurrentRestaurantPostInfos();
 
-//                int idx_of_restaurant_post_we_are_fixing = Integer.parseInt(tv_in_restaurant_post_restaurant_idx.getText().toString());
-
                 Intent intent = new Intent(InRestaurantPostActivity.this, FixingRestaurantActivity.class);
-//                intent.putExtra("idx_of_restaurant_post_we_are_fixing", idx_of_restaurant_post_we_are_fixing);
 
-
-//                intent.putExtra("origin_title", tv_in_post_title.getText().toString());
-//                intent.putExtra("origin_content", tv_in_post_content.getText().toString());
                 startActivity(intent);
 
                 finish();
 
                 break;
-            case R.id.menu_in_post_delete_post:
+            case R.id.menu_in_restaurant_post_delete_post:
                 // todo
                 // 글 삭제 API 엮기
 
-//                int idx_of_post_we_are_deleting = Integer.parseInt(tv_in_post_department_board_idx.getText().toString());
-//
-//                tryDeleteDepartmentPost(idx_of_post_we_are_deleting);
+                int idx_of_restaurant_post_we_are_deleting = Integer.parseInt(tv_in_restaurant_post_restaurant_idx.getText().toString());
+
+                tryDeleteRestaurantPost(idx_of_restaurant_post_we_are_deleting);
 
                 break;
-            case R.id.menu_in_post_send_message:
+            case R.id.menu_in_restaurant_post_send_message:
                 // todo
                 // 추후에 쪽지보내기 기능 생겼을 때 만들기
                 break;
@@ -247,6 +241,13 @@ public class InRestaurantPostActivity extends BaseActivity implements InRestaura
 
 
         return false;
+    }
+
+    private void tryDeleteRestaurantPost(int restaurant_idx) {
+        showProgressDialog();
+
+        final InRestaurantPostService inRestaurantPostService = new InRestaurantPostService(this);
+        inRestaurantPostService.deleteRestaurantPost(restaurant_idx);
     }
 
 
@@ -337,5 +338,22 @@ public class InRestaurantPostActivity extends BaseActivity implements InRestaura
     @Override
     public void deleteRestaurantCommentSuccess(DefaultResponse defaultResponse) {
         // RestaurantCommentAdapter에서 처리함
+    }
+
+    @Override
+    public void deleteRestaurantPostSuccess(DefaultResponse defaultResponse) {
+        hideProgressDialog();
+
+        switch (defaultResponse.getCode()) {
+            case 100:
+                Toast.makeText(this, defaultResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                finish();
+                break;
+
+            default:
+                Toast.makeText(this, defaultResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                break;
+
+        }
     }
 }

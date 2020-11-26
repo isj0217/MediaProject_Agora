@@ -42,6 +42,14 @@ public interface InRestaurantPostRetrofitInterface {
     Call<DefaultResponse> deleteRestaurantComment(@Header("x-access-token") String accessToken,
                                                   @Path("comment_idx") int comment_idx);
 
+    // 아주 맛집에서 특정 게시물 삭제
+    @DELETE("/tastehouse/{tastehouse_idx}")
+    Call<DefaultResponse> deleteRestaurantPost(@Header("x-access-token") String accessToken,
+                                               @Path("tastehouse_idx") int tastehouse_idx);
+
+
+
+
 
 
 

@@ -122,6 +122,27 @@ public class InRestaurantPostService {
         });
     }
 
+    void deleteRestaurantPost(int restaurant_idx) {
+        final InRestaurantPostRetrofitInterface inRestaurantPostRetrofitInterface = getRetrofit().create(InRestaurantPostRetrofitInterface.class);
+        inRestaurantPostRetrofitInterface.deleteRestaurantPost(X_ACCESS_TOKEN, restaurant_idx).enqueue(new Callback<DefaultResponse>() {
+            @Override
+            public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
+
+                final DefaultResponse defaultResponse = response.body();
+                if (defaultResponse == null) {
+                    mInRestaurantPostActivityView.validateFailure(null);
+                    return;
+                }
+                mInRestaurantPostActivityView.deleteRestaurantPostSuccess(defaultResponse);
+            }
+
+            @Override
+            public void onFailure(Call<DefaultResponse> call, Throwable t) {
+                mInRestaurantPostActivityView.validateFailure(null);
+            }
+        });
+    }
+
 
 }
 
