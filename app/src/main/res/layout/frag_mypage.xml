@@ -52,15 +52,17 @@
             android:padding="12dp">
 
             <ImageView
-                android:layout_width="wrap_content"
+                android:id="@+id/iv_mypage_photo"
+                android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:src="@drawable/profile_photo" />
+                android:src="@drawable/profile" />
 
             <TextView
+                android:id="@+id/tv_mypage_nickname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="망포동아붕이"
+                android:text=""
                 android:textSize="16sp"
                 android:textColor="@color/blue_app_name"
                 android:textStyle="bold" />
@@ -88,9 +90,10 @@
                     android:textSize="16sp"
                     android:textColor="@color/black"/>
                 <TextView
+                    android:id="@+id/tv_mypage_user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="조인성"
+                    android:text=""
                     android:textSize="16sp"
                     android:textColor="@color/black"/>
                 <TextView
@@ -123,9 +126,10 @@
                     android:textSize="16sp"
                     android:textColor="@color/black"/>
                 <TextView
+                    android:id="@+id/tv_mypage_department_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="미디어학과"
+                    android:text=""
                     android:textSize="16sp"
                     android:textColor="@color/black"/>
             </LinearLayout>
@@ -142,9 +146,10 @@
                     android:textSize="16sp"
                     android:textColor="@color/black"/>
                 <TextView
+                    android:id="@+id/tv_mypage_student_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="201521116"
+                    android:text=""
                     android:textSize="16sp"
                     android:textColor="@color/black"/>
             </LinearLayout>
@@ -164,6 +169,7 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/ll_mypage_change_nickname"
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:gravity="center_vertical"
@@ -178,6 +184,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_mypage_change_profile_photo"
             android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="65dp"
