@@ -4,6 +4,10 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediaproject_agora.R;
 import com.example.mediaproject_agora.src.BaseActivity;
+import com.example.mediaproject_agora.src.main.fragments.fragment_mypage.FragmentMyPage;
 import com.example.mediaproject_agora.src.main.interfaces.InPostActivityView;
 import com.example.mediaproject_agora.src.main.items.CommentItem;
 import com.example.mediaproject_agora.src.main.models.CommentAdapter;
@@ -27,6 +32,8 @@ import com.example.mediaproject_agora.src.main.models.DefaultResponse;
 import com.example.mediaproject_agora.src.main.models.InPostCommentResponse;
 import com.example.mediaproject_agora.src.main.models.InPostPostResponse;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -252,13 +259,23 @@ public class InPostActivity extends BaseActivity implements InPostActivityView, 
 
         switch (inPostPostResponse.getCode()) {
             case 100:
-                System.out.println("ㅇㅕ기까지만 오세요 제발");
 
                 tv_in_post_user_idx.setText(Integer.toString(inPostPostResponse.getInPostPostResult().getUser_idx()));
 
                 // todo
                 // String으로 받아온 사진 어떻게 띄울 것인지 생각해보기
-//                iv_in_post_user_picture.setImageResource(inPostPostResponse.getInPostPostResult().getUser_picture());
+
+                final String in_post_photo = inPostPostResponse.getInPostPostResult().getPhoto();
+                iv_in_post_photo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(in_post_photo));
+                        startActivity(intent);
+                    }
+                });
+
+                new DownloadPhotoTask().execute(in_post_photo);
+
                 tv_in_post_department_board_idx.setText(Integer.toString(inPostPostResponse.getInPostPostResult().getDepartment_board_idx()));
                 tv_in_post_title.setText(inPostPostResponse.getInPostPostResult().getTitle());
                 tv_in_post_content.setText(inPostPostResponse.getInPostPostResult().getContent());
@@ -287,6 +304,33 @@ public class InPostActivity extends BaseActivity implements InPostActivityView, 
 
             default:
                 break;
+        }
+    }
+
+    private class DownloadPhotoTask extends AsyncTask<String, Void, Bitmap> {
+        @Override
+        protected Bitmap doInBackground(String... strings) {
+            Bitmap bmp = null;
+            try {
+                String img_url = strings[0]; //url of the image
+                URL url = new URL(img_url);
+                bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return bmp;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+
+        @Override
+        protected void onPostExecute(Bitmap result) {
+            // doInBackground 에서 받아온 total 값 사용 장소
+            iv_in_post_photo.setImageBitmap(result);
         }
     }
 
