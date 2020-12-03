@@ -689,8 +689,6 @@ public class FragmentRestaurant extends Fragment implements FragmentRestaurantVi
 
         switch (restaurantListResponse.getCode()) {
             default:
-                System.out.println("레스토랑 리스트 받아오기 성공?!");
-
                 int num_of_restaurants = restaurantListResponse.getRestaurantResults().size();
 
                 for (int i = 0; i < num_of_restaurants; i++) {

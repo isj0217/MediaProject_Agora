@@ -2,6 +2,10 @@ package com.example.mediaproject_agora.src.main.fragments.fragment_restaurant;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +17,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediaproject_agora.R;
 import com.example.mediaproject_agora.src.main.DepartmentBoardActivity;
+import com.example.mediaproject_agora.src.main.InPostActivity;
 import com.example.mediaproject_agora.src.main.InRestaurantPostActivity;
 import com.example.mediaproject_agora.src.main.items.DepartmentItem;
 import com.example.mediaproject_agora.src.main.items.RestaurantItem;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAdapter.CustomViewHolder> {

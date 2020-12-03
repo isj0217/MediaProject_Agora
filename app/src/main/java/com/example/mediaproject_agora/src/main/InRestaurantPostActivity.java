@@ -5,6 +5,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,6 +37,8 @@ import com.example.mediaproject_agora.src.main.models.InPostPostResponse;
 import com.example.mediaproject_agora.src.main.models.InRestaurantPostCommentResponse;
 import com.example.mediaproject_agora.src.main.models.RestaurantCommentAdapter;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -185,7 +191,7 @@ public class InRestaurantPostActivity extends BaseActivity implements InRestaura
         popupMenu.setOnMenuItemClickListener(this);
 
         // 치언이가 서버 반영해주기 전까지 임시로 설정
-        is_mine = 1;
+        // is_mine = 1;
 
         if (is_mine == 1) {
             popupMenu.inflate(R.menu.menu_in_restaurant_post_mine);
@@ -269,6 +275,17 @@ public class InRestaurantPostActivity extends BaseActivity implements InRestaura
             default:
 
                 // Image 어떻게 넣을 것인지 생각
+
+                final String in_restaurant_post_photo = restaurantResponse.getRestaurantResult().getMenu_picture();
+                iv_in_restaurant_post_photo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(in_restaurant_post_photo));
+                        startActivity(intent);
+                    }
+                });
+
+                new DownloadPhotoTask().execute(in_restaurant_post_photo);
 //                iv_in_restaurant_post_photo.setImageResource();
 
                 tv_in_restaurant_post_nickname.setText(restaurantResponse.getRestaurantResult().getNickname());
@@ -291,6 +308,33 @@ public class InRestaurantPostActivity extends BaseActivity implements InRestaura
 
         }
 
+    }
+
+    private class DownloadPhotoTask extends AsyncTask<String, Void, Bitmap> {
+        @Override
+        protected Bitmap doInBackground(String... strings) {
+            Bitmap bmp = null;
+            try {
+                String img_url = strings[0]; //url of the image
+                URL url = new URL(img_url);
+                bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return bmp;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+
+        @Override
+        protected void onPostExecute(Bitmap result) {
+            // doInBackground 에서 받아온 total 값 사용 장소
+            iv_in_restaurant_post_photo.setImageBitmap(result);
+        }
     }
 
 
