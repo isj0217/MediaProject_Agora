@@ -1,6 +1,11 @@
 package com.example.mediaproject_agora.src.main.fragments.fragment_mypage;
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +24,8 @@ import androidx.fragment.app.Fragment;
 import com.example.mediaproject_agora.R;
 import com.example.mediaproject_agora.src.main.models.DefaultResponse;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.HashMap;
 
 public class FragmentMyPage extends Fragment implements FragmentMyPageView {
@@ -118,12 +125,50 @@ public class FragmentMyPage extends Fragment implements FragmentMyPageView {
             default:
                 Toast.makeText(viewGroup.getContext(), myPageResponse.getMessage(), Toast.LENGTH_SHORT).show();
 
+                final String my_page_photo = myPageResponse.getMyPageResult().getUser_picture();
+                iv_mypage_photo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(my_page_photo));
+                        startActivity(intent);
+                    }
+                });
+
+                new DownloadPhotoTask().execute(my_page_photo);
+
                 tv_mypage_nickname.setText(myPageResponse.getMyPageResult().getNickname());
                 tv_mypage_user_name.setText(myPageResponse.getMyPageResult().getUser_name());
                 tv_mypage_department_name.setText(myPageResponse.getMyPageResult().getDepartment_name());
                 tv_mypage_student_id.setText(Integer.toString(myPageResponse.getMyPageResult().getUser_student_id()));
 
                 break;
+        }
+    }
+
+    private class DownloadPhotoTask extends AsyncTask<String, Void, Bitmap> {
+        @Override
+        protected Bitmap doInBackground(String... strings) {
+            Bitmap bmp = null;
+            try {
+                String img_url = strings[0]; //url of the image
+                URL url = new URL(img_url);
+                bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return bmp;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+
+        @Override
+        protected void onPostExecute(Bitmap result) {
+            // doInBackground 에서 받아온 total 값 사용 장소
+            iv_mypage_photo.setImageBitmap(result);
         }
     }
 

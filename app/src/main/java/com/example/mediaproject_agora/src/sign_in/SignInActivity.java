@@ -140,8 +140,8 @@ public class SignInActivity extends BaseActivity implements SignInActivityView {
                 int server_id = signInResponse.getSignInResult().getServer_id();
                 String server_name = signInResponse.getSignInResult().getServer_name();
 
-                System.out.println(server_id);
-                System.out.println(server_name);
+                System.out.println("서버아이디: " + server_id);
+                System.out.println("서버네임: " + server_name);
 
                 saveServerIdAndServerName(server_id, server_name);
 
@@ -198,9 +198,9 @@ public class SignInActivity extends BaseActivity implements SignInActivityView {
                 // 회원가입이 되어있는 사람인지 확인해서,
                 // 가입이 되어있지 않다면 회원가입 액티비티로 보내고, 가입이 되어있다면 메인 액티비티로 보낸다.
 
-//                saveAccessTokenToSharedPreferences(accessToken);
+                saveAccessTokenToSharedPreferences(accessToken);
 
-                System.out.println(accessToken);
+                System.out.println("access token: " + accessToken);
 //                System.out.println(expriresAt);
 
                 tryPostSignIn(accessToken);

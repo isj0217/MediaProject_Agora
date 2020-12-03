@@ -31,18 +31,26 @@ class SignUpService {
             @Override
             public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
 
+                System.out.println("111111");
+
                 final SignUpResponse signUpResponse = response.body();
                 if (signUpResponse == null) {
+                    System.out.println("222222");
+
                     mSignUpActivityView.validateFailure(null);
                     return;
                 }
                 mSignUpActivityView.signUpSuccess(signUpResponse);
+                System.out.println("333333");
+
 
             }
 
             @Override
             public void onFailure(Call<SignUpResponse> call, Throwable t) {
                 mSignUpActivityView.validateFailure(null);
+                System.out.println("444444");
+
             }
         });
     }

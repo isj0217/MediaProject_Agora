@@ -13,7 +13,6 @@ public interface SignUpRetrofitInterface {
     @POST("/user")
     Call<SignUpResponse> signUpTest(@Body HashMap<String, Object> params);
 
-
     //    @GET("/test")
 //    @GET("/jwt")
 //    Call<SignInResponse> getTest();

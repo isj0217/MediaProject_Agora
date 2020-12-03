@@ -167,6 +167,9 @@ public class SignUpActivity extends BaseActivity implements SignUpActivityView {
 
                     loadServerIdAndServerName();
 
+                    System.out.println("server_id:" + server_id);
+                    System.out.println("server_name:" + server_name);
+
                     tryPostSignUp(server_id, server_name,
                             et_sign_up_nickname.getText().toString(),
                             et_sign_up_department.getText().toString(),
