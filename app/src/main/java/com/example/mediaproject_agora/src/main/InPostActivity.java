@@ -283,6 +283,18 @@ public class InPostActivity extends BaseActivity implements InPostActivityView, 
                 tv_in_post_time.setText(inPostPostResponse.getInPostPostResult().getTime());
                 // todo
                 // String으로 받아온 사진 어떻게 띄울 것인지 생각해보기
+
+                final String in_post_profile_photo = inPostPostResponse.getInPostPostResult().getUser_picture();
+                iv_in_post_user_picture.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(in_post_profile_photo));
+                        startActivity(intent);
+                    }
+                });
+
+                new DownloadProfilePhotoTask().execute(in_post_profile_photo);
+
 //                iv_in_post_photo.setImageResource(inPostPostResponse.getInPostPostResult().getPhoto());
                 tv_in_post_like_num.setText(Integer.toString(inPostPostResponse.getInPostPostResult().getLike_num()));
                 tv_in_post_comment_num.setText(Integer.toString(inPostPostResponse.getInPostPostResult().getComment_num()));
@@ -331,6 +343,33 @@ public class InPostActivity extends BaseActivity implements InPostActivityView, 
         protected void onPostExecute(Bitmap result) {
             // doInBackground 에서 받아온 total 값 사용 장소
             iv_in_post_photo.setImageBitmap(result);
+        }
+    }
+
+    private class DownloadProfilePhotoTask extends AsyncTask<String, Void, Bitmap> {
+        @Override
+        protected Bitmap doInBackground(String... strings) {
+            Bitmap bmp = null;
+            try {
+                String img_url = strings[0]; //url of the image
+                URL url = new URL(img_url);
+                bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return bmp;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+
+        @Override
+        protected void onPostExecute(Bitmap result) {
+            // doInBackground 에서 받아온 total 값 사용 장소
+            iv_in_post_user_picture.setImageBitmap(result);
         }
     }
 

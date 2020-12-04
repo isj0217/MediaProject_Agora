@@ -55,7 +55,7 @@
                 android:id="@+id/iv_mypage_photo"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:src="@drawable/profile" />
+                android:src="@drawable/profile_default" />
 
             <TextView
                 android:id="@+id/tv_mypage_nickname"
