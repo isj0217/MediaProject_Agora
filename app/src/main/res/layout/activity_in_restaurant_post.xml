@@ -96,12 +96,14 @@
                         android:layout_weight="1" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/tv_in_restaurant_post_user_idx"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="user_idx" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/tv_in_restaurant_post_restaurant_idx"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

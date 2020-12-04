@@ -178,6 +178,7 @@
                     android:layout_weight="1" />
 
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/tv_item_restaurant_idx_of_restaurant"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
