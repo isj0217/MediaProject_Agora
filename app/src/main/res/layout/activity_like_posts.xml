@@ -44,6 +44,38 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/ll_like_posts_empty"
+        android:layout_marginTop="90dp"
+        android:gravity="center_horizontal">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:src="@drawable/thumb_up_like_post" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="좋아요 표시한 글이 없습니다"
+            android:textColor="@color/grey"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="다른 학우의 글에 좋아요를 눌러 보세요"
+            android:textColor="@color/grey"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_like_posts"
         android:layout_width="match_parent"

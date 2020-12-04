@@ -48,6 +48,12 @@
                     android:textColor="@color/black"
                     android:text="학과 이름" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text=" 게시판" />
+
 
             </LinearLayout>
 

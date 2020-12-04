@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +29,8 @@ import com.example.mediaproject_agora.src.main.models.LikePostResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static android.view.View.GONE;
+
 public class LikePostsActivity extends BaseActivity implements LikePostsActivityView, PopupMenu.OnMenuItemClickListener{
 
     private ArrayList<LikePostItem> m_like_post_item_list;
@@ -37,10 +40,14 @@ public class LikePostsActivity extends BaseActivity implements LikePostsActivity
 
     private Intent intent;
 
+    private LinearLayout ll_like_posts_empty;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_like_posts);
+
+        ll_like_posts_empty = findViewById(R.id.ll_like_posts_empty);
 
         rv_like_posts = findViewById(R.id.rv_like_posts);
 
@@ -160,24 +167,27 @@ public class LikePostsActivity extends BaseActivity implements LikePostsActivity
 
                 int num_of_like_posts = likePostResponse.getLikePostResults().size();
 
-//                System.out.println("몇개??? " + num_of_posts_in_department_board);
+                if (num_of_like_posts > 0) {
 
-                for (int i = 0; i < num_of_like_posts; i++){
-                    LikePostItem likePostItem = new LikePostItem();
+                    ll_like_posts_empty.setVisibility(GONE);
 
-                    likePostItem.setDepartment_board_idx(likePostResponse.getLikePostResults().get(i).getDepartment_board_idx());
-                    likePostItem.setType(likePostResponse.getLikePostResults().get(i).getType());
-                    likePostItem.setTitle(likePostResponse.getLikePostResults().get(i).getTitle());
-                    likePostItem.setContent(likePostResponse.getLikePostResults().get(i).getContent());
-                    likePostItem.setNickname(likePostResponse.getLikePostResults().get(i).getNickname());
-                    likePostItem.setTime(likePostResponse.getLikePostResults().get(i).getTime());
-                    likePostItem.setPhoto_status(likePostResponse.getLikePostResults().get(i).getPhoto_status());
-                    likePostItem.setLike_num(likePostResponse.getLikePostResults().get(i).getLike_num());
-                    likePostItem.setComment_num(likePostResponse.getLikePostResults().get(i).getComment_num());
+                    for (int i = 0; i < num_of_like_posts; i++) {
+                        LikePostItem likePostItem = new LikePostItem();
 
-                    m_like_post_item_list.add(likePostItem);
+                        likePostItem.setDepartment_board_idx(likePostResponse.getLikePostResults().get(i).getDepartment_board_idx());
+                        likePostItem.setType(likePostResponse.getLikePostResults().get(i).getType());
+                        likePostItem.setTitle(likePostResponse.getLikePostResults().get(i).getTitle());
+                        likePostItem.setContent(likePostResponse.getLikePostResults().get(i).getContent());
+                        likePostItem.setNickname(likePostResponse.getLikePostResults().get(i).getNickname());
+                        likePostItem.setTime(likePostResponse.getLikePostResults().get(i).getTime());
+                        likePostItem.setPhoto_status(likePostResponse.getLikePostResults().get(i).getPhoto_status());
+                        likePostItem.setLike_num(likePostResponse.getLikePostResults().get(i).getLike_num());
+                        likePostItem.setComment_num(likePostResponse.getLikePostResults().get(i).getComment_num());
+
+                        m_like_post_item_list.add(likePostItem);
+                    }
+                    like_post_adapter.notifyDataSetChanged();
                 }
-                like_post_adapter.notifyDataSetChanged();
 
                 break;
 
