@@ -503,11 +503,11 @@ public class InPostActivity extends BaseActivity implements InPostActivityView, 
 //        super.onBackPressed();
         loadRecentSectionAndCategory();
         if (section_in_agora.equals("department")) {
-
             Intent intent = new Intent(InPostActivity.this, DepartmentBoardActivity.class);
             startActivity(intent);
             finish();
-
+        } else if (section_in_agora.equals("my_page")) {
+            finish();
         }
     }
 }

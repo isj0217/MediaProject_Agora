@@ -22,6 +22,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.example.mediaproject_agora.R;
+import com.example.mediaproject_agora.src.main.LikePostsActivity;
 import com.example.mediaproject_agora.src.main.models.DefaultResponse;
 
 import java.io.IOException;
@@ -38,6 +39,7 @@ public class FragmentMyPage extends Fragment implements FragmentMyPageView {
     private TextView tv_mypage_student_id;
     private LinearLayout ll_mypage_change_nickname;
     private LinearLayout ll_mypage_change_profile_photo;
+    private LinearLayout ll_mypage_like_posts;
 
     @Nullable
     @Override
@@ -62,6 +64,7 @@ public class FragmentMyPage extends Fragment implements FragmentMyPageView {
         tv_mypage_student_id = viewGroup.findViewById(R.id.tv_mypage_student_id);
         ll_mypage_change_nickname = viewGroup.findViewById(R.id.ll_mypage_change_nickname);
         ll_mypage_change_profile_photo = viewGroup.findViewById(R.id.ll_mypage_change_profile_photo);
+        ll_mypage_like_posts = viewGroup.findViewById(R.id.ll_mypage_like_posts);
     }
 
     public void setClickListeners() {
@@ -88,6 +91,15 @@ public class FragmentMyPage extends Fragment implements FragmentMyPageView {
                         })
                         .setCancelable(true)
                         .show();
+            }
+        });
+
+
+        ll_mypage_like_posts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), LikePostsActivity.class);
+                startActivity(intent);
             }
         });
     }
