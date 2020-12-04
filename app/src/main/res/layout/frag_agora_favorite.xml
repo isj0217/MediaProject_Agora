@@ -6,6 +6,29 @@
     android:orientation="vertical">
 <!--    android:background="#4285F4"-->
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/ll_agora_favorite_empty"
+        android:layout_marginTop="90dp"
+        android:gravity="center_horizontal">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:src="@drawable/empty" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="즐겨찾는 게시판이 없습니다"
+            android:textColor="@color/grey"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
 
     <ScrollView
         android:layout_width="match_parent"

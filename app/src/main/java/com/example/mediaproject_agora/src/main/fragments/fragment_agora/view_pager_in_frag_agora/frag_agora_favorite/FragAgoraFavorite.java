@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,6 +28,8 @@ public class FragAgoraFavorite extends Fragment implements FragAgoraFavoriteView
 
     private View view;
 
+    private LinearLayout ll_agora_favorite_empty;
+
     public static FragAgoraFavorite newInstance() {
         FragAgoraFavorite fragAgoraFavorite = new FragAgoraFavorite();
         return fragAgoraFavorite;
@@ -36,6 +39,8 @@ public class FragAgoraFavorite extends Fragment implements FragAgoraFavoriteView
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.frag_agora_favorite, container, false);
+
+        ll_agora_favorite_empty = view.findViewById(R.id.ll_agora_favorite_empty);
 
         rv_favorite_department = view.findViewById(R.id.rv_favorite_department_list);
 
@@ -73,16 +78,20 @@ public class FragAgoraFavorite extends Fragment implements FragAgoraFavoriteView
         switch (favoriteDepartmentResponse.getCode()){
             case 100:
                 int num_of_favorite_departments = favoriteDepartmentResponse.getFavoriteDepartmentResults().size();
-                System.out.println("즐겨찾는 게시판 갯수: " + num_of_favorite_departments);
 
-                for (int i = 0; i < num_of_favorite_departments; i++){
-                    DepartmentItem departmentItem = new DepartmentItem();
+                if (num_of_favorite_departments > 0) {
 
-                    departmentItem.setDepartment(favoriteDepartmentResponse.getFavoriteDepartmentResults().get(i).getDepartment());
+                    ll_agora_favorite_empty.setVisibility(View.GONE);
 
-                    m_department_item_list.add(departmentItem);
+                    for (int i = 0; i < num_of_favorite_departments; i++) {
+                        DepartmentItem departmentItem = new DepartmentItem();
+
+                        departmentItem.setDepartment(favoriteDepartmentResponse.getFavoriteDepartmentResults().get(i).getDepartment());
+
+                        m_department_item_list.add(departmentItem);
+                    }
+                    favorite_department_adapter.notifyDataSetChanged();
                 }
-                favorite_department_adapter.notifyDataSetChanged();
                 break;
 
             default:
