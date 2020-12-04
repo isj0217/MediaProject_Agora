@@ -77,6 +77,7 @@ public class FragmentMyPage extends Fragment implements FragmentMyPageView {
         ll_mypage_change_nickname.setOnClickListener(new View.OnClickListener() {
 
             final EditText et_mypage_nickname = new EditText(viewGroup.getContext());
+
             @Override
             public void onClick(View view) {
 
@@ -180,8 +181,10 @@ public class FragmentMyPage extends Fragment implements FragmentMyPageView {
                 iv_mypage_photo.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(my_page_photo));
-                        startActivity(intent);
+                        if (my_page_photo != null) {
+                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(my_page_photo));
+                            startActivity(intent);
+                        }
                     }
                 });
 
