@@ -32,20 +32,6 @@
             android:layout_weight="1" />
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="18dp"
-            android:src="@drawable/notification_off" />
-
-        <ImageView
-            android:id="@+id/iv_in_post_sync"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="12dp"
-            android:onClick="customOnClick"
-            android:src="@drawable/blue_sync" />
-
-        <ImageView
             android:id="@+id/iv_in_post_more"
             android:layout_width="36dp"
             android:layout_height="36dp"
