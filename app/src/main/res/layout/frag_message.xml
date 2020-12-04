@@ -34,25 +34,60 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
-<!--        <ImageView-->
-<!--            android:id="@+id/iv_in_message_sync"-->
-<!--            android:layout_width="30dp"-->
-<!--            android:layout_height="30dp"-->
-<!--            android:layout_marginEnd="10dp"-->
-<!--            android:onClick="customOnClick"-->
-<!--            android:src="@drawable/blue_sync" />-->
+        <!--        <ImageView-->
+        <!--            android:id="@+id/iv_in_message_sync"-->
+        <!--            android:layout_width="30dp"-->
+        <!--            android:layout_height="30dp"-->
+        <!--            android:layout_marginEnd="10dp"-->
+        <!--            android:onClick="customOnClick"-->
+        <!--            android:src="@drawable/blue_sync" />-->
 
     </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            app:layout_constraintTop_toBottomOf="@+id/ll_message_box_top_bar"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:id="@+id/rv_message_box_message_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/ll_message_empty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="90dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_message_box_top_bar">
 
-        </androidx.recyclerview.widget.RecyclerView>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:src="@drawable/email_empty" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="주고받은 쪽지가 없습니다"
+            android:textColor="@color/grey"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="게시글을 통해 글쓴이에게 쪽지를 보내 보세요"
+            android:textColor="@color/grey"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_message_box_message_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_message_empty">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 
     <!--    <com.getbase.floatingactionbutton.FloatingActionsMenu-->

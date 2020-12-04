@@ -45,13 +45,15 @@
                     android:id="@+id/tv_item_like_post_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
+                    android:textColor="@color/blue_app_name"
+                    android:textStyle="bold"
                     android:text="학과 이름" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
+                    android:textColor="@color/blue_app_name"
+                    android:textStyle="bold"
                     android:text=" 게시판" />
 
 
