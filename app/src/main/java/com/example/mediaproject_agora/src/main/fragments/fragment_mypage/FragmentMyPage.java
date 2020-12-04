@@ -185,8 +185,9 @@ public class FragmentMyPage extends Fragment implements FragmentMyPageView {
                     }
                 });
 
-                new DownloadPhotoTask().execute(my_page_photo);
-
+                if (my_page_photo != null) {
+                    new DownloadPhotoTask().execute(my_page_photo);
+                }
                 tv_mypage_nickname.setText(myPageResponse.getMyPageResult().getNickname());
                 tv_mypage_user_name.setText(myPageResponse.getMyPageResult().getUser_name());
                 tv_mypage_department_name.setText(myPageResponse.getMyPageResult().getDepartment_name());
