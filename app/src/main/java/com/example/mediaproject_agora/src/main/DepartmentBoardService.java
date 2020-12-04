@@ -17,9 +17,9 @@ class DepartmentBoardService {
     private final DepartmentBoardActivityView mDepartmentBoardActivityView;
     private HashMap<String, Object> mParams;
 
-//    SpecificBoardService(final SpecificBoardActivityView specificBoardActivityView) {
-//        this.mSpecificBoardActivityView = specificBoardActivityView;
-//    }
+    public DepartmentBoardService(DepartmentBoardActivityView mDepartmentBoardActivityView) {
+        this.mDepartmentBoardActivityView = mDepartmentBoardActivityView;
+    }
 
     DepartmentBoardService(final DepartmentBoardActivityView departmentBoardActivityView, HashMap<String, Object> mParams) {
         this.mDepartmentBoardActivityView = departmentBoardActivityView;
@@ -41,6 +41,29 @@ class DepartmentBoardService {
                     return;
                 }
                 mDepartmentBoardActivityView.getSpecificDepartmentBoardSuccess(departmentBoardResponse);
+            }
+
+            @Override
+            public void onFailure(Call<DepartmentBoardResponse> call, Throwable t) {
+                mDepartmentBoardActivityView.validateFailure(null);
+            }
+        });
+    }
+
+
+    // 검색기능 구현
+    void getFilteredDepartmentPost(String department_name, String text) {
+        final DepartmentBoardRetrofitInterface departmentBoardRetrofitInterface = getRetrofit().create(DepartmentBoardRetrofitInterface.class);
+        departmentBoardRetrofitInterface.getFilteredDepartmentBoard(X_ACCESS_TOKEN, department_name, text).enqueue(new Callback<DepartmentBoardResponse>() {
+            @Override
+            public void onResponse(Call<DepartmentBoardResponse> call, Response<DepartmentBoardResponse> response) {
+
+                final DepartmentBoardResponse departmentBoardResponse = response.body();
+                if (departmentBoardResponse == null) {
+                    mDepartmentBoardActivityView.validateFailure(null);
+                    return;
+                }
+                mDepartmentBoardActivityView.getFilteredDepartmentPostSuccess(departmentBoardResponse);
             }
 
             @Override

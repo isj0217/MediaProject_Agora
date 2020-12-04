@@ -52,6 +52,7 @@
 
         <ImageView
             android:id="@+id/iv_specific_board_search"
+            android:onClick="customOnClick"
             android:layout_marginEnd="18dp"
             android:layout_width="30dp"
             android:layout_height="30dp"

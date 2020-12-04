@@ -113,6 +113,9 @@ public class DepartmentBoardActivity extends BaseActivity implements DepartmentB
                 restartActivity(DepartmentBoardActivity.this);
                 break;
             case R.id.iv_specific_board_search:
+                intent = new Intent(DepartmentBoardActivity.this, SearchingActivity.class);
+                intent.putExtra("department_name", department_name);
+                startActivity(intent);
                 break;
             case R.id.iv_specific_board_write:
 
@@ -203,6 +206,11 @@ public class DepartmentBoardActivity extends BaseActivity implements DepartmentB
                 Toast.makeText(this, departmentBoardResponse.getMessage(), Toast.LENGTH_SHORT).show();
                 break;
         }
+    }
+
+    @Override
+    public void getFilteredDepartmentPostSuccess(DepartmentBoardResponse departmentBoardResponse) {
+
     }
 
 

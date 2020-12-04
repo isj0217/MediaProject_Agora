@@ -9,4 +9,6 @@ public interface DepartmentBoardActivityView {
     void validateFailure(String message);
 
     void getSpecificDepartmentBoardSuccess(DepartmentBoardResponse departmentBoardResponse);
+
+    void getFilteredDepartmentPostSuccess(DepartmentBoardResponse departmentBoardResponse);
 }
