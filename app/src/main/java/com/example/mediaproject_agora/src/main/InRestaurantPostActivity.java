@@ -132,7 +132,7 @@ public class InRestaurantPostActivity extends BaseActivity implements InRestaura
 
                                 tryPostRestaurantComment(restaurant_idx, et_in_restaurant_post_comment.getText().toString());
 
-                                finish();
+//                                finish();
 
                             }
                         })
@@ -383,6 +383,7 @@ public class InRestaurantPostActivity extends BaseActivity implements InRestaura
 
         switch (defaultResponse.getCode()) {
             default:
+                restartActivity(InRestaurantPostActivity.this);
                 System.out.println(defaultResponse.getMessage());
                 break;
         }
@@ -408,5 +409,14 @@ public class InRestaurantPostActivity extends BaseActivity implements InRestaura
                 break;
 
         }
+    }
+
+    private void restartActivity(Activity activity) {
+        Intent intent = new Intent();
+        intent.putExtra("index_of_this_restaurant_post", index_of_this_restaurant_post);
+        intent.setClass(activity, activity.getClass());
+        activity.startActivity(intent);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        activity.finish();
     }
 }
