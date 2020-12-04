@@ -37,6 +37,7 @@
         <activity android:name=".src.main.WritingRestaurantActivity" />
         <activity android:name=".src.main.FixingRestaurantActivity" />
         <activity android:name=".src.main.LikePostsActivity" />
+        <activity android:name=".src.main.SendingFirstMessageActivity" />
 
     </application>
 

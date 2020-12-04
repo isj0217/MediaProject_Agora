@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".src.main.InMessageRoomActivity">
+
+    <LinearLayout
+        android:id="@+id/linear_layout_in_first_message_room_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="20dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="8dp">
+
+        <ImageView
+            android:id="@+id/iv_in_first_message_room_go_back"
+            android:onClick="customOnClick"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/left_arrow_blue" />
+
+        <TextView
+            android:id="@+id/tv_in_first_message_room_nickname"
+            android:layout_marginStart="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="상대방 닉네임"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <!--        스크롤뷰 안에 들어가는 유일한 하나의 레이아웃-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!--            댓글 부분-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_first_message_room_message_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/in_post_input_box"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="2dp"
+        android:paddingEnd="2dp">
+
+
+        <EditText
+            android:id="@+id/et_in_first_message_room_message"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:hint="보낼 쪽지를 입력하세요"
+            android:textColor="@color/black"
+            android:textColorHint="@color/dark_grey"
+            android:textCursorDrawable="@drawable/cursor_blue"
+            android:textSize="13sp" />
+
+        <ImageView
+            android:id="@+id/iv_in_first_message_room_send"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="15dp"
+            android:onClick="customOnClick"
+            android:src="@drawable/send" />
+    </LinearLayout>
+
+
+</LinearLayout>

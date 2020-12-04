@@ -73,6 +73,8 @@ public class InPostActivity extends BaseActivity implements InPostActivityView, 
 
     private ImageView iv_in_post_more;
 
+    private Intent intent;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -509,7 +511,7 @@ public class InPostActivity extends BaseActivity implements InPostActivityView, 
                 // 일단 FixingActivity로 넘긴 후에 거기서 글 수정 API 엮기
                 int idx_of_post_we_are_fixing = Integer.parseInt(tv_in_post_department_board_idx.getText().toString());
 
-                Intent intent = new Intent(InPostActivity.this, FixingDepartmentActivity.class);
+                intent = new Intent(InPostActivity.this, FixingDepartmentActivity.class);
                 intent.putExtra("idx_of_post_we_are_fixing", idx_of_post_we_are_fixing);
                 intent.putExtra("origin_title", tv_in_post_title.getText().toString());
                 intent.putExtra("origin_content", tv_in_post_content.getText().toString());
@@ -530,6 +532,17 @@ public class InPostActivity extends BaseActivity implements InPostActivityView, 
             case R.id.menu_in_post_send_message:
                 // todo
                 // 추후에 쪽지보내기 기능 생겼을 때 만들기
+
+                intent = new Intent(InPostActivity.this, SendingFirstMessageActivity.class);
+                intent.putExtra("nickname", tv_in_post_nickname.getText().toString());
+                intent.putExtra("user_idx", Integer.parseInt(tv_in_post_user_idx.getText().toString()));
+                startActivity(intent);
+//                finish();
+
+
+
+
+
                 break;
         }
 
