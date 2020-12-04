@@ -30,11 +30,17 @@ import com.example.mediaproject_agora.src.main.models.DefaultResponse;
 import com.example.mediaproject_agora.src.sign_in.SignInActivity;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.HashMap;
 
+import static android.app.Activity.RESULT_CANCELED;
+import static android.app.Activity.RESULT_OK;
+
 public class FragmentMyPage extends Fragment implements FragmentMyPageView {
     ViewGroup viewGroup;
+
+    private static final int REQUEST_CODE = 0;
 
     private ImageView iv_mypage_photo;
     private TextView tv_mypage_nickname;
@@ -142,7 +148,41 @@ public class FragmentMyPage extends Fragment implements FragmentMyPageView {
             }
         });
 
+
+        ll_mypage_change_profile_photo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent, REQUEST_CODE);
+            }
+        });
+
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                try {
+                    InputStream in = getActivity().getContentResolver().openInputStream(data.getData());
+
+                    Bitmap img = BitmapFactory.decodeStream(in);
+                    in.close();
+
+                    iv_mypage_photo.setImageBitmap(img);
+                } catch (Exception e) {
+
+                }
+            } else if (resultCode == RESULT_CANCELED) {
+                Toast.makeText(getContext(), "사진 선택 취소", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+
 
     private void tryGetMyPage() {
 
