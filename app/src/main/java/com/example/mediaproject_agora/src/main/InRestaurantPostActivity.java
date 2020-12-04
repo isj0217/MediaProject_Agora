@@ -55,6 +55,7 @@ public class InRestaurantPostActivity extends BaseActivity implements InRestaura
 
     private ImageView iv_in_restaurant_post_photo;
 
+    private TextView tv_in_restaurant_post_user_idx;
     private TextView tv_in_restaurant_post_nickname;
     private TextView tv_in_restaurant_post_time;
     private TextView tv_in_restaurant_post_restaurant_idx;
@@ -99,6 +100,7 @@ public class InRestaurantPostActivity extends BaseActivity implements InRestaura
     public void bindViews() {
         iv_in_restaurant_post_photo = findViewById(R.id.iv_in_restaurant_post_photo);
 
+        tv_in_restaurant_post_user_idx = findViewById(R.id.tv_in_restaurant_post_user_idx);
         tv_in_restaurant_post_nickname = findViewById(R.id.tv_in_restaurant_post_nickname);
         tv_in_restaurant_post_time = findViewById(R.id.tv_in_restaurant_post_time);
         tv_in_restaurant_post_restaurant_idx = findViewById(R.id.tv_in_restaurant_post_restaurant_idx);
@@ -242,6 +244,12 @@ public class InRestaurantPostActivity extends BaseActivity implements InRestaura
             case R.id.menu_in_restaurant_post_send_message:
                 // todo
                 // 추후에 쪽지보내기 기능 생겼을 때 만들기
+
+                intent = new Intent(InRestaurantPostActivity.this, SendingFirstMessageActivity.class);
+                intent.putExtra("nickname", tv_in_restaurant_post_nickname.getText().toString());
+                intent.putExtra("user_idx", Integer.parseInt(tv_in_restaurant_post_user_idx.getText().toString()));
+                startActivity(intent);
+
                 break;
         }
 
@@ -288,6 +296,7 @@ public class InRestaurantPostActivity extends BaseActivity implements InRestaura
                 new DownloadPhotoTask().execute(in_restaurant_post_photo);
 //                iv_in_restaurant_post_photo.setImageResource();
 
+                tv_in_restaurant_post_user_idx.setText(Integer.toString(restaurantResponse.getRestaurantResult().getUser_idx()));
                 tv_in_restaurant_post_nickname.setText(restaurantResponse.getRestaurantResult().getNickname());
                 tv_in_restaurant_post_time.setText(restaurantResponse.getRestaurantResult().getTime());
                 tv_in_restaurant_post_restaurant_idx.setText(Integer.toString(restaurantResponse.getRestaurantResult().getTastehouse_idx()));

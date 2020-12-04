@@ -78,7 +78,7 @@ public class FragmentMyPage extends Fragment implements FragmentMyPageView {
                         .setTitle("닉네임 수정")
                         .setMessage("변경하려는 닉네임을 입력해주세요.")
                         .setView(et_mypage_nickname)
-                        .setPositiveButton("수정하기", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("수정", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
 
                                 // todo
@@ -89,7 +89,12 @@ public class FragmentMyPage extends Fragment implements FragmentMyPageView {
 //                                tryPostDepartmentComment(department_board_idx, et_in_post_comment.getText().toString());
                             }
                         })
-                        .setCancelable(true)
+                        .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        })
+                        .setCancelable(false)
                         .show();
             }
         });

@@ -3,6 +3,7 @@ package com.example.mediaproject_agora.src.main.fragments.fragment_restaurant;
 public class RestaurantResult {
 
     private int tastehouse_idx;
+    private int user_idx;
     private String tastehouse_name;
     private float tastehouse_star;
     private String menu_picture;
@@ -14,8 +15,9 @@ public class RestaurantResult {
     private String time;
     private int is_mine;
 
-    public RestaurantResult(int tastehouse_idx, String tastehouse_name, float tastehouse_star, String menu_picture, String menu_name, int menu_price, String tastehouse_content, String nickname, int comment_num, String time, int is_mine) {
+    public RestaurantResult(int tastehouse_idx, int user_idx, String tastehouse_name, float tastehouse_star, String menu_picture, String menu_name, int menu_price, String tastehouse_content, String nickname, int comment_num, String time, int is_mine) {
         this.tastehouse_idx = tastehouse_idx;
+        this.user_idx = user_idx;
         this.tastehouse_name = tastehouse_name;
         this.tastehouse_star = tastehouse_star;
         this.menu_picture = menu_picture;
@@ -30,6 +32,10 @@ public class RestaurantResult {
 
     public int getTastehouse_idx() {
         return tastehouse_idx;
+    }
+
+    public int getUser_idx() {
+        return user_idx;
     }
 
     public String getTastehouse_name() {
