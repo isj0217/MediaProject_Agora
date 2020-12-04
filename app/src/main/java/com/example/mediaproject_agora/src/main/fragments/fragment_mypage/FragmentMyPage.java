@@ -135,7 +135,7 @@ public class FragmentMyPage extends Fragment implements FragmentMyPageView {
     public void getMyPageSuccess(MyPageResponse myPageResponse) {
         switch (myPageResponse.getCode()) {
             default:
-                Toast.makeText(viewGroup.getContext(), myPageResponse.getMessage(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(viewGroup.getContext(), myPageResponse.getMessage(), Toast.LENGTH_SHORT).show();
 
                 final String my_page_photo = myPageResponse.getMyPageResult().getUser_picture();
                 iv_mypage_photo.setOnClickListener(new View.OnClickListener() {
