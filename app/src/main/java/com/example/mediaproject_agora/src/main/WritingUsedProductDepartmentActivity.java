@@ -109,6 +109,7 @@ public class WritingUsedProductDepartmentActivity extends BaseActivity implement
                             public void onClick(DialogInterface dialog, int which) {
                                 Intent intent = new Intent(WritingUsedProductDepartmentActivity.this, DepartmentBoardActivity.class);
                                 startActivity(intent);
+                                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                                 finish();
                             }
                         })
@@ -141,6 +142,7 @@ public class WritingUsedProductDepartmentActivity extends BaseActivity implement
                                     isEmptyTitle();
                                     Intent intent = new Intent(WritingUsedProductDepartmentActivity.this, DepartmentBoardActivity.class);
                                     startActivity(intent);
+                                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                                     finish();
                                 }
                             })
@@ -170,6 +172,7 @@ public class WritingUsedProductDepartmentActivity extends BaseActivity implement
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(WritingUsedProductDepartmentActivity.this, DepartmentBoardActivity.class);
                         startActivity(intent);
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                         finish();
                     }
                 })

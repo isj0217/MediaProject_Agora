@@ -101,6 +101,7 @@ public class DepartmentBoardActivity extends BaseActivity implements DepartmentB
         Intent intent = new Intent();
         intent.setClass(activity, activity.getClass());
         activity.startActivity(intent);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         activity.finish();
     }
 
@@ -116,6 +117,7 @@ public class DepartmentBoardActivity extends BaseActivity implements DepartmentB
                 intent = new Intent(DepartmentBoardActivity.this, SearchingActivity.class);
                 intent.putExtra("department_name", department_name);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 break;
             case R.id.iv_specific_board_write:
 
@@ -125,12 +127,14 @@ public class DepartmentBoardActivity extends BaseActivity implements DepartmentB
                     case "department":
                         intent = new Intent(DepartmentBoardActivity.this, WritingDepartmentActivity.class);
                         startActivity(intent);
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                         finish();
                         break;
 
                     case "used_product":
                         intent = new Intent(DepartmentBoardActivity.this, WritingUsedProductDepartmentActivity.class);
                         startActivity(intent);
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                         finish();
                         break;
 

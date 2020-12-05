@@ -103,6 +103,7 @@ public class FixingDepartmentActivity extends BaseActivity implements FixingDepa
                             public void onClick(DialogInterface dialog, int which) {
                                 Intent intent = new Intent(FixingDepartmentActivity.this, DepartmentBoardActivity.class);
                                 startActivity(intent);
+                                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                                 finish();
                             }
                         })
@@ -139,6 +140,7 @@ public class FixingDepartmentActivity extends BaseActivity implements FixingDepa
 
                                     Intent intent = new Intent(FixingDepartmentActivity.this, DepartmentBoardActivity.class);
                                     startActivity(intent);
+                                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                                     finish();
                                 }
                             })
@@ -233,6 +235,7 @@ public class FixingDepartmentActivity extends BaseActivity implements FixingDepa
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(FixingDepartmentActivity.this, DepartmentBoardActivity.class);
                         startActivity(intent);
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                         finish();
                     }
                 })

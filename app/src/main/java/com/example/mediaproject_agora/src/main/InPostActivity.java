@@ -181,6 +181,7 @@ public class InPostActivity extends BaseActivity implements InPostActivityView, 
         intent.putExtra("index_of_this_post", index_of_this_post);
         intent.setClass(activity, activity.getClass());
         activity.startActivity(intent);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         activity.finish();
     }
 
@@ -282,6 +283,7 @@ public class InPostActivity extends BaseActivity implements InPostActivityView, 
                     public void onClick(View view) {
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(in_post_photo));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                     }
                 });
 
@@ -301,6 +303,7 @@ public class InPostActivity extends BaseActivity implements InPostActivityView, 
                     public void onClick(View view) {
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(in_post_profile_photo));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                     }
                 });
 
@@ -475,6 +478,7 @@ public class InPostActivity extends BaseActivity implements InPostActivityView, 
                 showCustomToast("게시글 삭제 완료");
                 Intent intent = new Intent(InPostActivity.this, DepartmentBoardActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
                 break;
 
@@ -529,6 +533,7 @@ public class InPostActivity extends BaseActivity implements InPostActivityView, 
                 intent.putExtra("origin_title", tv_in_post_title.getText().toString());
                 intent.putExtra("origin_content", tv_in_post_content.getText().toString());
                 startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
                 finish();
 
@@ -550,6 +555,7 @@ public class InPostActivity extends BaseActivity implements InPostActivityView, 
                 intent.putExtra("nickname", tv_in_post_nickname.getText().toString());
                 intent.putExtra("user_idx", Integer.parseInt(tv_in_post_user_idx.getText().toString()));
                 startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 //                finish();
 
 
@@ -570,6 +576,7 @@ public class InPostActivity extends BaseActivity implements InPostActivityView, 
         if (section_in_agora.equals("department")) {
             Intent intent = new Intent(InPostActivity.this, DepartmentBoardActivity.class);
             startActivity(intent);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             finish();
         } else if (section_in_agora.equals("my_page")) {
             finish();

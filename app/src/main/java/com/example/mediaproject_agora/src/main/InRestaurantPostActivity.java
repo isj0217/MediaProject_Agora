@@ -228,6 +228,7 @@ public class InRestaurantPostActivity extends BaseActivity implements InRestaura
                 Intent intent = new Intent(InRestaurantPostActivity.this, FixingRestaurantActivity.class);
 
                 startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
                 finish();
 
@@ -249,6 +250,7 @@ public class InRestaurantPostActivity extends BaseActivity implements InRestaura
                 intent.putExtra("nickname", tv_in_restaurant_post_nickname.getText().toString());
                 intent.putExtra("user_idx", Integer.parseInt(tv_in_restaurant_post_user_idx.getText().toString()));
                 startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
                 break;
         }
@@ -290,6 +292,7 @@ public class InRestaurantPostActivity extends BaseActivity implements InRestaura
                     public void onClick(View view) {
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(in_restaurant_post_photo));
                         startActivity(intent);
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                     }
                 });
 

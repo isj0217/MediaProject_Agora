@@ -89,6 +89,7 @@ public class WritingDepartmentActivity extends BaseActivity implements WritingDe
                             public void onClick(DialogInterface dialog, int which) {
                                 Intent intent = new Intent(WritingDepartmentActivity.this, DepartmentBoardActivity.class);
                                 startActivity(intent);
+                                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                                 finish();
                             }
                         })
@@ -125,6 +126,7 @@ public class WritingDepartmentActivity extends BaseActivity implements WritingDe
 
                                     Intent intent = new Intent(WritingDepartmentActivity.this, DepartmentBoardActivity.class);
                                     startActivity(intent);
+                                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                                     finish();
                                 }
                             })
@@ -220,6 +222,7 @@ public class WritingDepartmentActivity extends BaseActivity implements WritingDe
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(WritingDepartmentActivity.this, DepartmentBoardActivity.class);
                         startActivity(intent);
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                         finish();
                     }
                 })

@@ -199,6 +199,7 @@ public class FragAgoraDepartment extends Fragment implements FragAgoraDepartment
                 saveRecentSectionAndCategory("department", "미디어학과");
                 Intent intent = new Intent(view.getContext(), DepartmentBoardActivity.class);
                 startActivity(intent);
+
             }
         });
 

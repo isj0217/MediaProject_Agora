@@ -75,6 +75,7 @@ public class FragmentRestaurant extends Fragment implements FragmentRestaurantVi
                 Intent intent = new Intent(view.getContext(), WritingRestaurantActivity.class);
                 startActivity(intent);
 
+
             }
         });
 

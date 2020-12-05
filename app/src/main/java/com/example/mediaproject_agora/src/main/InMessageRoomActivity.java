@@ -239,6 +239,7 @@ public class InMessageRoomActivity extends BaseActivity implements InMessageRoom
         Intent intent = new Intent();
         intent.setClass(activity, activity.getClass());
         activity.startActivity(intent);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         activity.finish();
     }
 
