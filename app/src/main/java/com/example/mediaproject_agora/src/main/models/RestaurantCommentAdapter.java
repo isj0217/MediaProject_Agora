@@ -24,6 +24,8 @@ import com.example.mediaproject_agora.src.main.items.RestaurantCommentItem;
 
 import java.util.ArrayList;
 
+import static android.view.View.GONE;
+
 public class RestaurantCommentAdapter extends RecyclerView.Adapter<RestaurantCommentAdapter.CustomViewHolder> implements InRestaurantPostActivityView {
 
     private ArrayList<RestaurantCommentItem> restaurant_comment_item_list;
@@ -52,12 +54,18 @@ public class RestaurantCommentAdapter extends RecyclerView.Adapter<RestaurantCom
 
     @Override
     public void onBindViewHolder(@NonNull final RestaurantCommentAdapter.CustomViewHolder holder, int position) {
+        holder.tv_item_restaurant_comment_is_mine.setText(Integer.toString(restaurant_comment_item_list.get(position).getIs_mine()));
+
         holder.tv_item_restaurant_comment_restaurant_comment_index.setText(Integer.toString(restaurant_comment_item_list.get(position).getComment_idx()));
         holder.tv_item_restaurant_comment_content.setText(restaurant_comment_item_list.get(position).getComment_content());
         holder.tv_item_restaurant_comment_time.setText(restaurant_comment_item_list.get(position).getTime());
         holder.tv_item_restaurant_comment_nickname.setText(restaurant_comment_item_list.get(position).getNickname());
 
         holder.itemView.setTag(position);
+
+        if (holder.tv_item_restaurant_comment_is_mine.getText().toString().equals("0")) {
+            holder.iv_item_restaurant_comment_trash_can.setVisibility(GONE) ;
+        }
 
         /**
          * click 리스너 달 거면 여기에 달 것
@@ -143,6 +151,8 @@ public class RestaurantCommentAdapter extends RecyclerView.Adapter<RestaurantCom
 
     public class CustomViewHolder extends RecyclerView.ViewHolder {
 
+        protected TextView tv_item_restaurant_comment_is_mine;
+
         protected ImageView iv_item_restaurant_comment_trash_can;
         protected TextView tv_item_restaurant_comment_restaurant_comment_index;
         protected TextView tv_item_restaurant_comment_content;
@@ -151,6 +161,8 @@ public class RestaurantCommentAdapter extends RecyclerView.Adapter<RestaurantCom
 
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            this.tv_item_restaurant_comment_is_mine = itemView.findViewById(R.id.tv_item_restaurant_comment_is_mine);
 
             this.iv_item_restaurant_comment_trash_can = itemView.findViewById(R.id.iv_item_restaurant_comment_trash_can);
             this.tv_item_restaurant_comment_restaurant_comment_index = itemView.findViewById(R.id.tv_item_restaurant_comment_restaurant_comment_index);
