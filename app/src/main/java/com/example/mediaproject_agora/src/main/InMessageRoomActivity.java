@@ -192,6 +192,10 @@ public class InMessageRoomActivity extends BaseActivity implements InMessageRoom
             case R.id.iv_in_message_room_send:
                 trySendMessage(et_in_message_room_message.getText().toString(), user_idx);
                 break;
+
+            case R.id.iv_in_message_room_sync:
+                restartActivity(InMessageRoomActivity.this);
+                break;
         }
     }
 

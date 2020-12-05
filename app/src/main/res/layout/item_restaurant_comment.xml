@@ -5,6 +5,7 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/ll_item_restaurant_comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -104,6 +105,7 @@
     </LinearLayout>
 
     <View
+        android:id="@+id/view_item_restaurant_comment_underline"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginStart="5dp"

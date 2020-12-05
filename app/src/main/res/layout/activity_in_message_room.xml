@@ -41,6 +41,14 @@
             android:layout_weight="1" />
 
         <ImageView
+            android:id="@+id/iv_in_message_room_sync"
+            android:onClick="customOnClick"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="12dp"
+            android:src="@drawable/blue_sync" />
+
+        <ImageView
             android:id="@+id/iv_in_message_room_more"
             android:onClick="customOnClick"
             android:layout_width="36dp"

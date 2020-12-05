@@ -87,7 +87,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CustomVi
                                 // todo
                                 // 댓글 삭제 API 구현
 
-                                // 1. 자기가 쓴 댓글일 때만 삭제가 가능하므로 일단 댓글 통째로 안보이게 없애버리기
+                                // 1. 어차피 자기가 쓴 댓글일 때만 쓰레기통 모양이 보여 삭제가 가능하므로 일단 댓글 통째로 안보이게 없애버리기
                                 holder.ll_item_comment.setVisibility(GONE);
                                 holder.view_item_comment_underline.setVisibility(GONE);
 

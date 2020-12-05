@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -83,7 +84,12 @@ public class RestaurantCommentAdapter extends RecyclerView.Adapter<RestaurantCom
                                 // todo
                                 // 댓글 삭제 API 구현
 
-//                                Toast.makeText(view.getContext(), holder.tv_item_comment_department_comment_index.getText().toString(), Toast.LENGTH_SHORT).show();
+                                // 1. 어차피 자기가 쓴 댓글일 때만 쓰레기통 모양이 보여 삭제가 가능하므로 일단 댓글 통째로 안보이게 없애버리기
+                                holder.ll_item_restaurant_comment.setVisibility(GONE);
+                                holder.view_item_restaurant_comment_underline.setVisibility(GONE);
+
+                                // 2. 댓글 갯수 하나 줄이기
+                                // like_num은 어댑터가 아니라 액티비티 내에 있는데 어떻게 바꾸지??
 
                                 tryDeleteRestaurantComment(Integer.parseInt(holder.tv_item_restaurant_comment_restaurant_comment_index.getText().toString()));
                             }
@@ -139,8 +145,12 @@ public class RestaurantCommentAdapter extends RecyclerView.Adapter<RestaurantCom
     @Override
     public void deleteRestaurantCommentSuccess(DefaultResponse defaultResponse) {
         switch (defaultResponse.getCode()) {
+
+            case 100:
+                Toast.makeText(adapter_context, "아주맛집 댓글 삭제 완료", Toast.LENGTH_SHORT).show();
+
             default:
-                System.out.println(defaultResponse.getMessage());
+//                System.out.println(defaultResponse.getMessage());
                 break;
         }
     }
@@ -154,6 +164,9 @@ public class RestaurantCommentAdapter extends RecyclerView.Adapter<RestaurantCom
 
         protected TextView tv_item_restaurant_comment_is_mine;
 
+        protected LinearLayout ll_item_restaurant_comment;
+        protected View view_item_restaurant_comment_underline;
+
         protected ImageView iv_item_restaurant_comment_trash_can;
         protected TextView tv_item_restaurant_comment_restaurant_comment_index;
         protected TextView tv_item_restaurant_comment_content;
@@ -164,6 +177,9 @@ public class RestaurantCommentAdapter extends RecyclerView.Adapter<RestaurantCom
             super(itemView);
 
             this.tv_item_restaurant_comment_is_mine = itemView.findViewById(R.id.tv_item_restaurant_comment_is_mine);
+
+            this.ll_item_restaurant_comment = itemView.findViewById(R.id.ll_item_restaurant_comment);
+            this.view_item_restaurant_comment_underline = itemView.findViewById(R.id.view_item_restaurant_comment_underline);
 
             this.iv_item_restaurant_comment_trash_can = itemView.findViewById(R.id.iv_item_restaurant_comment_trash_can);
             this.tv_item_restaurant_comment_restaurant_comment_index = itemView.findViewById(R.id.tv_item_restaurant_comment_restaurant_comment_index);
