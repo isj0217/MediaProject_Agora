@@ -54,7 +54,7 @@ public class RestaurantCommentAdapter extends RecyclerView.Adapter<RestaurantCom
 
     @Override
     public void onBindViewHolder(@NonNull final RestaurantCommentAdapter.CustomViewHolder holder, int position) {
-        holder.tv_item_restaurant_comment_is_mine.setText(Integer.toString(restaurant_comment_item_list.get(position).getIs_mine()));
+        holder.tv_item_restaurant_comment_is_mine.setText((Integer.toString(restaurant_comment_item_list.get(position).getIs_mine())));
 
         holder.tv_item_restaurant_comment_restaurant_comment_index.setText(Integer.toString(restaurant_comment_item_list.get(position).getComment_idx()));
         holder.tv_item_restaurant_comment_content.setText(restaurant_comment_item_list.get(position).getComment_content());
@@ -64,6 +64,7 @@ public class RestaurantCommentAdapter extends RecyclerView.Adapter<RestaurantCom
         holder.itemView.setTag(position);
 
         if (holder.tv_item_restaurant_comment_is_mine.getText().toString().equals("0")) {
+            System.out.println(holder.tv_item_restaurant_comment_restaurant_comment_index.getText().toString());
             holder.iv_item_restaurant_comment_trash_can.setVisibility(GONE) ;
         }
 

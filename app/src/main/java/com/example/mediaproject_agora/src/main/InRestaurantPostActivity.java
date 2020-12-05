@@ -362,6 +362,8 @@ public class InRestaurantPostActivity extends BaseActivity implements InRestaura
                 for (int i = 0; i < num_of_comments_in_the_restaurant_post; i++) {
                     RestaurantCommentItem restaurantCommentItem = new RestaurantCommentItem();
 
+                    restaurantCommentItem.setIs_mine(inRestaurantPostCommentResponse.getInRestaurantPostCommentResults().get(i).getIs_mine());
+
                     restaurantCommentItem.setComment_content(inRestaurantPostCommentResponse.getInRestaurantPostCommentResults().get(i).getComment_content());
                     restaurantCommentItem.setTime(inRestaurantPostCommentResponse.getInRestaurantPostCommentResults().get(i).getTime());
                     restaurantCommentItem.setNickname(inRestaurantPostCommentResponse.getInRestaurantPostCommentResults().get(i).getNickname());
