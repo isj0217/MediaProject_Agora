@@ -83,8 +83,9 @@ public class FragmentMessage extends Fragment implements FragmentMessageView{
             case 100:
                 int num_of_message_rooms = messageRoomResponse.getMessageRoomResults().size();
 
-                if (num_of_message_rooms > 0) {
-
+                if (num_of_message_rooms == 0) {
+                    ll_message_empty.setVisibility(View.VISIBLE);
+                } else {
                     ll_message_empty.setVisibility(GONE);
 
                     for (int i = 0; i < num_of_message_rooms; i++) {
