@@ -32,6 +32,8 @@ import com.example.mediaproject_agora.src.main.models.DefaultResponse;
 import com.example.mediaproject_agora.src.main.models.InPostCommentResponse;
 import com.example.mediaproject_agora.src.main.models.InPostPostResponse;
 
+import org.w3c.dom.Comment;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -137,11 +139,17 @@ public class InPostActivity extends BaseActivity implements InPostActivityView, 
 
                                 tryPostDepartmentComment(department_board_idx, et_in_post_comment.getText().toString());
 
-//                                restartActivity(InPostActivity.this);
+                                /**
+                                 * 이렇게 뒤로 빼는 방법 말고 요 액티비티 안에서 갱신할 수 있는 방법을 찾아보자
+                                 * */
+//                                Intent intent = new Intent(InPostActivity.this, DepartmentBoardActivity.class);
+//                                startActivity(intent);
+//                                finish();
 
-                                Intent intent = new Intent(InPostActivity.this, DepartmentBoardActivity.class);
-                                startActivity(intent);
-                                finish();
+
+                                // Item 만들어서 어댑터에 박으려다가 그냥 restartActivity 하기로 마음 먹음
+//                                CommentItem commentItem = new CommentItem();
+//                                commentItem.set
                             }
                         })
                         .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
@@ -170,6 +178,7 @@ public class InPostActivity extends BaseActivity implements InPostActivityView, 
 
     private void restartActivity(Activity activity) {
         Intent intent = new Intent();
+        intent.putExtra("index_of_this_post", index_of_this_post);
         intent.setClass(activity, activity.getClass());
         activity.startActivity(intent);
         activity.finish();
@@ -411,9 +420,11 @@ public class InPostActivity extends BaseActivity implements InPostActivityView, 
     public void postDepartmentCommentSuccess(DefaultResponse defaultResponse) {
         hideProgressDialog();
 
+        restartActivity(InPostActivity.this);
+
         switch (defaultResponse.getCode()) {
             case 100:
-                System.out.println("댓글 달기 성공???????");
+//                System.out.println("댓글 달기 성공???????");
         }
     }
 

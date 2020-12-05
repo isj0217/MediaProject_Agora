@@ -99,7 +99,6 @@ public class FragmentMyPage extends Fragment implements FragmentMyPageView {
 
                                 tryChangeNickname(et_mypage_nickname.getText().toString());
 
-//                                tryPostDepartmentComment(department_board_idx, et_in_post_comment.getText().toString());
                             }
                         })
                         .setNegativeButton("취소", new DialogInterface.OnClickListener() {
