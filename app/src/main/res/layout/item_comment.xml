@@ -5,6 +5,7 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/ll_item_comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -108,6 +109,13 @@
                     android:text="department-comment-idx"
                     android:visibility="gone" />
 
+                <TextView
+                    android:id="@+id/tv_item_comment_is_mine"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="is_mine"
+                    android:visibility="gone" />
+
             </LinearLayout>
 
         </LinearLayout>
@@ -115,6 +123,7 @@
     </LinearLayout>
 
     <View
+        android:id="@+id/view_item_comment_underline"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginStart="5dp"

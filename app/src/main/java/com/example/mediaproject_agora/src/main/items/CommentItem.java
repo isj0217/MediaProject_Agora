@@ -2,10 +2,20 @@ package com.example.mediaproject_agora.src.main.items;
 
 public class CommentItem {
 
+    private int is_mine;
+
     private int department_comment_idx;
     private String nickname;
     private String time;
     private String comment;
+
+    public int getIs_mine() {
+        return is_mine;
+    }
+
+    public void setIs_mine(int is_mine) {
+        this.is_mine = is_mine;
+    }
 
     public int getDepartment_comment_idx() {
         return department_comment_idx;

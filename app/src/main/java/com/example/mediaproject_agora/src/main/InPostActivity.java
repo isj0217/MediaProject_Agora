@@ -400,10 +400,12 @@ public class InPostActivity extends BaseActivity implements InPostActivityView, 
                 for (int i = 0; i < num_of_comments_in_the_post; i++) {
                     CommentItem commentItem = new CommentItem();
 
+                    commentItem.setIs_mine(inPostCommentResponse.getInPostCommentResults().get(i).getIs_mine());
+
                     commentItem.setComment(inPostCommentResponse.getInPostCommentResults().get(i).getComment());
                     commentItem.setTime(inPostCommentResponse.getInPostCommentResults().get(i).getTime());
                     commentItem.setNickname(inPostCommentResponse.getInPostCommentResults().get(i).getNickname());
-                    commentItem.setDepartment_comment_idx(inPostCommentResponse.getInPostCommentResults().get(i).getDepartment_board_idx());
+                    commentItem.setDepartment_comment_idx(inPostCommentResponse.getInPostCommentResults().get(i).getDepartment_comment_idx());
 
                     m_comment_item_list.add(commentItem);
                 }

@@ -2,19 +2,26 @@ package com.example.mediaproject_agora.src.main.models;
 
 public class InPostCommentResult {
 
+    int is_mine;
+
     int department_comment_idx;
     String nickname;
     String time;
     String comment;
 
-    public InPostCommentResult(int department_board_idx, String nickname, String time, String comment) {
-        this.department_comment_idx = department_board_idx;
+    public InPostCommentResult(int is_mine, int department_comment_idx, String nickname, String time, String comment) {
+        this.is_mine = is_mine;
+        this.department_comment_idx = department_comment_idx;
         this.nickname = nickname;
         this.time = time;
         this.comment = comment;
     }
 
-    public int getDepartment_board_idx() {
+    public int getIs_mine() {
+        return is_mine;
+    }
+
+    public int getDepartment_comment_idx() {
         return department_comment_idx;
     }
 
