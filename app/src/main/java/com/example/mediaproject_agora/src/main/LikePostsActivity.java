@@ -90,6 +90,15 @@ public class LikePostsActivity extends BaseActivity implements LikePostsActivity
         activity.finish();
     }
 
+    public void customOnClick(View view) {
+        switch (view.getId()) {
+            case R.id.iv_like_posts_left_arrow:
+                onBackPressed();
+                break;
+        }
+    }
+
+
 //    public void customOnClick(View view) {
 //        switch (view.getId()) {
 //            case R.id.iv_specific_board_go_back:
