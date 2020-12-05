@@ -277,7 +277,7 @@ public class FragAgoraDepartment extends Fragment implements FragAgoraDepartment
 //                break;
 
             default:
-                Toast.makeText(getContext(), addFavoriteResponse.getMessage(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), addFavoriteResponse.getMessage(), Toast.LENGTH_SHORT).show();
                 break;
         }
     }
