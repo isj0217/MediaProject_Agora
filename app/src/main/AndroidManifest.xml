@@ -43,6 +43,7 @@
         <activity android:name=".src.main.UsedProductBoardActivity_electronics" />
         <activity android:name=".src.main.UsedProductBoardActivity_furniture" />
         <activity android:name=".src.main.UsedProductBoardActivity_clothes" />
+        <activity android:name=".src.main.ClubBoardActivity_samter" />
 
     </application>
 
