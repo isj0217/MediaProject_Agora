@@ -39,6 +39,10 @@
         <activity android:name=".src.main.LikePostsActivity" />
         <activity android:name=".src.main.SendingFirstMessageActivity" />
         <activity android:name=".src.main.SearchingActivity" />
+        <activity android:name=".src.main.UsedProductBoardActivity_book" />
+        <activity android:name=".src.main.UsedProductBoardActivity_electronics" />
+        <activity android:name=".src.main.UsedProductBoardActivity_furniture" />
+        <activity android:name=".src.main.UsedProductBoardActivity_clothes" />
 
     </application>
 

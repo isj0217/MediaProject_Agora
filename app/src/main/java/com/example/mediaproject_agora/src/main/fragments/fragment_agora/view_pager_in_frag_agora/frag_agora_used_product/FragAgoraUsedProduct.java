@@ -15,6 +15,10 @@ import androidx.fragment.app.Fragment;
 
 import com.example.mediaproject_agora.R;
 import com.example.mediaproject_agora.src.main.DepartmentBoardActivity;
+import com.example.mediaproject_agora.src.main.UsedProductBoardActivity_book;
+import com.example.mediaproject_agora.src.main.UsedProductBoardActivity_clothes;
+import com.example.mediaproject_agora.src.main.UsedProductBoardActivity_electronics;
+import com.example.mediaproject_agora.src.main.UsedProductBoardActivity_furniture;
 
 public class FragAgoraUsedProduct extends Fragment {
 
@@ -54,7 +58,7 @@ public class FragAgoraUsedProduct extends Fragment {
             @Override
             public void onClick(View view) {
                 saveRecentSectionAndCategory("used_product", "중고책방");
-                Intent intent = new Intent(view.getContext(), DepartmentBoardActivity.class);
+                Intent intent = new Intent(view.getContext(), UsedProductBoardActivity_book.class);
                 startActivity(intent);
             }
         });
@@ -64,7 +68,7 @@ public class FragAgoraUsedProduct extends Fragment {
             @Override
             public void onClick(View view) {
                 saveRecentSectionAndCategory("used_product", "가전기기");
-                Intent intent = new Intent(view.getContext(), DepartmentBoardActivity.class);
+                Intent intent = new Intent(view.getContext(), UsedProductBoardActivity_electronics.class);
                 startActivity(intent);
             }
         });
@@ -74,7 +78,7 @@ public class FragAgoraUsedProduct extends Fragment {
             @Override
             public void onClick(View view) {
                 saveRecentSectionAndCategory("used_product", "자취방 가구");
-                Intent intent = new Intent(view.getContext(), DepartmentBoardActivity.class);
+                Intent intent = new Intent(view.getContext(), UsedProductBoardActivity_furniture.class);
                 startActivity(intent);
             }
         });
@@ -84,7 +88,7 @@ public class FragAgoraUsedProduct extends Fragment {
             @Override
             public void onClick(View view) {
                 saveRecentSectionAndCategory("used_product", "의류 및 신발");
-                Intent intent = new Intent(view.getContext(), DepartmentBoardActivity.class);
+                Intent intent = new Intent(view.getContext(), UsedProductBoardActivity_clothes.class);
                 startActivity(intent);
             }
         });
