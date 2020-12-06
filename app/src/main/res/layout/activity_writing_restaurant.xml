@@ -232,6 +232,7 @@
                 android:background="@color/light_grey" />
 
             <ImageView
+                android:id="@+id/iv_writing_restaurant_attach_photo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -239,6 +240,13 @@
                 android:maxWidth="160dp"
                 android:padding="20dp"
                 android:src="@drawable/add_circle" />
+            
+            <ImageView
+                android:id="@+id/iv_writing_restaurant_thumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="10dp"
+                android:visibility="gone" />
 
             <EditText
                 android:id="@+id/et_writing_restaurant_content"

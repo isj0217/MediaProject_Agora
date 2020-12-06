@@ -39,6 +39,11 @@ public class WritingRestaurantActivity extends BaseActivity implements WritingRe
     private EditText et_writing_restaurant_stars;
     private EditText et_writing_restaurant_content;
 
+    private ImageView iv_writing_restaurant_attach_photo;
+    private ImageView iv_writing_restaurant_thumbnail;
+    private static final int REQUEST_CODE = 0;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,6 +117,9 @@ public class WritingRestaurantActivity extends BaseActivity implements WritingRe
         et_writing_restaurant_price = findViewById(R.id.et_writing_restaurant_price);
         et_writing_restaurant_stars = findViewById(R.id.et_writing_restaurant_stars);
         et_writing_restaurant_content = findViewById(R.id.et_writing_restaurant_content);
+
+        iv_writing_restaurant_attach_photo = findViewById(R.id.iv_writing_restaurant_attach_photo);
+        iv_writing_restaurant_thumbnail = findViewById(R.id.iv_writing_restaurant_thumbnail);
     }
 
     public void setClickListenersToButtons() {
@@ -158,6 +166,39 @@ public class WritingRestaurantActivity extends BaseActivity implements WritingRe
                         .show();
             }
         });
+
+        iv_writing_restaurant_attach_photo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent, REQUEST_CODE);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                try {
+                    InputStream in = getContentResolver().openInputStream(data.getData());
+
+                    Bitmap img = BitmapFactory.decodeStream(in);
+                    in.close();
+
+                    iv_writing_restaurant_thumbnail.setImageBitmap(img);
+                    iv_writing_restaurant_thumbnail.setVisibility(View.VISIBLE);
+                    iv_writing_restaurant_attach_photo.setVisibility(View.GONE);
+                } catch (Exception e) {
+
+                }
+            } else if (resultCode == RESULT_CANCELED) {
+                Toast.makeText(this, "사진 선택 취소", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
     public void tryPostRestaurantPost(int category, String restaurant_name, float stars, String photo, String menu_name, int price, String content){
