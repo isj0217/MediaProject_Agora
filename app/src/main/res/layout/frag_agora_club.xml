@@ -138,6 +138,7 @@
                                 android:layout_weight="1" />
 
                             <ImageView
+                                android:visibility="gone"
                                 android:layout_width="30dp"
                                 android:layout_height="match_parent"
                                 android:src="@drawable/icon_new" />
@@ -202,6 +203,7 @@
                                 android:layout_weight="1" />
 
                             <ImageView
+                                android:visibility="gone"
                                 android:layout_width="30dp"
                                 android:layout_height="match_parent"
                                 android:src="@drawable/icon_new" />
