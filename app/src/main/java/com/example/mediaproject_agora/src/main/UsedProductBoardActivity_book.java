@@ -39,10 +39,23 @@ import java.util.HashMap;
 
 public class UsedProductBoardActivity_book extends BaseActivity {
 
+    private LinearLayout ll_used_book_1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_used_product_board_book);
+
+        ll_used_book_1 = findViewById(R.id.ll_used_book_1);
+
+        ll_used_book_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(UsedProductBoardActivity_book.this, UsedProductBoardActivity_book_1.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+            }
+        });
 
     }
 

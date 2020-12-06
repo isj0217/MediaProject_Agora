@@ -67,6 +67,7 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/ll_club_samter_1"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
@@ -129,7 +130,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="1년 전"
+                            android:text="4일 전"
                             android:textColor="@color/light_grey"
                             android:textSize="11sp" />
 
@@ -253,7 +254,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="1년 전"
+                            android:text="4일 전"
                             android:textColor="@color/light_grey"
                             android:textSize="11sp" />
 
@@ -377,7 +378,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="1년 전"
+                            android:text="4일 전"
                             android:textColor="@color/light_grey"
                             android:textSize="11sp" />
 

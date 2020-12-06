@@ -64,6 +64,7 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/ll_used_electronics_1"
             android:layout_width="match_parent"
             android:layout_height="160dp"
             android:background="@color/white"
